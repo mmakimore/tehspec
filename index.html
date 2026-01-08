@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тест Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, sans-serif;
+            padding: 20px;
+            background: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+            min-height: 100vh;
+        }
+        .container { max-width: 400px; margin: 0 auto; }
+        h1 { margin-bottom: 20px; font-size: 24px; }
+        .card {
+            background: var(--tg-theme-secondary-bg-color, #f2f2f2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary {
+            background: var(--tg-theme-button-color, #40a7e3);
+            color: var(--tg-theme-button-text-color, #ffffff);
+        }
+        .btn-secondary {
+            background: var(--tg-theme-secondary-bg-color, #e0e0e0);
+            color: var(--tg-theme-text-color, #000000);
+        }
+        button:active { transform: scale(0.98); }
+        .info { margin: 10px 0; padding: 10px; background: #e3f2fd; border-radius: 8px; }
+        .theme-light { background: #f8f9fa; color: #212529; }
+        .theme-dark { background: #1a1a1a; color: #ffffff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Тест Mini App</h1>
+        
+        <div class="card">
+            <h3>👤 Инфо о пользователе:</h3>
+            <div id="user-info">Загрузка...</div>
+        </div>
+
+        <div class="card">
+            <h3>🎨 Тема:</h3>
+            <div id="theme-info">Определяем...</div>
+        </div>
+
+        <div class="card">
+            <h3>📱 Платформа:</h3>
+            <div id="platform-info">Загрузка...</div>
+        </div>
+
+        <button class="btn-primary" onclick="showAlert()">
+            🔔 Показать уведомление
+        </button>
+
+        <button class="btn-secondary" onclick="toggleExpand()">
+            📱 Развернуть/Свернуть
+        </button>
+
+        <button class="btn-primary" onclick="sendToBot()">
+            📤 Отправить данные боту
+        </button>
+
+        <button class="btn-secondary" onclick="closeApp()">
+            ❌ Закрыть приложение
+        </button>
+
+        <div class="info" id="log">
+            Журнал событий появится здесь...
+        </div>
+    </div>
+
+    <script>
+        // ========== ОСНОВНОЙ КОД MINI APP ==========
+        const tg = window.Telegram.WebApp;
+        
+        // 1. Инициализация
+        function init() {
+            log('Mini App запущен!');
+            
+            // Разворачиваем на весь экран
+            tg.expand();
+            
+            // Показываем информацию о пользователе
+            showUserInfo();
+            
+            // Показываем тему
+            showTheme();
+            
+            // Показываем платформу
+            showPlatform();
+            
+            // Сообщаем Telegram что готовы
+            tg.ready();
+            log('Приложение готово к работе');
+        }
+
+        // 2. Показать информацию о пользователе
+        function showUserInfo() {
+            const user = tg.initDataUnsafe.user;
+            if (user) {
+                document.getElementById('user-info').innerHTML = `
+                    <strong>Имя:</strong> ${user.first_name || 'Не указано'}<br>
+                    <strong>Фамилия:</strong> ${user.last_name || 'Не указана'}<br>
+                    <strong>Username:</strong> @${user.username || 'нет'}<br>
+                    <strong>ID:</strong> ${user.id}
+                `;
+                log(`Пользователь: ${user.first_name} (@${user.username})`);
+            } else {
+                document.getElementById('user-info').innerHTML = 'Пользователь не авторизован';
+                log('Пользователь не найден');
+            }
+        }
+
+        // 3. Показать тему
+        function showTheme() {
+            const theme = tg.colorScheme;
+            document.getElementById('theme-info').innerHTML = `
+                <strong>Тема:</strong> ${theme === 'dark' ? '🌙 Тёмная' : '☀️ Светлая'}<br>
+                <strong>Цвет фона:</strong> ${tg.themeParams.bg_color || 'по умолчанию'}
+            `;
+            
+            // Меняем класс для демо
+            document.body.className = theme === 'dark' ? 'theme-dark' : 'theme-light';
+        }
+
+        // 4. Показать платформу
+        function showPlatform() {
+            const platform = tg.platform;
+            document.getElementById('platform-info').innerHTML = `
+                <strong>Платформа:</strong> ${platform}<br>
+                <strong>Версия:</strong> ${tg.version}
+            `;
+        }
+
+        // 5. Показать всплывающее окно
+        function showAlert() {
+            tg.showAlert('Привет от Mini App! 🎉');
+            log('Показано уведомление');
+        }
+
+        // 6. Развернуть/свернуть
+        let isExpanded = true;
+        function toggleExpand() {
+            if (isExpanded) {
+                tg.close();
+                log('Приложение свёрнуто');
+            } else {
+                tg.expand();
+                log('Приложение развёрнуто');
+            }
+            isExpanded = !isExpanded;
+        }
+
+        // 7. Отправить данные боту
+        function sendToBot() {
+            const data = {
+                action: 'test',
+                timestamp: new Date().toISOString(),
+                user_id: tg.initDataUnsafe.user?.id
+            };
+            
+            tg.sendData(JSON.stringify(data));
+            tg.showAlert('Данные отправлены боту!');
+            log('Данные отправлены боту: ' + JSON.stringify(data));
+        }
+
+        // 8. Закрыть приложение
+        function closeApp() {
+            tg.close();
+            log('Приложение закрыто');
+        }
+
+        // 9. Логирование (для отладки)
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML = `[${time}] ${message}<br>` + logDiv.innerHTML;
+        }
+
+        // 10. Слушаем события
+        tg.onEvent('themeChanged', showTheme);
+        tg.onEvent('viewportChanged', () => log('Размер окна изменён'));
+
+        // Запускаем когда страница загрузится
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
