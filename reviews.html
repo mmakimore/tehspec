@@ -3,453 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Отзывы | TexCлейc</title>
+    <title>Отзывы | Кургузов Глеб</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #ed760e;
-            --dark: #1c1c1c;
-            --light: #ffffff;
-            --gray: #2a2a2a;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Шапка */
-        header {
-            background: linear-gradient(135deg, rgba(28, 28, 28, 0.95), rgba(40, 40, 40, 0.95));
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(237, 118, 14, 0.2);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    background: linear-gradient(45deg, var(--primary), #ff9a3d);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    color: transparent;
-}
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-            background: rgba(237, 118, 14, 0.1);
-        }
-
-        .nav-links a.active {
-            color: var(--primary);
-            background: rgba(237, 118, 14, 0.15);
-        }
-
-        /* Контент страницы */
-        .page-content {
-            padding-top: 150px;
-            min-height: 100vh;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .page-header p {
-            color: #aaa;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Отзывы */
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .review-card {
-            background: var(--gray);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-        }
-
-        .review-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(237, 118, 14, 0.3);
-        }
-
-        .review-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .review-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary), #0ea5ed);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .review-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .review-position {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        .review-stars {
-            color: var(--primary);
-            margin-top: 5px;
-        }
-
-        .review-text {
-            color: #ccc;
-            font-style: italic;
-            line-height: 1.8;
-            padding: 15px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Кнопки */
-        .btn {
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--primary), #ff9a3d);
-            color: white;
-            box-shadow: 0 4px 15px rgba(237, 118, 14, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(237, 118, 14, 0.4);
-        }
-
-        .btn-telegram {
-            background: #0088cc;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
-        }
-
-        .btn-telegram:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
-        }
-
-        /* Подвал */
-        footer {
-            background: #111;
-            padding: 60px 0 30px;
-            margin-top: 100px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h4 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .footer-links a {
-            color: #aaa;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: var(--gray);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: #666;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .reviews-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Шапка -->
     <header>
-        <div class="container nav-container">
+        <div class="nav-container">
             <div class="logo">
                 <i class="fas fa-code"></i>
-                TexCлейc
+                Кургузов Глеб
             </div>
             
             <nav class="nav-links">
                 <a href="index.html">Главная</a>
-                <a href="portfolio.html">Портфолио</a>
                 <a href="reviews.html" class="active">Отзывы</a>
-                <a href="contact.html">Связаться</a>
+                <a href="contact.html">Контакты</a>
             </nav>
+            
+            <button class="mobile-menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Контент страницы -->
-    <main class="page-content">
+    <!-- Отзывы -->
+    <section class="section" style="padding-top: 120px;">
         <div class="container">
-            <div class="page-header">
-                <h1>Отзывы клиентов</h1>
+            <div class="section-title">
+                <h2>Отзывы клиентов</h2>
                 <p>Что говорят о моей работе</p>
             </div>
-
-            <!-- Отзывы -->
+            
             <div class="reviews-grid">
-                <div class="review-card">
+                <div class="review-card animate-on-scroll">
                     <div class="review-header">
                         <div class="review-avatar">АК</div>
                         <div class="review-info">
                             <h4>Алексей Королёв</h4>
-                            <div class="review-position">IT-директор</div>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+                            <p>IT-директор</p>
                         </div>
                     </div>
                     <p class="review-text">"С вами очень комфортно работать, все было организовано быстро и чётко. Проект завершили раньше срока с отличным результатом. Особенно хочу отметить внимательность к деталям и качество кода."</p>
                 </div>
-
-                <div class="review-card">
+                
+                <div class="review-card animate-on-scroll">
                     <div class="review-header">
                         <div class="review-avatar">ДИ</div>
                         <div class="review-info">
                             <h4>Дмитрий Иванов</h4>
-                            <div class="review-position">Предприниматель</div>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+                            <p>Предприниматель</p>
                         </div>
                     </div>
                     <p class="review-text">"Сделал все грамотно, по цене легко договориться, знает свое дело на 100%. Заказывал разработку интернет-магазина — получил именно то, что хотел. Поддержка на высшем уровне!"</p>
                 </div>
-
-                <div class="review-card">
+                
+                <div class="review-card animate-on-scroll">
                     <div class="review-header">
                         <div class="review-avatar">МС</div>
                         <div class="review-info">
                             <h4>Мария Семёнова</h4>
-                            <div class="review-position">Маркетолог</div>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
+                            <p>Маркетолог</p>
                         </div>
                     </div>
                     <p class="review-text">"Заказывала лендинг на Тильде. Сделали быстро, качественно, внесли все правки. Конверсия выросла на 30%! Отдельное спасибо за помощь в настройке аналитики."</p>
                 </div>
-
-                <div class="review-card">
+                
+                <div class="review-card animate-on-scroll">
                     <div class="review-header">
                         <div class="review-avatar">ПВ</div>
                         <div class="review-info">
                             <h4>Павел Волков</h4>
-                            <div class="review-position">Владелец бизнеса</div>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+                            <p>Владелец бизнеса</p>
                         </div>
                     </div>
                     <p class="review-text">"Разрабатывали дашборд для анализа продаж. Получился удобный и информативный инструмент. Теперь вся аналитика перед глазами. Рекомендую как специалиста высокого уровня!"</p>
                 </div>
-
-                <div class="review-card">
+                
+                <div class="review-card animate-on-scroll">
                     <div class="review-header">
                         <div class="review-avatar">ЕН</div>
                         <div class="review-info">
                             <h4>Елена Николаева</h4>
-                            <div class="review-position">Руководитель проекта</div>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+                            <p>Руководитель проекта</p>
                         </div>
                     </div>
                     <p class="review-text">"Работали над сложным корпоративным порталом. Все этапы были четко спланированы, коммуникация на высшем уровне. Проект сдали вовремя, все работает стабильно."</p>
                 </div>
-
-                <div class="review-card">
+                
+                <div class="review-card animate-on-scroll">
                     <div class="review-header">
                         <div class="review-avatar">СК</div>
                         <div class="review-info">
                             <h4>Сергей Кузнецов</h4>
-                            <div class="review-position">Директор по развитию</div>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+                            <p>Директор по развитию</p>
                         </div>
                     </div>
                     <p class="review-text">"Создавали систему автоматизации бизнес-процессов. Решение оказалось эффективным и масштабируемым. Экономия времени сотрудников — более 20 часов в неделю. Отличная работа!"</p>
                 </div>
             </div>
-
-            <!-- CTA -->
-            <div style="text-align: center; margin-top: 80px;">
-                <h3 style="margin-bottom: 30px; font-size: 1.8rem;">Хотите так же?</h3>
-                <a href="https://t.me/tehspecgleb" target="_blank" class="btn btn-telegram" style="font-size: 1.1rem;">
-                    <i class="fab fa-telegram"></i> Обсудить проект в Telegram
-                </a>
-            </div>
         </div>
-    </main>
+    </section>
 
     <!-- Подвал -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>TexCлейc</h4>
-                    <p>Чистый код, адаптивная верстка, современные решения</p>
+                    <h4>Кургузов Глеб</h4>
+                    <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
                     <div class="social-links">
                         <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 
@@ -457,7 +123,6 @@
                     <h4>Навигация</h4>
                     <div class="footer-links">
                         <a href="index.html">Главная</a>
-                        <a href="portfolio.html">Портфолио</a>
                         <a href="reviews.html">Отзывы</a>
                         <a href="contact.html">Контакты</a>
                     </div>
@@ -467,15 +132,17 @@
                     <h4>Контакты</h4>
                     <div class="footer-links">
                         <a href="https://t.me/tehspecgleb">Telegram</a>
-                        <a href="mailto:contact@texsleys.ru">Email</a>
+                        <a href="mailto:kurguzovgleb@yandex.ru">Email</a>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 TexCлейc | @tehspecgleb</p>
+                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb" style="color: #666; text-decoration: none;">@tehspecgleb</a></p>
             </div>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
