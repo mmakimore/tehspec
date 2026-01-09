@@ -8,33 +8,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Шапка (всегда видна, даже на мобилке) -->
+    <!-- Шапка (закреплена, без картинки шестеренки) -->
     <header>
-        <div class="nav-container">
+        <div class="nav-container container">
             <div class="logo">
-                <img src="https://w7.pngwing.com/pngs/723/170/png-transparent-web-development-computer-icons-icon-design-mechanical-miscellaneous-text-orange.png" alt="Шестеренка" class="logo-gear">
+                <i class="fas fa-code"></i>
                 <span>Кургузов Глеб</span>
             </div>
             <nav class="nav-links">
                 <a href="#main" class="active">Главная</a>
-                <a href="#services">Услуги</a>
-                <a href="#works">Работы</a>
                 <a href="#reviews">Отзывы</a>
                 <a href="#contact">Контакты</a>
             </nav>
         </div>
     </header>
 
-    <!-- Анимация загрузки (шестеренка + двери) -->
+    <!-- Анимация загрузки -->
     <div id="loader">
-        <img src="https://w7.pngwing.com/pngs/723/170/png-transparent-web-development-computer-icons-icon-design-mechanical-miscellaneous-text-orange.png" alt="Шестеренка" class="spin-gear">
+        <div class="gear-icon">
+            <i class="fas fa-cog"></i>
+        </div>
         <div class="door door-top"></div>
         <div class="door door-bottom"></div>
     </div>
 
-    <!-- Основной контент (скрыт до анимации) -->
+    <!-- Основное содержимое -->
     <main id="main-content" class="hidden">
-        <!-- Герой-секция -->
+        <!-- Герой -->
         <section class="hero-section" id="main">
             <div class="container">
                 <div class="hero-content">
@@ -43,15 +43,15 @@
                     <div class="description">
                         Сопровождение онлайн-школ | запуск | сайт | чат-боты | CRM-системы
                     </div>
-                    <!-- Кнопка с анимацией падения -->
-                    <a href="#contact" class="btn btn-primary falling-btn" id="cta-button">
+                    <!-- Кнопка появляется один раз -->
+                    <a href="#contact" class="btn btn-primary" id="cta-button">
                         <i class="fas fa-paper-plane"></i> Связаться со мной
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Услуги с модальными окнами -->
+        <!-- Услуги -->
         <section class="section" id="services">
             <div class="container">
                 <div class="section-title">
@@ -59,114 +59,31 @@
                     <p>Полный спектр услуг для вашего бизнеса</p>
                 </div>
                 <div class="services-grid">
-                    <!-- Карточка 1 -->
                     <div class="service-card" data-modal="modal1">
                         <div class="service-icon"><i class="fas fa-rocket"></i></div>
                         <h3>Запуск онлайн-школ</h3>
                         <p>Полное сопровождение от идеи до первых студентов</p>
-                        <span class="service-more">Подробнее →</span>
                     </div>
-                    <!-- Карточка 2 -->
                     <div class="service-card" data-modal="modal2">
                         <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
                         <h3>Разработка сайтов</h3>
                         <p>Тильда, WordPress, 1C-Битрикс, HTML/CSS/JS</p>
-                        <span class="service-more">Подробнее →</span>
                     </div>
-                    <!-- Карточка 3 -->
                     <div class="service-card" data-modal="modal3">
                         <div class="service-icon"><i class="fas fa-robot"></i></div>
                         <h3>Чат-боты</h3>
                         <p>Создание и настройка ботов для продаж и поддержки</p>
-                        <span class="service-more">Подробнее →</span>
                     </div>
-                    <!-- Карточка 4 -->
                     <div class="service-card" data-modal="modal4">
                         <div class="service-icon"><i class="fas fa-cogs"></i></div>
                         <h3>Автоматизация</h3>
                         <p>Настройка автоматических воронок и процессов</p>
-                        <span class="service-more">Подробнее →</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Модальные окна для услуг -->
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h3><i class="fas fa-rocket"></i> Запуск онлайн-школ</h3>
-                <div class="modal-body">
-                    <p><strong>Полный цикл сопровождения:</strong></p>
-                    <ul>
-                        <li>Анализ ниши и целевой аудитории</li>
-                        <li>Разработка стратегии запуска</li>
-                        <li>Настройка технической инфраструктуры</li>
-                        <li>Подключение платежных систем</li>
-                        <li>Автоматизация процессов приема студентов</li>
-                        <li>Интеграция с CRM и email-рассылками</li>
-                    </ul>
-                    <p><strong>Результат:</strong> Готовая к работе онлайн-школа с отлаженными процессами.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="modal2" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h3><i class="fas fa-laptop-code"></i> Разработка сайтов</h3>
-                <div class="modal-body">
-                    <p><strong>На всех платформах:</strong></p>
-                    <ul>
-                        <li><strong>Тильда:</strong> Лендинги, корпоративные сайты</li>
-                        <li><strong>WordPress:</strong> Блоги, каталоги, корпоративные порталы</li>
-                        <li><strong>1C-Битрикс:</strong> Интернет-магазины, сложные порталы</li>
-                        <li><strong>HTML/CSS/JS:</strong> Кастомная разработка с нуля</li>
-                        <li><strong>Интеграции:</strong> API, платежные системы, CRM</li>
-                    </ul>
-                    <p><strong>Особенности:</strong> Адаптивная верстка, SEO-оптимизация, высокая скорость загрузки.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="modal3" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h3><i class="fas fa-robot"></i> Чат-боты</h3>
-                <div class="modal-body">
-                    <p><strong>Для любых задач:</strong></p>
-                    <ul>
-                        <li><strong>Telegram/Salebot/Bothelp:</strong> Автоворонки продаж</li>
-                        <li><strong>Python-боты:</strong> Сложная логика и интеграции</li>
-                        <li><strong>Чат-поддержка:</strong> Автоответы, тикеты, FAQ</li>
-                        <li><strong>Автоматизация:</strong> Рассылки, напоминания, триггеры</li>
-                        <li><strong>Аналитика:</strong> Отслеживание конверсии, поведение пользователей</li>
-                    </ul>
-                    <p><strong>Эффект:</strong> Увеличение конверсии на 30-50%, снижение нагрузки на поддержку.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="modal4" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h3><i class="fas fa-cogs"></i> Автоматизация</h3>
-                <div class="modal-body">
-                    <p><strong>Оптимизация бизнес-процессов:</strong></p>
-                    <ul>
-                        <li>Автоматические воронки продаж</li>
-                        <li>Интеграция CRM с мессенджерами и почтой</li>
-                        <li>Скрипты для обработки данных (Python)</li>
-                        <li>Автоотчеты и дашборды</li>
-                        <li>Уведомления и напоминания</li>
-                        <li>Синхронизация данных между системами</li>
-                    </ul>
-                    <p><strong>Выгода:</strong> Экономия 20+ часов в неделю, минимизация человеческих ошибок.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Работы в одну строку (слайдер) -->
+        <!-- Работы -->
         <section class="section works-section" id="works">
             <div class="container">
                 <div class="section-title">
@@ -184,7 +101,6 @@
                                 <div class="work-tags">
                                     <span class="tag">Тильда</span>
                                     <span class="tag">Адаптив</span>
-                                    <span class="tag">UI/UX</span>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +113,6 @@
                                 <div class="work-tags">
                                     <span class="tag">Дашборд</span>
                                     <span class="tag">Аналитика</span>
-                                    <span class="tag">CRM</span>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +125,6 @@
                                 <div class="work-tags">
                                     <span class="tag">HTML</span>
                                     <span class="tag">CSS</span>
-                                    <span class="tag">JavaScript</span>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +153,6 @@
                         </div>
                         <p class="review-text">"С вами очень комфортно работать, все было организовано быстро и чётко. Проект завершили раньше срока с отличным результатом."</p>
                     </div>
-                    
                     <div class="review-card">
                         <div class="review-header">
                             <div class="review-avatar">ДИ</div>
@@ -250,7 +163,6 @@
                         </div>
                         <p class="review-text">"Сделал все грамотно, по цене легко договориться, знает свое дело на 100%. Заказывал разработку интернет-магазина — получил именно то, что хотел."</p>
                     </div>
-                    
                     <div class="review-card">
                         <div class="review-header">
                             <div class="review-avatar">МС</div>
@@ -265,7 +177,7 @@
             </div>
         </section>
 
-        <!-- Контакты и форма -->
+        <!-- Контакты -->
         <section class="section" id="contact">
             <div class="container">
                 <div class="contact-section">
@@ -274,17 +186,16 @@
                             <h3>Готов обсудить ваш проект</h3>
                             <p>Отвечаю в Telegram в течение 15 минут</p>
                             <div class="contact-methods">
-                                <a href="https://t.me/tehspecgleb" target="_blank" style="text-decoration: none;">
-                                    <div class="contact-method">
-                                        <div class="contact-icon">
-                                            <i class="fab fa-telegram"></i>
-                                        </div>
-                                        <div>
-                                            <strong>Telegram</strong>
-                                            <p>@tehspecgleb</p>
-                                        </div>
+                                <!-- Просто текст, не синий -->
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fab fa-telegram"></i>
                                     </div>
-                                </a>
+                                    <div>
+                                        <strong>Telegram</strong>
+                                        <p>@tehspecgleb</p>
+                                    </div>
+                                </div>
                                 
                                 <div class="contact-method">
                                     <div class="contact-icon">
@@ -293,16 +204,6 @@
                                     <div>
                                         <strong>Email</strong>
                                         <p>kurguzovgleb@yandex.ru</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fas fa-clock"></i>
-                                    </div>
-                                    <div>
-                                        <strong>Время ответа</strong>
-                                        <p>15 минут в рабочее время</p>
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +225,7 @@
                                 <textarea id="form-message" placeholder="Что нужно сделать? *" rows="4" required></textarea>
                             </div>
                             <button type="button" class="btn btn-primary" id="submit-form">
-                                <i class="fab fa-telegram"></i> Отправить заявку
+                                <i class="fas fa-paper-plane"></i> Отправить заявку
                             </button>
                             <p class="form-note">Я напишу вам в Telegram в течение 15 минут</p>
                         </div>
@@ -338,41 +239,11 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section footer-main">
+                <div class="footer-section">
                     <h4>Кургузов Глеб</h4>
-                    <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
-                    <div class="social-links">
-                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
+                    <p>Технический специалист</p>
                 </div>
-                
-                <div class="footer-section footer-nav">
-                    <h4>Навигация</h4>
-                    <div class="footer-links">
-                        <a href="#main">Главная</a>
-                        <a href="#services">Услуги</a>
-                        <a href="#works">Работы</a>
-                        <a href="#reviews">Отзывы</a>
-                        <a href="#contact">Контакты</a>
-                    </div>
-                </div>
-                
-                <div class="footer-section footer-services">
-                    <h4>Услуги</h4>
-                    <div class="footer-links">
-                        <a href="#services" data-modal="modal1">Запуск онлайн-школ</a>
-                        <a href="#services" data-modal="modal2">Разработка сайтов</a>
-                        <a href="#services" data-modal="modal3">Чат-боты</a>
-                        <a href="#services" data-modal="modal4">Автоматизация</a>
-                    </div>
-                </div>
-                
-                <div class="footer-section footer-contact">
+                <div class="footer-section">
                     <h4>Контакты</h4>
                     <div class="footer-links">
                         <a href="https://t.me/tehspecgleb" target="_blank">Telegram: @tehspecgleb</a>
@@ -380,17 +251,11 @@
                     </div>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb" target="_blank">@tehspecgleb</a></p>
+                <p>&copy; 2025 Кургузов Глеб</p>
             </div>
         </div>
     </footer>
-
-    <!-- Аудио для звука (скрыто) -->
-    <audio id="metalSound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-metal-hit-impact-908.mp3" type="audio/mpeg">
-    </audio>
 
     <script src="script.js"></script>
 </body>
