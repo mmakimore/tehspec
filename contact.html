@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты | Кургузов Глеб</title>
+    <title>Связаться | Кургузов Глеб</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -17,21 +17,16 @@
             </div>
             <nav class="nav-links">
                 <a href="index.html">Главная</a>
+                <a href="about.html">Обо мне</a>
                 <a href="portfolio.html">Кейсы</a>
                 <a href="reviews.html">Отзывы</a>
                 <a href="contact.html" class="active">Связаться</a>
             </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
-
-    <!-- Анимация загрузки -->
-    <div id="loader">
-        <div class="gear-icon">
-            <i class="fas fa-cog"></i>
-        </div>
-        <div class="door door-top"></div>
-        <div class="door door-bottom"></div>
-    </div>
 
     <!-- Контакты -->
     <section class="section" style="padding-top: 90px;">
@@ -48,14 +43,14 @@
                         <p>Выберите удобный способ связи</p>
                         
                         <div class="contact-methods">
-                            <a href="https://t.me/tehspecgleb" target="_blank" style="text-decoration: none;">
+                            <a href="https://t.me/tehspecgleb" target="_blank">
                                 <div class="contact-method">
                                     <div class="contact-icon">
                                         <i class="fab fa-telegram"></i>
                                     </div>
                                     <div>
                                         <strong>Telegram</strong>
-                                        <p>@tehspecgleb (основной)</p>
+                                        <p>@tehspecgleb</p>
                                     </div>
                                 </div>
                             </a>
@@ -83,7 +78,7 @@
                     </div>
                     
                     <div class="contact-form">
-                        <h3>Быстрая заявка</h3>
+                        <h3>Оставить заявку</h3>
                         <div class="form-group">
                             <input type="text" id="contact-name" placeholder="Ваше имя" required>
                         </div>
@@ -93,8 +88,8 @@
                         <div class="form-group">
                             <textarea id="contact-message" placeholder="Опишите проект..." required></textarea>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="sendContactToTelegram()">
-                            <i class="fab fa-telegram"></i> Отправить в Telegram
+                        <button type="button" class="btn btn-primary">
+                            <i class="fab fa-telegram"></i> Отправить
                         </button>
                     </div>
                 </div>
@@ -106,7 +101,7 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
+                <div class="footer-section center">
                     <h4>Кургузов Глеб</h4>
                     <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
                     <div class="social-links">
@@ -115,53 +110,34 @@
                     </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h4>Навигация</h4>
-                    <div class="footer-links">
-                        <a href="index.html">Главная</a>
-                        <a href="portfolio.html">Кейсы</a>
-                        <a href="reviews.html">Отзывы</a>
-                        <a href="contact.html">Связаться</a>
+                <div class="footer-columns">
+                    <div class="footer-section">
+                        <h4>Навигация</h4>
+                        <div class="footer-links">
+                            <a href="index.html">Главная</a>
+                            <a href="about.html">Обо мне</a>
+                            <a href="portfolio.html">Кейсы</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contact.html">Связаться</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Контакты</h4>
-                    <div class="footer-links">
-                        <a href="https://t.me/tehspecgleb">Telegram</a>
-                        <a href="mailto:kurguzovgleb@yandex.ru">Email</a>
+                    
+                    <div class="footer-section">
+                        <h4>Контакты</h4>
+                        <div class="footer-links">
+                            <a href="https://t.me/tehspecgleb">Telegram</a>
+                            <a href="mailto:kurguzovgleb@yandex.ru">Email</a>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb" style="color: #666; text-decoration: none;">@tehspecgleb</a></p>
+                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb">@tehspecgleb</a></p>
             </div>
         </div>
     </footer>
 
-    <script>
-        function sendContactToTelegram() {
-            const name = document.getElementById('contact-name').value.trim();
-            const phone = document.getElementById('contact-phone').value.trim();
-            const message = document.getElementById('contact-message').value.trim();
-            
-            if (!name || !phone || !message) {
-                alert('Пожалуйста, заполните все поля');
-                return;
-            }
-            
-            const telegramMessage = `Новая заявка с сайта:%0A%0AИмя: ${name}%0AКонтакты: ${phone}%0AПроект: ${message}`;
-            window.open(`https://t.me/tehspecgleb?text=${telegramMessage}`, '_blank');
-            
-            // Очищаем форму
-            document.getElementById('contact-name').value = '';
-            document.getElementById('contact-phone').value = '';
-            document.getElementById('contact-message').value = '';
-            
-            alert('Сообщение подготовлено для отправки в Telegram!');
-        }
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
