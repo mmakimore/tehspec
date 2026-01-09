@@ -15,21 +15,26 @@
                 <i class="fas fa-code"></i>
                 Кургузов Глеб
             </div>
-            
             <nav class="nav-links">
                 <a href="index.html">Главная</a>
+                <a href="portfolio.html">Кейсы</a>
                 <a href="reviews.html">Отзывы</a>
-                <a href="contact.html" class="active">Контакты</a>
+                <a href="contact.html" class="active">Связаться</a>
             </nav>
-            
-            <button class="mobile-menu-btn" id="menuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </header>
 
+    <!-- Анимация загрузки -->
+    <div id="loader">
+        <div class="gear-icon">
+            <i class="fas fa-cog"></i>
+        </div>
+        <div class="door door-top"></div>
+        <div class="door door-bottom"></div>
+    </div>
+
     <!-- Контакты -->
-    <section class="section" style="padding-top: 120px;">
+    <section class="section" style="padding-top: 90px;">
         <div class="container">
             <div class="section-title">
                 <h2>Связаться со мной</h2>
@@ -114,8 +119,9 @@
                     <h4>Навигация</h4>
                     <div class="footer-links">
                         <a href="index.html">Главная</a>
+                        <a href="portfolio.html">Кейсы</a>
                         <a href="reviews.html">Отзывы</a>
-                        <a href="contact.html">Контакты</a>
+                        <a href="contact.html">Связаться</a>
                     </div>
                 </div>
                 
@@ -134,6 +140,28 @@
         </div>
     </footer>
 
+    <script>
+        function sendContactToTelegram() {
+            const name = document.getElementById('contact-name').value.trim();
+            const phone = document.getElementById('contact-phone').value.trim();
+            const message = document.getElementById('contact-message').value.trim();
+            
+            if (!name || !phone || !message) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            const telegramMessage = `Новая заявка с сайта:%0A%0AИмя: ${name}%0AКонтакты: ${phone}%0AПроект: ${message}`;
+            window.open(`https://t.me/tehspecgleb?text=${telegramMessage}`, '_blank');
+            
+            // Очищаем форму
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-phone').value = '';
+            document.getElementById('contact-message').value = '';
+            
+            alert('Сообщение подготовлено для отправки в Telegram!');
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
