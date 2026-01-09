@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты | TexCлейc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ed760e;
+            --dark: #1c1c1c;
+            --light: #ffffff;
+            --gray: #2a2a2a;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, rgba(28, 28, 28, 0.95), rgba(40, 40, 40, 0.95));
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(237, 118, 14, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--primary), #ff9a3d);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    color: transparent;
+}
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(237, 118, 14, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            background: rgba(237, 118, 14, 0.15);
+        }
+
+        /* Контент страницы */
+        .page-content {
+            padding-top: 150px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .page-header p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Контакты */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--gray);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            border-color: rgba(237, 118, 14, 0.3);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(237, 118, 14, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-details strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            color: #aaa;
+        }
+
+        /* Форма */
+        .contact-form {
+            background: var(--gray);
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(237, 118, 14, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ed760e' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+
+        /* Кнопки */
+        .btn {
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+        }
+
+        .btn-telegram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+        }
+
+        /* Время ответа */
+        .response-time {
+            background: linear-gradient(135deg, rgba(237, 118, 14, 0.1), rgba(14, 165, 237, 0.05));
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+            border: 1px solid rgba(237, 118, 14, 0.2);
+        }
+
+        .response-time h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* Подвал */
+        footer {
+            background: #111;
+            padding: 60px 0 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #666;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                TexCлейc
+            </div>
+            
+            <nav class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="portfolio.html">Портфолио</a>
+                <a href="reviews.html">Отзывы</a>
+                <a href="contact.html" class="active">Связаться</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Контент страницы -->
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Связаться со мной</h1>
+                <p>Отвечаю в Telegram в течение 15 минут</p>
+            </div>
+
+            <!-- Контакты и форма -->
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Контакты</h3>
+                    <div class="contact-methods">
+                        <a href="https://t.me/tehspecgleb" target="_blank" style="text-decoration: none;">
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fab fa-telegram"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <strong>Telegram</strong>
+                                    <p>@tehspecgleb (основной канал связи)</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Email</strong>
+                                <p>contact@texsleys.ru</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Время работы</strong>
+                                <p>Понедельник - Воскресенье<br>10:00 - 22:00 (МСК)</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Этапы работы</strong>
+                                <p>Обсуждение → Прототип → Разработка → Запуск</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="response-time">
+                        <h4>⏱️ Быстрый ответ</h4>
+                        <p>Отвечаю в Telegram в течение 15 минут в рабочее время</p>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Быстрая заявка</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя *</label>
+                            <input type="text" id="name" placeholder="Иван Иванов" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact">Контакт для связи *</label>
+                            <input type="text" id="contact" placeholder="Telegram, телефон или email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project-type">Тип проекта</label>
+                            <select id="project-type">
+                                <option value="">Выберите тип проекта</option>
+                                <option value="tilda">Сайт на Тильде</option>
+                                <option value="wordpress">Сайт на WordPress</option>
+                                <option value="bitrix">Сайт на 1C-Битрикс</option>
+                                <option value="dashboard">Дашборд/Аналитика</option>
+                                <option value="html">Кастомная разработка</option>
+                                <option value="support">Техническая поддержка</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Бюджет проекта</label>
+                            <select id="budget">
+                                <option value="">Выберите бюджет</option>
+                                <option value="10-30">10 000 - 30 000 ₽</option>
+                                <option value="30-50">30 000 - 50 000 ₽</option>
+                                <option value="50-100">50 000 - 100 000 ₽</option>
+                                <option value="100+">От 100 000 ₽</option>
+                                <option value="discuss">Нужна консультация</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Описание проекта *</label>
+                            <textarea id="message" placeholder="Опишите задачу, цели проекта и пожелания..." required></textarea>
+                        </div>
+
+                        <button type="button" class="btn btn-telegram" onclick="sendContactForm()">
+                            <i class="fab fa-telegram"></i> Отправить заявку в Telegram
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Дополнительная информация -->
+            <div style="text-align: center; margin-top: 80px;">
+                <h3 style="margin-bottom: 20px; font-size: 1.8rem;">Что будет дальше?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 40px;">
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="background: rgba(237, 118, 14, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary); font-size: 1.5rem;">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">1. Обсуждение</h4>
+                        <p style="color: #aaa;">Связываемся, уточняем детали, обсуждаем задачи</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="background: rgba(237, 118, 14, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary); font-size: 1.5rem;">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">2. Оценка</h4>
+                        <p style="color: #aaa;">Составляю ТЗ, оцениваю сроки и стоимость</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="background: rgba(237, 118, 14, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary); font-size: 1.5rem;">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">3. Разработка</h4>
+                        <p style="color: #aaa;">Разрабатываю проект по согласованному плану</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="background: rgba(237, 118, 14, 0.1); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary); font-size: 1.5rem;">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">4. Запуск</h4>
+                        <p style="color: #aaa;">Запускаю проект, настраиваю, обучаю пользоваться</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>TexCлейc</h4>
+                    <p>Чистый код, адаптивная верстка, современные решения</p>
+                    <div class="social-links">
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Главная</a>
+                        <a href="portfolio.html">Портфолио</a>
+                        <a href="reviews.html">Отзывы</a>
+                        <a href="contact.html">Контакты</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Услуги</h4>
+                    <div class="footer-links">
+                        <a href="portfolio.html">Сайты на Тильде</a>
+                        <a href="portfolio.html">WordPress</a>
+                        <a href="portfolio.html">1C-Битрикс</a>
+                        <a href="portfolio.html">Дашборды</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 TexCлейc | @tehspecgleb</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Отправка формы контактов в Telegram
+        function sendContactForm() {
+            const name = document.getElementById('name').value;
+            const contact = document.getElementById('contact').value;
+            const projectType = document.getElementById('project-type').value;
+            const budget = document.getElementById('budget').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !contact || !message) {
+                alert('Пожалуйста, заполните обязательные поля (имя, контакт, описание)');
+                return;
+            }
+            
+            // Тексты для выбранных значений
+            const projectTypes = {
+                'tilda': 'Сайт на Тильде',
+                'wordpress': 'Сайт на WordPress',
+                'bitrix': 'Сайт на 1C-Битрикс',
+                'dashboard': 'Дашборд/Аналитика',
+                'html': 'Кастомная разработка',
+                'support': 'Техническая поддержка',
+                'other': 'Другое'
+            };
+            
+            const budgets = {
+                '10-30': '10 000 - 30 000 ₽',
+                '30-50': '30 000 - 50 000 ₽',
+                '50-100': '50 000 - 100 000 ₽',
+                '100+': 'От 100 000 ₽',
+                'discuss': 'Нужна консультация'
+            };
+            
+            const projectTypeText = projectType ? projectTypes[projectType] || projectType : 'Не указано';
+            const budgetText = budget ? budgets[budget] || budget : 'Не указан';
+            
+            const text = `📨 Новая заявка с КОНТАКТНОЙ формы TexCлейc%0A%0A👤 Имя: ${name}%0A📱 Контакт: ${contact}%0A🏷️ Тип проекта: ${projectTypeText}%0A💰 Бюджет: ${budgetText}%0A📝 Сообщение: ${message}`;
+            
+            window.open(`https://t.me/tehspecgleb?text=${text}`, '_blank');
+            
+            // Очищаем форму
+            document.getElementById('contactForm').reset();
+            
+            alert('Заявка подготовлена для отправки в Telegram! С вами свяжутся в течение 15 минут.');
+        }
+    </script>
+</body>
+</html>
