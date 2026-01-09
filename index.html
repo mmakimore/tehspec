@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="main-page">
     <!-- Шапка -->
     <header>
         <div class="nav-container">
@@ -17,10 +17,14 @@
             </div>
             <nav class="nav-links">
                 <a href="index.html" class="active">Главная</a>
+                <a href="about.html">Обо мне</a>
                 <a href="portfolio.html">Кейсы</a>
                 <a href="reviews.html">Отзывы</a>
                 <a href="contact.html">Связаться</a>
             </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -40,11 +44,10 @@
             <div class="container">
                 <div class="hero-content">
                     <h1>Технический специалист</h1>
-                    <div class="subtitle">Чистый код, адаптивная верстка</div>
-                    <div class="description">
+                    <div class="hero-description">
                         Сопровождение онлайн-школ | запуск | сайт | чат-боты | CRM-системы
                     </div>
-                    <a href="contact.html" class="btn btn-primary falling-btn">
+                    <a href="contact.html" class="btn btn-primary">
                         <i class="fas fa-paper-plane"></i> Связаться со мной
                     </a>
                 </div>
@@ -96,7 +99,6 @@
                 </div>
                 <div class="works-slider">
                     <div class="works-track" id="works-track">
-                        <!-- Работа 1 -->
                         <div class="work-slide">
                             <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
                             <div class="work-content">
@@ -108,7 +110,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Работа 2 -->
                         <div class="work-slide">
                             <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23%20(2).jpg');"></div>
                             <div class="work-content">
@@ -120,7 +121,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Работа 3 -->
                         <div class="work-slide">
                             <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-28-46.jpg');"></div>
                             <div class="work-content">
@@ -190,15 +190,17 @@
                             <h3>Готов обсудить ваш проект</h3>
                             <p>Отвечаю в Telegram в течение 15 минут</p>
                             <div class="contact-methods">
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fab fa-telegram"></i>
+                                <a href="https://t.me/tehspecgleb" target="_blank">
+                                    <div class="contact-method">
+                                        <div class="contact-icon">
+                                            <i class="fab fa-telegram"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Telegram</strong>
+                                            <p>@tehspecgleb</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <strong>Telegram</strong>
-                                        <p>@tehspecgleb</p>
-                                    </div>
-                                </div>
+                                </a>
                                 
                                 <div class="contact-method">
                                     <div class="contact-icon">
@@ -241,7 +243,7 @@
     <!-- Модальные окна для услуг -->
     <div class="modal" id="modal1">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <button class="close-modal">&times;</button>
             <h3><i class="fas fa-rocket"></i> Запуск онлайн-школ</h3>
             <div class="modal-body">
                 <p><strong>Полное сопровождение от идеи до первых студентов</strong></p>
@@ -256,23 +258,21 @@
                     <li>Техническая поддержка студентов</li>
                     <li>Аналитика и оптимизация процессов</li>
                 </ul>
-                <p><strong>Сроки:</strong> 2-4 недели в зависимости от сложности</p>
-                <p><strong>Стоимость:</strong> от 50 000 ₽</p>
             </div>
         </div>
     </div>
 
     <div class="modal" id="modal2">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <button class="close-modal">&times;</button>
             <h3><i class="fas fa-laptop-code"></i> Разработка сайтов</h3>
             <div class="modal-body">
                 <p><strong>Создаю сайты на разных платформах</strong></p>
                 <ul>
-                    <li><strong>Тильда:</strong> Быстрые лендинги, многостраничники, интернет-магазины</li>
-                    <li><strong>WordPress:</strong> Блоги, корпоративные сайты, каталоги</li>
-                    <li><strong>1C-Битрикс:</strong> Сложные порталы, CRM, интернет-магазины</li>
-                    <li><strong>HTML/CSS/JS:</strong> Кастомные решения с нуля</li>
+                    <li>Тильда: Быстрые лендинги, многостраничники, интернет-магазины</li>
+                    <li>WordPress: Блоги, корпоративные сайты, каталоги</li>
+                    <li>1C-Битрикс: Сложные порталы, CRM, интернет-магазины</li>
+                    <li>HTML/CSS/JS: Кастомные решения с нуля</li>
                 </ul>
                 <p><strong>Что входит:</strong></p>
                 <ul>
@@ -282,15 +282,13 @@
                     <li>Интеграция с CRM и сервисами</li>
                     <li>Обучение работе с сайтом</li>
                 </ul>
-                <p><strong>Сроки:</strong> 1-3 недели</p>
-                <p><strong>Стоимость:</strong> от 25 000 ₽</p>
             </div>
         </div>
     </div>
 
     <div class="modal" id="modal3">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <button class="close-modal">&times;</button>
             <h3><i class="fas fa-robot"></i> Чат-боты</h3>
             <div class="modal-body">
                 <p><strong>Создание и настройка ботов для продаж и поддержки</strong></p>
@@ -310,15 +308,13 @@
                     <li>Мультиязычность</li>
                     <li>Аналитика и статистика</li>
                 </ul>
-                <p><strong>Сроки:</strong> 1-2 недели</p>
-                <p><strong>Стоимость:</strong> от 15 000 ₽</p>
             </div>
         </div>
     </div>
 
     <div class="modal" id="modal4">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <button class="close-modal">&times;</button>
             <h3><i class="fas fa-cogs"></i> Автоматизация</h3>
             <div class="modal-body">
                 <p><strong>Настройка автоматических воронок и процессов</strong></p>
@@ -345,8 +341,6 @@
                     <li>Снижение количества ошибок</li>
                     <li>Прозрачность процессов</li>
                 </ul>
-                <p><strong>Сроки:</strong> 1-3 недели</p>
-                <p><strong>Стоимость:</strong> от 30 000 ₽</p>
             </div>
         </div>
     </div>
@@ -355,29 +349,39 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
+                <div class="footer-section center">
                     <h4>Кургузов Глеб</h4>
-                    <p>Технический специалист</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Контакты</h4>
-                    <div class="footer-links">
-                        <a href="https://t.me/tehspecgleb" target="_blank">Telegram: @tehspecgleb</a>
-                        <a href="mailto:kurguzovgleb@yandex.ru">Email: kurguzovgleb@yandex.ru</a>
+                    <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
+                    <div class="social-links">
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Навигация</h4>
-                    <div class="footer-links">
-                        <a href="index.html">Главная</a>
-                        <a href="portfolio.html">Кейсы</a>
-                        <a href="reviews.html">Отзывы</a>
-                        <a href="contact.html">Связаться</a>
+                
+                <div class="footer-columns">
+                    <div class="footer-section">
+                        <h4>Навигация</h4>
+                        <div class="footer-links">
+                            <a href="index.html">Главная</a>
+                            <a href="about.html">Обо мне</a>
+                            <a href="portfolio.html">Кейсы</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contact.html">Связаться</a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Контакты</h4>
+                        <div class="footer-links">
+                            <a href="https://t.me/tehspecgleb">Telegram</a>
+                            <a href="mailto:kurguzovgleb@yandex.ru">Email</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <div class="copyright">
-                <p>&copy; 2025 Кургузов Глеб</p>
+                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb">@tehspecgleb</a></p>
             </div>
         </div>
     </footer>
