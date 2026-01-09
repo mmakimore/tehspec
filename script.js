@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 // Твой токен бота и ID чата
                 const botToken = '8328083670:AAHkb_xbhVHaL53rzU_LoSLtnfs3bDsgiao';
-                const chatId = '710000000'; // ЗАМЕНИ НА СВОЙ ID TELEGRAM!
+                const chatId = '7884533080'; // ЗАМЕНИ НА СВОЙ ID TELEGRAM!
                 
                 // Форматируем сообщение
                 const formattedMessage = `
