@@ -27,8 +27,7 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
-    background: var(--dark) url('https://static.vecteezy.com/system/resources/previews/000/696/278/non_2x/textured-black-background-vector.jpg') fixed;
-    background-size: cover;
+    background: var(--dark);
 }
 
 .container {
@@ -47,15 +46,15 @@ body {
     visibility: visible;
 }
 
-/* ===== АНИМАЦИИ ===== */
+/* ===== ОБНОВЛЕННЫЕ АНИМАЦИИ ЗАГРУЗКИ ===== */
 @keyframes gearSpin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
+    100% { transform: translate(-50%, -50%) rotate(720deg); }
 }
 
 @keyframes gearFadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; visibility: hidden; }
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); visibility: hidden; }
 }
 
 @keyframes doorOpenTop {
@@ -149,12 +148,6 @@ header {
     color: var(--light);
 }
 
-.logo-gear {
-    width: 30px;
-    height: 30px;
-    animation: neonPulse 2s infinite alternate;
-}
-
 .nav-links {
     display: flex;
     gap: 15px;
@@ -202,41 +195,46 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
-.spin-gear {
+.gear-icon {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 120px;
     height: 120px;
     transform: translate(-50%, -50%);
-    animation: gearSpin 2s linear infinite,
-               gearFadeOut 0.5s ease forwards;
-    animation-delay: 0s, 2s;
+    animation: gearSpin 1.5s ease-in-out forwards;
     z-index: 2;
+}
+
+.gear-icon i {
+    font-size: 120px;
+    color: #ed760e;
+    animation: neonPulse 1.5s ease-in-out infinite;
 }
 
 .door {
     position: absolute;
     left: 0;
     width: 100%;
-    background: var(--dark);
+    background: #0a0a0a;
     z-index: 1;
 }
 
 .door-top {
     top: 0;
     height: 50%;
-    animation: doorOpenTop 1s ease forwards;
-    animation-delay: 2s;
+    animation: doorOpenTop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    animation-delay: 1.5s;
 }
 
 .door-bottom {
     bottom: 0;
     height: 50%;
-    animation: doorOpenBottom 1s ease forwards;
-    animation-delay: 2s;
+    animation: doorOpenBottom 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    animation-delay: 1.5s;
 }
 
 /* ===== ГЛАВНАЯ ГЕРОЙ СЕКЦИЯ ===== */
@@ -244,7 +242,7 @@ header {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 70px;
+    padding-top: 20px; /* Отступ сверху 20px */
 }
 
 .hero-content {
@@ -287,7 +285,7 @@ header {
 
 /* ===== СЕКЦИИ ===== */
 .section {
-    padding: 100px 0;
+    padding: 15px 0; /* Отступ между блоками 15px */
 }
 
 .section-title {
@@ -311,7 +309,7 @@ header {
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    gap: 15px; /* Отступ между карточками 15px */
 }
 
 .service-card {
@@ -386,13 +384,19 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     z-index: 1001;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
 }
 
 .modal.active {
     display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .modal-content {
@@ -400,76 +404,89 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(26, 26, 26, 0.95);
+    background: rgba(26, 26, 26, 0.98);
     padding: 40px;
     border-radius: 20px;
     width: 90%;
-    max-width: 600px;
-    max-height: 80vh;
+    max-width: 700px;
+    max-height: 85vh;
     overflow-y: auto;
-    border: 1px solid rgba(237, 118, 14, 0.3);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 50px rgba(237, 118, 14, 0.3);
     animation: modalAppear 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .modal-content h3 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 25px;
     color: var(--primary);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+}
+
+.modal-content h3 i {
+    font-size: 1.8rem;
 }
 
 .modal-body {
-    color: #ccc;
-    line-height: 1.8;
+    color: #eee;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.modal-body p {
+    margin-bottom: 20px;
 }
 
 .modal-body ul {
     margin: 20px 0;
-    padding-left: 20px;
+    padding-left: 25px;
 }
 
 .modal-body li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     position: relative;
+    padding-left: 10px;
 }
 
 .modal-body li::before {
-    content: '•';
+    content: '→';
     color: var(--primary);
-    font-weight: bold;
     position: absolute;
     left: -15px;
+    font-weight: bold;
 }
 
 .modal-body strong {
     color: var(--light);
-    display: block;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
 }
 
 .close-modal {
     position: absolute;
     top: 20px;
     right: 20px;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     color: #aaa;
     cursor: pointer;
     transition: var(--transition);
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    line-height: 1;
 }
 
 .close-modal:hover {
     color: var(--primary);
     background: rgba(237, 118, 14, 0.1);
+    transform: rotate(90deg);
 }
 
 /* ===== РАБОТЫ (СЛАЙДЕР) ===== */
@@ -579,7 +596,7 @@ header {
 .reviews-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 15px; /* Отступ между отзывами 15px */
 }
 
 .review-card {
@@ -919,7 +936,7 @@ footer {
     }
     
     .section {
-        padding: 70px 0;
+        padding: 15px 0;
     }
     
     .work-slide {
@@ -960,11 +977,6 @@ footer {
     
     .logo {
         font-size: 1.3rem;
-    }
-    
-    .logo-gear {
-        width: 25px;
-        height: 25px;
     }
 }
 
