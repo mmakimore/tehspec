@@ -27,8 +27,15 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
-    background: var(--dark) url('https://static.vecteezy.com/system/resources/previews/000/696/278/non_2x/textured-black-background-vector.jpg') fixed;
-    background-size: cover;
+    background: 
+        radial-gradient(
+            ellipse at center,
+            rgba(10, 10, 10, 0) 0%,
+            rgba(10, 10, 10, 0.3) 30%,
+            rgba(10, 10, 10, 0.5) 100%
+        ),
+        var(--dark);
+    background-attachment: fixed;
 }
 
 .container {
@@ -62,25 +69,6 @@ body {
 @keyframes doorOpenBottom {
     0% { transform: translateY(0); }
     100% { transform: translateY(100%); }
-}
-
-@keyframes letterGlow {
-    0% { 
-        text-shadow: 0 0 1px var(--primary),
-                     0 0 1px var(--primary);
-        opacity: 0.3;
-    }
-    50% { 
-        text-shadow: 0 0 3px var(--primary),
-                     0 0 8px var(--primary),
-                     0 0 12px rgba(237, 118, 14, 0.5);
-        opacity: 1;
-    }
-    100% { 
-        text-shadow: 0 0 1px var(--primary),
-                     0 0 1px var(--primary);
-        opacity: 0.3;
-    }
 }
 
 @keyframes typewriter {
@@ -135,6 +123,11 @@ body {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* ===== ШАПКА ===== */
@@ -274,7 +267,7 @@ header {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 30px; /* Подняли на 30px */
+    padding-top: 30px;
 }
 
 .hero-content {
@@ -285,49 +278,15 @@ header {
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin-bottom: 30px;
     color: var(--light);
-    overflow: hidden;
-    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--primary),
+                 0 0 20px rgba(237, 118, 14, 0.5),
+                 0 0 30px rgba(237, 118, 14, 0.3);
 }
-
-.letter {
-    display: inline-block;
-    position: relative;
-}
-
-.letter::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--primary);
-    animation: letterGlow 1.5s ease-in-out infinite;
-    opacity: 0;
-}
-
-.letter:nth-child(1)::after { animation-delay: 0.1s; }
-.letter:nth-child(2)::after { animation-delay: 0.2s; }
-.letter:nth-child(3)::after { animation-delay: 0.3s; }
-.letter:nth-child(4)::after { animation-delay: 0.4s; }
-.letter:nth-child(5)::after { animation-delay: 0.5s; }
-.letter:nth-child(6)::after { animation-delay: 0.6s; }
-.letter:nth-child(7)::after { animation-delay: 0.7s; }
-.letter:nth-child(8)::after { animation-delay: 0.8s; }
-.letter:nth-child(9)::after { animation-delay: 0.9s; }
-.letter:nth-child(10)::after { animation-delay: 1.0s; }
-.letter:nth-child(11)::after { animation-delay: 1.1s; }
-.letter:nth-child(12)::after { animation-delay: 1.2s; }
-.letter:nth-child(13)::after { animation-delay: 1.3s; }
-.letter:nth-child(14)::after { animation-delay: 1.4s; }
-.letter:nth-child(15)::after { animation-delay: 1.5s; }
-.letter:nth-child(16)::after { animation-delay: 1.6s; }
-.letter:nth-child(17)::after { animation-delay: 1.7s; }
-.letter:nth-child(18)::after { animation-delay: 1.8s; }
-.letter:nth-child(19)::after { animation-delay: 1.9s; }
 
 .hero-description {
     font-size: 1.4rem;
@@ -337,11 +296,21 @@ header {
     overflow: hidden;
     border-right: 3px solid var(--primary);
     white-space: nowrap;
+    margin: 0 auto 50px;
     animation: 
-        typewriter 3.5s steps(40, end),
+        typewriter 3.5s steps(40, end) 1s forwards,
         blinkCursor 0.75s step-end infinite;
     width: 0;
-    animation-fill-mode: forwards;
+}
+
+/* Для мобильных устройств и мини-ап */
+@media (max-width: 768px) {
+    .hero-description {
+        white-space: normal;
+        border-right: none;
+        animation: fadeIn 2s ease forwards;
+        width: 100%;
+    }
 }
 
 /* ===== СЕКЦИИ ===== */
@@ -365,6 +334,8 @@ header {
     margin-bottom: 15px;
     color: var(--primary);
     white-space: nowrap;
+    text-shadow: 0 0 10px var(--primary),
+                 0 0 20px rgba(237, 118, 14, 0.5);
 }
 
 .section-title p {
@@ -402,6 +373,31 @@ header {
 .service-card:nth-child(2) { animation-delay: 0.2s; }
 .service-card:nth-child(3) { animation-delay: 0.3s; }
 .service-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Анимация блика при наведении */
+.service-card::before,
+.review-card::before,
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: left 0.7s ease;
+}
+
+.service-card:hover::before,
+.review-card:hover::before,
+.stat-card:hover::before {
+    left: 100%;
+}
 
 .service-card:hover {
     transform: translateY(-10px);
@@ -455,12 +451,6 @@ header {
 
 .modal.active {
     display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
 
 .modal-content {
@@ -477,18 +467,6 @@ header {
     overflow-y: auto;
     border: 2px solid var(--primary);
     box-shadow: 0 0 50px rgba(237, 118, 14, 0.3);
-    animation: modalAppear 0.3s ease;
-}
-
-@keyframes modalAppear {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.7);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
 }
 
 .modal-content h3 {
@@ -524,10 +502,6 @@ header {
     position: relative;
     padding-left: 10px;
     list-style-type: disc;
-}
-
-.modal-body li::before {
-    display: none; /* Убрали стрелки */
 }
 
 .close-modal {
@@ -682,6 +656,8 @@ header {
     transition: var(--transition);
     opacity: 0;
     transform: translateY(20px);
+    position: relative;
+    overflow: hidden;
 }
 
 .review-card.animated {
@@ -808,7 +784,6 @@ header {
     margin: 0;
 }
 
-/* Сделаем Telegram обычным текстом (не синим) */
 .contact-method a {
     text-decoration: none;
     color: inherit;
@@ -927,6 +902,44 @@ header {
     transform: translateY(-2px);
 }
 
+/* ===== СТАТИСТИКА ===== */
+.stat-card {
+    background: rgba(26, 26, 26, 0.7);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(237, 118, 14, 0.2);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(237, 118, 14, 0.2);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 80px;
+}
+
 /* ===== ПОДВАЛ ===== */
 footer {
     background: rgba(10, 10, 10, 0.95);
@@ -936,19 +949,20 @@ footer {
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
     margin-bottom: 50px;
 }
 
-.footer-section {
-    display: flex;
-    flex-direction: column;
+.footer-center {
+    grid-column: 1 / -1;
+    text-align: center;
 }
 
-.footer-section.center {
-    text-align: center;
-    align-items: center;
+.footer-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
 }
 
 .footer-section h4 {
@@ -1004,12 +1018,6 @@ footer {
 .footer-links a:hover {
     color: var(--primary);
     padding-left: 5px;
-}
-
-.footer-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
 }
 
 .copyright {
@@ -1090,10 +1098,6 @@ footer {
     
     .hero-description {
         font-size: 1.1rem;
-        white-space: normal;
-        animation: none;
-        border: none;
-        width: 100%;
     }
     
     .section {
@@ -1141,6 +1145,10 @@ footer {
         grid-template-columns: 1fr;
         gap: 30px;
     }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 576px) {
@@ -1166,6 +1174,14 @@ footer {
         height: 40px;
         font-size: 1rem;
     }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
 }
 
 @media (max-width: 400px) {
@@ -1186,4 +1202,9 @@ footer {
     .hero-content h1 {
         font-size: 1.8rem;
     }
+}
+
+/* Telegram Mini App специфичные стили */
+.telegram-webapp .hero-description {
+    animation: fadeIn 2s ease forwards !important;
 }
