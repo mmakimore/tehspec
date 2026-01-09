@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ТехСпейс | Сайт-визитка</title>
+    <title>TexCлейc | Разработка сайтов и дашбордов</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -13,7 +13,7 @@
             --dark: #1c1c1c;       /* Темный фон */
             --light: #ffffff;       /* Белый текст */
             --gray: #2a2a2a;        /* Серый для фона */
-            --accent: #0ea5ed;      /* Синий акцент (дополнительный) */
+            --accent: #0ea5ed;      /* Синий акцент */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -79,10 +79,6 @@
             to { filter: drop-shadow(0 0 15px rgba(237, 118, 14, 0.8)); }
         }
 
-        .logo i {
-            color: var(--primary);
-        }
-
         .nav-links {
             display: flex;
             gap: 30px;
@@ -101,27 +97,6 @@
         .nav-links a:hover {
             color: var(--primary);
             background: rgba(237, 118, 14, 0.1);
-        }
-
-        .nav-links a.active {
-            color: var(--primary);
-            background: rgba(237, 118, 14, 0.15);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-            transform: translateX(-50%);
-        }
-
-        .nav-links a:hover::after {
-            width: 70%;
         }
 
         .mobile-menu-btn {
@@ -153,13 +128,6 @@
                 radial-gradient(circle at 20% 50%, rgba(237, 118, 14, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(14, 165, 237, 0.05) 0%, transparent 50%);
             z-index: -1;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, 30px) rotate(120deg); }
-            66% { transform: translate(-20px, 40px) rotate(240deg); }
         }
 
         .hero-content {
@@ -222,6 +190,17 @@
             box-shadow: 0 6px 20px rgba(237, 118, 14, 0.4);
         }
 
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+        }
+
+        .btn-telegram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+        }
+
         .btn-secondary {
             background: transparent;
             color: var(--light);
@@ -233,7 +212,7 @@
             transform: translateY(-3px);
         }
 
-        /* ===== СЕКЦИЯ КЕЙСОВ ===== */
+        /* ===== СЕКЦИЯ ТЕХНОЛОГИЙ ===== */
         .section {
             padding: 100px 0;
         }
@@ -261,13 +240,41 @@
             background: var(--primary);
         }
 
-        .cases-grid {
+        .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
 
-        .case-card {
+        .tech-card {
+            background: var(--gray);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(237, 118, 14, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* ===== СЕКЦИЯ РАБОТ ===== */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .work-card {
             background: var(--gray);
             border-radius: 15px;
             overflow: hidden;
@@ -275,37 +282,45 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .case-card:hover {
+        .work-card:hover {
             transform: translateY(-10px);
             border-color: rgba(237, 118, 14, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .case-img {
+        .work-img {
             height: 200px;
-            background: linear-gradient(45deg, #333, #444);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 3rem;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .case-content {
+        .work-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
+        }
+
+        .work-content {
             padding: 25px;
         }
 
-        .case-content h3 {
+        .work-content h3 {
             font-size: 1.3rem;
             margin-bottom: 10px;
         }
 
-        .case-content p {
+        .work-content p {
             color: #aaa;
             margin-bottom: 15px;
         }
 
-        .case-tags {
+        .work-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
@@ -451,6 +466,28 @@
             resize: vertical;
         }
 
+        /* ===== СТРАНИЦЫ ===== */
+        .page-content {
+            padding-top: 150px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .page-header p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         /* ===== ПОДВАЛ ===== */
         footer {
             background: #111;
@@ -558,9 +595,13 @@
             .review-card {
                 min-width: 300px;
             }
+            
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* ===== АНИМАЦИИ ПРИ ПРОКРУТКЕ ===== */
+        /* ===== АНИМАЦИИ ===== */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
@@ -571,6 +612,11 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ===== УТИЛИТЫ ===== */
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -578,8 +624,8 @@
     <header>
         <div class="container nav-container">
             <div class="logo">
-                <i class="fas fa-rocket"></i>
-                ТехСпейс
+                <i class="fas fa-code"></i>
+                TexCлейc
             </div>
             
             <button class="mobile-menu-btn" id="menuBtn">
@@ -587,253 +633,542 @@
             </button>
             
             <nav class="nav-links" id="navLinks">
-                <a href="#hero" class="active">Главная</a>
-                <a href="#cases">Кейсы</a>
-                <a href="#reviews">Отзывы</a>
-                <a href="#contact">Связь</a>
+                <a href="index.html" class="active">Главная</a>
+                <a href="services.html">Услуги</a>
+                <a href="portfolio.html">Работы</a>
+                <a href="reviews.html">Отзывы</a>
+                <a href="contact.html">Связаться</a>
             </nav>
         </div>
     </header>
 
-    <!-- ГЕРОЙ -->
-    <section class="hero" id="hero">
-        <div class="hero-bg"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1>Создаём цифровые <span>решения</span> для вашего бизнеса</h1>
-                <p>Разработка сайтов, мобильных приложений и сложных веб-сервисов. Превращаем идеи в работающие продукты с помощью современных технологий.</p>
-                
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Обсудить проект
-                    </a>
-                    <a href="#cases" class="btn btn-secondary">
-                        <i class="fas fa-eye"></i> Смотреть работы
-                    </a>
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <main id="main-content">
+        <section class="hero" id="hero">
+            <div class="hero-bg"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Чистый код, <span>адаптивная верстка</span></h1>
+                    <p>Создаю современные сайты, дашборды и веб-приложения. Специализируюсь на разработке под ключ: от дизайна до запуска.</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="btn btn-telegram">
+                            <i class="fab fa-telegram"></i> Написать в Telegram
+                        </a>
+                        <a href="portfolio.html" class="btn btn-secondary">
+                            <i class="fas fa-eye"></i> Смотреть работы
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- КЕЙСЫ -->
-    <section class="section" id="cases">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Наши кейсы</h2>
-                <p>Реальные проекты с измеримыми результатами</p>
-            </div>
-            
-            <div class="cases-grid">
-                <div class="case-card animate-on-scroll">
-                    <div class="case-img">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="case-content">
-                        <h3>Интернет-магазин электроники</h3>
-                        <p>Полный цикл разработки: дизайн, фронтенд, бэкенд, интеграция с платежными системами.</p>
-                        <div class="case-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
-                        </div>
-                    </div>
+        <!-- ТЕХНОЛОГИИ -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title animate-on-scroll">
+                    <h2>Технологии</h2>
+                    <p>Работаю со всеми современными платформами</p>
                 </div>
                 
-                <div class="case-card animate-on-scroll">
-                    <div class="case-img">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="case-content">
-                        <h3>Мобильное приложение для доставки еды</h3>
-                        <p>Кроссплатформенное приложение на React Native с real-time отслеживанием заказов.</p>
-                        <div class="case-tags">
-                            <span class="tag">React Native</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">WebSockets</span>
+                <div class="tech-grid">
+                    <div class="tech-card animate-on-scroll">
+                        <div class="tech-icon">
+                            <i class="fas fa-brush"></i>
                         </div>
+                        <h3>Тильда</h3>
+                        <p>Современные лендинги и сайты на конструкторе</p>
                     </div>
-                </div>
-                
-                <div class="case-card animate-on-scroll">
-                    <div class="case-img">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="case-content">
-                        <h3>Дашборд для анализа данных</h3>
-                        <p>Визуализация больших данных с интерактивными графиками и автоматическими отчетами.</p>
-                        <div class="case-tags">
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">D3.js</span>
+                    
+                    <div class="tech-card animate-on-scroll">
+                        <div class="tech-icon">
+                            <i class="fab fa-wordpress"></i>
                         </div>
+                        <h3>WordPress</h3>
+                        <p>Корпоративные сайты и блоги</p>
+                    </div>
+                    
+                    <div class="tech-card animate-on-scroll">
+                        <div class="tech-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3>1C-Битрикс</h3>
+                        <p>Интернет-магазины и порталы</p>
+                    </div>
+                    
+                    <div class="tech-card animate-on-scroll">
+                        <div class="tech-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>HTML/CSS/JS</h3>
+                        <p>Кастомная разработка с нуля</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ОТЗЫВЫ -->
-    <section class="section" id="reviews">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Отзывы клиентов</h2>
-                <p>Что говорят о нашей работе</p>
-            </div>
-            
-            <div class="reviews-slider">
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <div class="review-avatar">АК</div>
-                        <div>
-                            <h4>Алексей Королёв</h4>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="review-text">"Работали над сложным fintech-проектом. Команда ТехСпейс показала высокий уровень экспертизы и ответственный подход к делу. Рекомендую!"</p>
+        <!-- ПОСЛЕДНИЕ РАБОТЫ -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title animate-on-scroll">
+                    <h2>Последние работы</h2>
+                    <p>Примеры реализованных проектов</p>
                 </div>
                 
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <div class="review-avatar">МС</div>
-                        <div>
-                            <h4>Мария Семёнова</h4>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="review-text">"Заказали разработку корпоративного портала. Сделали всё в срок, качественно. Отдельное спасибо за помощь в обучении сотрудников."</p>
-                </div>
-                
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <div class="review-avatar">ДИ</div>
-                        <div>
-                            <h4>Дмитрий Иванов</h4>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="review-text">"Лучшие разработчики, с которыми я работал! Понимают задачу с полуслова, предлагают оптимальные решения. Будем сотрудничать дальше."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- КОНТАКТЫ -->
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="contact-section animate-on-scroll">
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <h3>Свяжитесь со мной</h3>
-                        <p>Обсудим ваш проект и найдём лучшее решение</p>
-                        
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <strong>Email</strong>
-                                    <p>contact@techspace.ru</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-method">
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div>
-                                    <strong>Телефон</strong>
-                                    <p>+7 (999) 123-45-67</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-method">
-                                <div class="contact-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <strong>Время работы</strong>
-                                    <p>Пн-Пт: 10:00 - 19:00</p>
-                                </div>
+                <div class="works-grid">
+                    <div class="work-card animate-on-scroll">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
+                        <div class="work-content">
+                            <h3>Корпоративный сайт на Тильде</h3>
+                            <p>Современный дизайн, адаптивная верстка, интеграция с CRM</p>
+                            <div class="work-tags">
+                                <span class="tag">Тильда</span>
+                                <span class="tag">Адаптив</span>
+                                <span class="tag">UI/UX</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="contact-form">
-                        <div class="form-group">
-                            <input type="text" placeholder="Ваше имя" required>
+                    <div class="work-card animate-on-scroll">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23%20(2).jpg');"></div>
+                        <div class="work-content">
+                            <h3>Дашборд CRM системы</h3>
+                            <p>Визуализация данных, аналитика, отчетность в реальном времени</p>
+                            <div class="work-tags">
+                                <span class="tag">Дашборд</span>
+                                <span class="tag">Аналитика</span>
+                                <span class="tag">Vue.js</span>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email" required>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="portfolio.html" class="btn btn-primary">
+                        <i class="fas fa-images"></i> Все работы
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- КОНТАКТЫ НА ГЛАВНОЙ -->
+        <section class="section" id="contact">
+            <div class="container">
+                <div class="contact-section animate-on-scroll">
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h3>Готов обсудить ваш проект</h3>
+                            <p>Отвечаю в Telegram в течение 15 минут</p>
+                            
+                            <div class="contact-methods">
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fab fa-telegram"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Telegram</strong>
+                                        <p>@tehspecgleb</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Время работы</strong>
+                                        <p>Пн-Вс: 10:00 - 22:00</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <textarea placeholder="Расскажите о проекте..." required></textarea>
+                        
+                        <div class="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="name" placeholder="Ваше имя" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" placeholder="Телефон или Telegram" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" placeholder="Опишите задачу..." required></textarea>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="sendToTelegram()">
+                                <i class="fab fa-telegram"></i> Отправить в Telegram
+                            </button>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Отправить сообщение
-                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
+
+    <!-- СТРАНИЦА УСЛУГ -->
+    <div class="hidden" id="services-page">
+        <section class="page-content">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Услуги</h1>
+                    <p>Полный цикл разработки цифровых продуктов</p>
+                </div>
+                
+                <div class="works-grid">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Дизайн сайтов</h3>
+                        <p>UI/UX дизайн, прототипирование, создание макетов</p>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Верстка</h3>
+                        <p>Чистая, адаптивная, кроссбраузерная верстка</p>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Дашборды</h3>
+                        <p>Аналитика, визуализация данных, отчеты</p>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Интернет-магазины</h3>
+                        <p>1C-Битрикс, WooCommerce, кастомные решения</p>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Интеграции</h3>
+                        <p>API, платежные системы, CRM, 1C</p>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Поддержка</h3>
+                        <p>Техническая поддержка и развитие проектов</p>
+                    </div>
+                </div>
+                
+                <div class="contact-section" style="margin-top: 80px;">
+                    <div style="text-align: center;">
+                        <h3 style="margin-bottom: 20px;">Нужна консультация?</h3>
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="btn btn-telegram" style="font-size: 1.1rem;">
+                            <i class="fab fa-telegram"></i> Обсудить проект в Telegram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- СТРАНИЦА ПОРТФОЛИО -->
+    <div class="hidden" id="portfolio-page">
+        <section class="page-content">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Портфолио</h1>
+                    <p>Реализованные проекты в разных технологиях</p>
+                </div>
+                
+                <div class="section-title">
+                    <h2>Сайты на Тильде</h2>
+                </div>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
+                        <div class="work-content">
+                            <h3>Бизнес-лендинг</h3>
+                            <p>Многостраничный сайт с анимациями и формами</p>
+                            <div class="work-tags">
+                                <span class="tag">Тильда</span>
+                                <span class="tag">Лендинг</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="work-card">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07%20(2).jpg');"></div>
+                        <div class="work-content">
+                            <h3>Сайт услуг</h3>
+                            <p>Презентация услуг с онлайн-записью</p>
+                            <div class="work-tags">
+                                <span class="tag">Тильда</span>
+                                <span class="tag">Адаптив</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-title" style="margin-top: 80px;">
+                    <h2>Дашборды и аналитика</h2>
+                </div>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23.jpg');"></div>
+                        <div class="work-content">
+                            <h3>Дашборд аналитики</h3>
+                            <p>Визуализация метрик и KPI в реальном времени</p>
+                            <div class="work-tags">
+                                <span class="tag">Дашборд</span>
+                                <span class="tag">Аналитика</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="work-card">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-40-07.jpg');"></div>
+                        <div class="work-content">
+                            <h3>Сложный дашборд</h3>
+                            <p>Многокомпонентная панель управления</p>
+                            <div class="work-tags">
+                                <span class="tag">Панель</span>
+                                <span class="tag">Управление</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="work-card">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-39-24.jpg');"></div>
+                        <div class="work-content">
+                            <h3>Панель управления</h3>
+                            <p>Админ-панель с CRUD операциями</p>
+                            <div class="work-tags">
+                                <span class="tag">Админка</span>
+                                <span class="tag">React</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-title" style="margin-top: 80px;">
+                    <h2>Кастомная разработка</h2>
+                </div>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-28-46.jpg');"></div>
+                        <div class="work-content">
+                            <h3>HTML/CSS/JS сайт</h3>
+                            <p>Кастомная разработка с анимациями</p>
+                            <div class="work-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="work-card">
+                        <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-17_10-14-24.jpg');"></div>
+                        <div class="work-content">
+                            <h3>Интерфейс системы</h3>
+                            <p>Сложный интерфейс с множеством элементов</p>
+                            <div class="work-tags">
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">Интерфейс</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- СТРАНИЦА ОТЗЫВОВ -->
+    <div class="hidden" id="reviews-page">
+        <section class="page-content">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Отзывы</h1>
+                    <p>Что говорят клиенты о моей работе</p>
+                </div>
+                
+                <div class="reviews-slider">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">АК</div>
+                            <div>
+                                <h4>Алексей, IT-директор</h4>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="review-text">"С вами очень комфортно работать, все было организовано быстро и чётко. Проект завершили раньше срока с отличным результатом."</p>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ДП</div>
+                            <div>
+                                <h4>Дмитрий, предприниматель</h4>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="review-text">"Сделал все грамотно, по цене легко договориться, знает свое дело на 100%. Рекомендую как ответственного исполнителя!"</p>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">МС</div>
+                            <div>
+                                <h4>Марина, маркетолог</h4>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="review-text">"Заказывали лендинг на Тильде. Сделали быстро, качественно, внесли все правки. Конверсия выросла на 30%!"</p>
+                    </div>
+                </div>
+                
+                <div class="contact-section" style="margin-top: 80px;">
+                    <div style="text-align: center;">
+                        <h3 style="margin-bottom: 20px;">Хотите так же?</h3>
+                        <a href="contact.html" class="btn btn-primary" style="font-size: 1.1rem;">
+                            <i class="fas fa-paper-plane"></i> Обсудить проект
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- СТРАНИЦА КОНТАКТОВ -->
+    <div class="hidden" id="contact-page">
+        <section class="page-content">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Связаться</h1>
+                    <p>Отвечаю в Telegram в течение 15 минут</p>
+                </div>
+                
+                <div class="contact-section">
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h3>Контакты</h3>
+                            <p>Выберите удобный способ связи</p>
+                            
+                            <div class="contact-methods">
+                                <a href="https://t.me/tehspecgleb" target="_blank" style="text-decoration: none;">
+                                    <div class="contact-method">
+                                        <div class="contact-icon">
+                                            <i class="fab fa-telegram"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Telegram</strong>
+                                            <p>@tehspecgleb (основной)</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Email</strong>
+                                        <p>contact@texsleys.ru</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Время работы</strong>
+                                        <p>Пн-Вс: 10:00 - 22:00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form">
+                            <h3 style="margin-bottom: 20px;">Быстрая заявка</h3>
+                            <div class="form-group">
+                                <input type="text" id="contact-name" placeholder="Ваше имя" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="contact-phone" placeholder="Телефон или Telegram" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="contact-message" placeholder="Опишите проект..." required></textarea>
+                            </div>
+                            <button type="button" class="btn btn-telegram" onclick="sendContactToTelegram()" style="width: 100%;">
+                                <i class="fab fa-telegram"></i> Отправить в Telegram
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- ПОДВАЛ -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>ТехСпейс</h4>
-                    <p>Создаём цифровые продукты, которые работают на результат.</p>
+                    <h4>TexCлейc</h4>
+                    <p>Чистый код, адаптивная верстка, современные решения</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Навигация</h4>
                     <div class="footer-links">
-                        <a href="#hero">Главная</a>
-                        <a href="#cases">Кейсы</a>
-                        <a href="#reviews">Отзывы</a>
-                        <a href="#contact">Контакты</a>
+                        <a href="index.html">Главная</a>
+                        <a href="services.html">Услуги</a>
+                        <a href="portfolio.html">Работы</a>
+                        <a href="reviews.html">Отзывы</a>
+                        <a href="contact.html">Контакты</a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Услуги</h4>
+                    <h4>Технологии</h4>
                     <div class="footer-links">
-                        <a href="#">Веб-разработка</a>
-                        <a href="#">Мобильные приложения</a>
-                        <a href="#">UI/UX дизайн</a>
-                        <a href="#">Техническая поддержка</a>
+                        <a href="#">Тильда</a>
+                        <a href="#">WordPress</a>
+                        <a href="#">1C-Битрикс</a>
+                        <a href="#">HTML/CSS/JS</a>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2024 ТехСпейс. Все права защищены.</p>
+                <p>&copy; 2025 TexCлейc | @tehspecgleb</p>
             </div>
         </div>
     </footer>
@@ -850,27 +1185,105 @@
                 : '<i class="fas fa-bars"></i>';
         });
 
-        // Плавная прокрутка для ссылок
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    // Закрываем мобильное меню если открыто
-                    navLinks.classList.remove('active');
-                    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    
-                    // Прокрутка
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+        // Навигация по страницам
+        function navigateTo(page) {
+            const pages = ['main', 'services', 'portfolio', 'reviews', 'contact'];
+            const mainContent = document.getElementById('main-content');
+            
+            // Скрываем все страницы
+            pages.forEach(p => {
+                const pageEl = document.getElementById(`${p}-page`);
+                if (pageEl) pageEl.classList.add('hidden');
+            });
+            
+            if (page === 'main') {
+                mainContent.classList.remove('hidden');
+            } else {
+                mainContent.classList.add('hidden');
+                const targetPage = document.getElementById(`${page}-page`);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                }
+            }
+            
+            // Прокрутка вверх
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Закрываем меню на мобильных
+            navLinks.classList.remove('active');
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            
+            // Обновляем активную ссылку
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `${page}.html`) {
+                    link.classList.add('active');
                 }
             });
+        }
+
+        // Обработка навигации
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('href').replace('.html', '');
+                navigateTo(page);
+            });
         });
+
+        // Обработка ссылок в подвале
+        document.querySelectorAll('.footer-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('href').replace('.html', '');
+                navigateTo(page);
+            });
+        });
+
+        // Отправка формы в Telegram
+        function sendToTelegram() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !phone || !message) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            const text = `📨 Новая заявка с сайта TexCлейc%0A%0A👤 Имя: ${name}%0A📱 Контакты: ${phone}%0A📝 Сообщение: ${message}`;
+            
+            window.open(`https://t.me/tehspecgleb?text=${text}`, '_blank');
+            
+            // Очищаем форму
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('message').value = '';
+            
+            alert('Сообщение подготовлено для отправки в Telegram!');
+        }
+
+        function sendContactToTelegram() {
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const message = document.getElementById('contact-message').value;
+            
+            if (!name || !phone || !message) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            const text = `📨 Новая заявка с КОНТАКТНОЙ формы TexCлейc%0A%0A👤 Имя: ${name}%0A📱 Контакты: ${phone}%0A📝 Сообщение: ${message}`;
+            
+            window.open(`https://t.me/tehspecgleb?text=${text}`, '_blank');
+            
+            // Очищаем форму
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-phone').value = '';
+            document.getElementById('contact-message').value = '';
+            
+            alert('Сообщение подготовлено для отправки в Telegram!');
+        }
 
         // Анимация при прокрутке
         const observerOptions = {
@@ -886,45 +1299,31 @@
             });
         }, observerOptions);
 
-        // Наблюдаем за всеми элементами с анимацией
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
 
-        // Активная ссылка при прокрутке
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if(scrollY >= (sectionTop - 100)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if(link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Инициализация Telegram Web App (если в мини-апп)
+        // Инициализация Telegram Web App
         if (typeof Telegram !== 'undefined') {
             const tg = window.Telegram.WebApp;
             tg.expand();
             tg.ready();
             
-            // Меняем тему если нужно
             if (tg.colorScheme === 'dark') {
                 document.documentElement.style.setProperty('--dark', '#0a0a0a');
                 document.documentElement.style.setProperty('--gray', '#1a1a1a');
             }
+            
+            // Можем использовать tg.sendData для отправки данных
+            window.sendToBot = function(data) {
+                tg.sendData(JSON.stringify(data));
+            };
         }
+
+        // Загружаем главную страницу по умолчанию
+        document.addEventListener('DOMContentLoaded', () => {
+            navigateTo('main');
+        });
     </script>
 </body>
 </html>
