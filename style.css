@@ -34,7 +34,7 @@ body {
             rgba(10, 10, 10, 0.3) 30%,
             rgba(10, 10, 10, 0.5) 100%
         ),
-        var(--dark);
+        linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     background-attachment: fixed;
 }
 
@@ -163,6 +163,10 @@ header {
     color: var(--light);
 }
 
+.logo i {
+    color: var(--primary);
+}
+
 .nav-links {
     display: flex;
     gap: 15px;
@@ -203,10 +207,14 @@ header {
     display: none;
     background: none;
     border: none;
-    color: var(--light);
+    color: var(--primary);
     font-size: 1.5rem;
     cursor: pointer;
     z-index: 1001;
+}
+
+.mobile-menu-btn:hover {
+    color: var(--primary-glow);
 }
 
 /* ===== ЗАГРУЗОЧНАЯ АНИМАЦИЯ ===== */
@@ -264,10 +272,10 @@ header {
 
 /* ===== ГЛАВНАЯ ГЕРОЙ СЕКЦИЯ ===== */
 .hero-section {
-    min-height: 100vh;
+    min-height: calc(100vh - 50px);
     display: flex;
     align-items: center;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 .hero-content {
@@ -279,13 +287,12 @@ header {
 
 .hero-content h1 {
     font-size: 3rem;
-    margin-bottom: 30px;
-    color: var(--light);
+    margin-bottom: 20px;
+    color: var(--primary);
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 0 0 10px var(--primary),
-                 0 0 20px rgba(237, 118, 14, 0.5),
-                 0 0 30px rgba(237, 118, 14, 0.3);
+    text-shadow: 0 0 5px var(--primary),
+                 0 0 10px rgba(237, 118, 14, 0.3);
 }
 
 .hero-description {
@@ -304,13 +311,21 @@ header {
 }
 
 /* Для мобильных устройств и мини-ап */
-@media (max-width: 768px) {
+@media (max-width: 768px), (max-width: 1024px) {
     .hero-description {
         white-space: normal;
         border-right: none;
-        animation: fadeIn 2s ease forwards;
+        animation: fadeIn 2s ease forwards !important;
         width: 100%;
     }
+}
+
+.telegram-webapp .hero-description {
+    animation: typewriter 3.5s steps(40, end) 1s forwards,
+               blinkCursor 0.75s step-end infinite !important;
+    border-right: 3px solid var(--primary);
+    white-space: nowrap;
+    width: 0;
 }
 
 /* ===== СЕКЦИИ ===== */
@@ -334,8 +349,8 @@ header {
     margin-bottom: 15px;
     color: var(--primary);
     white-space: nowrap;
-    text-shadow: 0 0 10px var(--primary),
-                 0 0 20px rgba(237, 118, 14, 0.5);
+    text-shadow: 0 0 5px var(--primary),
+                 0 0 10px rgba(237, 118, 14, 0.3);
 }
 
 .section-title p {
@@ -387,7 +402,7 @@ header {
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255, 255, 255, 0.1),
+        rgba(237, 118, 14, 0.2),
         transparent
     );
     transition: left 0.7s ease;
@@ -833,11 +848,32 @@ header {
     resize: vertical;
 }
 
-.form-note {
+.form-hint {
+    display: block;
     color: #666;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.form-success {
+    display: none;
     text-align: center;
-    margin-top: 10px;
+    padding: 40px;
+}
+
+.form-success.active {
+    display: block;
+}
+
+.form-success i {
+    font-size: 4rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.form-success h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
 }
 
 /* ===== КНОПКИ ===== */
@@ -869,12 +905,6 @@ header {
     box-shadow: 0 10px 20px rgba(237, 118, 14, 0.3);
 }
 
-.btn-small {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    border-radius: 20px;
-}
-
 /* ===== КАТЕГОРИИ ПОРТФОЛИО ===== */
 .categories {
     display: flex;
@@ -900,6 +930,32 @@ header {
 .category-btn:hover {
     background: var(--primary-glow);
     transform: translateY(-2px);
+}
+
+/* ===== ПРОГРЕСС-БАР ===== */
+.progress-bar {
+    margin: 15px 0;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+.progress-bg {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-glow));
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
 }
 
 /* ===== СТАТИСТИКА ===== */
@@ -954,7 +1010,7 @@ footer {
     margin-bottom: 50px;
 }
 
-.footer-center {
+.footer-section:first-child {
     grid-column: 1 / -1;
     text-align: center;
 }
@@ -1202,9 +1258,4 @@ footer {
     .hero-content h1 {
         font-size: 1.8rem;
     }
-}
-
-/* Telegram Mini App специфичные стили */
-.telegram-webapp .hero-description {
-    animation: fadeIn 2s ease forwards !important;
 }
