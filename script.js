@@ -1,53 +1,85 @@
 // Основная функция загрузки
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, первый ли это запуск главной страницы
-    const isFirstVisit = !sessionStorage.getItem('visited');
-    const isMainPage = document.querySelector('body').classList.contains('main-page');
+    // Проверяем, находится ли пользователь в Telegram Mini App
+    const isTelegramWebApp = window.Telegram && window.Telegram.WebApp;
     
-    // Элементы для анимации загрузки
-    const loader = document.getElementById('loader');
-    const mainContent = document.getElementById('main-content');
+    // Если это мини-ап, добавляем класс к body
+    if (isTelegramWebApp) {
+        document.body.classList.add('telegram-webapp');
+        
+        // Инициализируем Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        
+        // Запускаем анимации через requestAnimationFrame для мини-ап
+        requestAnimationFrame(() => {
+            animateForMiniApp();
+        });
+    } else {
+        // Обычная загрузка сайта
+        normalPageLoad();
+    }
     
-    // Если это первое посещение главной страницы - показываем анимацию
-    if (isMainPage && isFirstVisit) {
-        // Показываем лоадер
-        if (loader) {
-            loader.style.display = 'flex';
+    function animateForMiniApp() {
+        // Запускаем анимацию печатания текста для мини-ап
+        const description = document.querySelector('.hero-description');
+        if (description) {
+            description.style.animation = 'fadeIn 2s ease forwards';
         }
         
-        // Быстрая анимация: 0.8с шестеренка + 0.4с двери = 1.2с всего
+        // Показываем контент
+        const mainContent = document.getElementById('main-content');
+        if (mainContent) {
+            mainContent.classList.remove('hidden');
+            mainContent.classList.add('visible');
+        }
+        
+        // Запускаем остальные анимации
         setTimeout(() => {
+            animateContent();
+        }, 500);
+    }
+    
+    function normalPageLoad() {
+        // Проверяем, первый ли это запуск главной страницы
+        const isFirstVisit = !sessionStorage.getItem('visited');
+        const isMainPage = document.querySelector('body').classList.contains('main-page');
+        
+        // Элементы для анимации загрузки
+        const loader = document.getElementById('loader');
+        const mainContent = document.getElementById('main-content');
+        
+        // Если это первое посещение главной страницы - показываем анимацию
+        if (isMainPage && isFirstVisit && loader) {
+            loader.style.display = 'flex';
+            
+            // Быстрая анимация: 0.8с шестеренка + 0.4с двери = 1.2с всего
+            setTimeout(() => {
+                if (loader) loader.style.display = 'none';
+                if (mainContent) {
+                    mainContent.classList.remove('hidden');
+                    mainContent.classList.add('visible');
+                }
+                
+                sessionStorage.setItem('visited', 'true');
+                
+                setTimeout(() => {
+                    animateContent();
+                }, 100);
+                
+            }, 1200);
+        } else {
+            // Не первое посещение или не главная страница
             if (loader) loader.style.display = 'none';
             if (mainContent) {
                 mainContent.classList.remove('hidden');
                 mainContent.classList.add('visible');
             }
             
-            // Отмечаем, что пользователь уже посетил сайт
-            sessionStorage.setItem('visited', 'true');
-            
-            // Запускаем анимацию контента
             setTimeout(() => {
                 animateContent();
-                startTextAnimations();
-            }, 100);
-            
-        }, 1200);
-    } else {
-        // Не первое посещение или не главная страница
-        if (loader) loader.style.display = 'none';
-        if (mainContent) {
-            mainContent.classList.remove('hidden');
-            mainContent.classList.add('visible');
+            }, 300);
         }
-        
-        // Запускаем анимацию контента с задержкой
-        setTimeout(() => {
-            animateContent();
-            if (isMainPage) {
-                startTextAnimations();
-            }
-        }, 300);
     }
 
     // Функция анимации появления контента
@@ -56,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const serviceCards = document.querySelectorAll('.service-card');
         const reviewCards = document.querySelectorAll('.review-card');
         const workSlides = document.querySelectorAll('.work-slide');
+        const statCards = document.querySelectorAll('.stat-card');
         
         // Анимация секций
         sections.forEach((section, index) => {
@@ -84,31 +117,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 slide.classList.add('animated');
             }, index * 100);
         });
-    }
-
-    // Анимация текста в герое
-    function startTextAnimations() {
-        const title = document.querySelector('.hero-content h1');
-        const description = document.querySelector('.hero-description');
         
-        if (title && description) {
-            // Разбиваем заголовок на буквы
-            const text = title.textContent;
-            title.innerHTML = '';
-            
-            for (let i = 0; i < text.length; i++) {
-                const span = document.createElement('span');
-                span.className = 'letter';
-                span.textContent = text[i];
-                span.style.animationDelay = `${i * 0.05}s`;
-                title.appendChild(span);
-            }
-            
-            // Запускаем анимацию печатания для описания
+        // Анимация статистики
+        statCards.forEach((card, index) => {
             setTimeout(() => {
-                description.style.animationPlayState = 'running';
-            }, 500);
-        }
+                card.classList.add('animated');
+            }, index * 100);
+        });
     }
 
     // Мобильное меню
@@ -127,7 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
             });
         });
     }
@@ -245,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 const botToken = '8328083670:AAHkb_xbhVHaL53rzU_LoSLtnfs3bDsgiao';
-                const chatId = '7884533080'; // Твой chat_id
+                const chatId = '7884533080';
                 
                 const formattedMessage = `
 📨 <b>НОВАЯ ЗАЯВКА С САЙТА</b>
@@ -383,6 +400,18 @@ ${message}
             }
         });
     });
+
+    // Анимация блика для всех карточек
+    function initializeGlowEffects() {
+        const cards = document.querySelectorAll('.service-card, .review-card, .stat-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+    }
+    
+    initializeGlowEffects();
 
     console.log('Сайт загружен!');
 });
