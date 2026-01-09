@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне | Кургузов Глеб</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-hero {
+            padding-top: 100px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .about-hero .subtitle {
+            font-size: 1.5rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .stat-card {
+            background: rgba(26, 26, 26, 0.7);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(237, 118, 14, 0.2);
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(237, 118, 14, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+        
+        .skills-section {
+            margin-bottom: 80px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-category {
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .skill-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-list li i {
+            color: var(--primary);
+        }
+        
+        .experience-section {
+            margin-bottom: 80px;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(237, 118, 14, 0.3);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 45%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 60px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 55%;
+            padding-left: 60px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 0;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+        
+        .timeline-content h4 {
+            color: var(--light);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .timeline-content p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 60px !important;
+                padding-right: 0 !important;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 10px;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                Кургузов Глеб
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="about.html" class="active">Обо мне</a>
+                <a href="portfolio.html">Кейсы</a>
+                <a href="reviews.html">Отзывы</a>
+                <a href="contact.html">Связаться</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main style="padding-top: 90px;">
+        <div class="container">
+            <!-- Герой -->
+            <section class="about-hero">
+                <h1>Обо мне</h1>
+                <div class="subtitle">
+                    Технический специалист с опытом запуска сложных проектов и автоматизации бизнес-процессов
+                </div>
+            </section>
+
+            <!-- Статистика -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Успешных проектов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">800+</div>
+                    <div class="stat-label">Человек на запусках</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Лет опыта</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Довольных клиентов</div>
+                </div>
+            </section>
+
+            <!-- Навыки -->
+            <section class="skills-section">
+                <div class="section-title">
+                    <h2>Мои навыки</h2>
+                    <p>Технологии и инструменты, которые я использую</p>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-laptop-code"></i> Разработка сайтов</h3>
+                        <ul class="skill-list">
+                            <li><i class="fas fa-check"></i> Тильда (лендинги, многостраничники)</li>
+                            <li><i class="fas fa-check"></i> WordPress (блоги, корпоративные сайты)</li>
+                            <li><i class="fas fa-check"></i> 1C-Битрикс (порталы, CRM)</li>
+                            <li><i class="fas fa-check"></i> HTML5, CSS3, JavaScript</li>
+                            <li><i class="fas fa-check"></i> Адаптивная верстка</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-robot"></i> Чат-боты и автоматизация</h3>
+                        <ul class="skill-list">
+                            <li><i class="fas fa-check"></i> Telegram боты (на конструкторе и коде)</li>
+                            <li><i class="fas fa-check"></i> Сложные боты с интеграциями</li>
+                            <li><i class="fas fa-check"></i> Автоматические воронки продаж</li>
+                            <li><i class="fas fa-check"></i> Интеграция с CRM системами</li>
+                            <li><i class="fas fa-check"></i> Google Sheets + API</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-cogs"></i> CRM и системы</h3>
+                        <ul class="skill-list">
+                            <li><i class="fas fa-check"></i> Настройка и внедрение CRM</li>
+                            <li><i class="fas fa-check"></i> Автоматизация бизнес-процессов</li>
+                            <li><i class="fas fa-check"></i> Разработка дашбордов</li>
+                            <li><i class="fas fa-check"></i> Аналитика и отчетность</li>
+                            <li><i class="fas fa-check"></i> Интеграция платежных систем</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Опыт -->
+            <section class="experience-section">
+                <div class="section-title">
+                    <h2>Мой подход к работе</h2>
+                    <p>Принципы, которые помогают достигать результатов</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Глубокий анализ</h4>
+                            <p>Перед началом работы изучаю бизнес-процессы, целевую аудиторию и конкурентов. Это позволяет создавать решения, которые действительно работают.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Инновационные решения</h4>
+                            <p>Постоянно изучаю новые технологии и инструменты. Внедряю в проекты современные решения, которые дают конкурентное преимущество.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Масштабируемость</h4>
+                            <p>Создаю системы, которые легко масштабируются. От небольших лендингов до сложных многостраничных порталов с CRM.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Поддержка и развитие</h4>
+                            <p>Не бросаю проект после сдачи. Предоставляю поддержку, помогаю развивать и оптимизировать систему по мере роста бизнеса.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="section" style="text-align: center; margin-top: 50px;">
+                <h2 style="margin-bottom: 30px; font-size: 2.5rem;">Готовы к сотрудничеству?</h2>
+                <p style="color: #aaa; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Обсудим ваш проект и найдем оптимальное решение для достижения ваших бизнес-целей
+                </p>
+                <a href="contact.html" class="btn btn-primary" style="font-size: 1.1rem;">
+                    <i class="fas fa-paper-plane"></i> Обсудить проект
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section center">
+                    <h4>Кургузов Глеб</h4>
+                    <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
+                    <div class="social-links">
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-section">
+                        <h4>Навигация</h4>
+                        <div class="footer-links">
+                            <a href="index.html">Главная</a>
+                            <a href="about.html">Обо мне</a>
+                            <a href="portfolio.html">Кейсы</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contact.html">Связаться</a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Контакты</h4>
+                        <div class="footer-links">
+                            <a href="https://t.me/tehspecgleb">Telegram</a>
+                            <a href="mailto:kurguzovgleb@yandex.ru">Email</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb">@tehspecgleb</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
