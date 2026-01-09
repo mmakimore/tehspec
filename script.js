@@ -1,41 +1,134 @@
 // Основная функция загрузки
 document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем, первый ли это запуск главной страницы
+    const isFirstVisit = !sessionStorage.getItem('visited');
+    const isMainPage = document.querySelector('body').classList.contains('main-page');
+    
     // Элементы для анимации загрузки
     const loader = document.getElementById('loader');
     const mainContent = document.getElementById('main-content');
     
-    // Анимация загрузки: шестеренка крутится 1.5с, потом двери распахиваются
-    setTimeout(() => {
-        // После вращения шестеренки двери открываются
+    // Если это первое посещение главной страницы - показываем анимацию
+    if (isMainPage && isFirstVisit) {
+        // Показываем лоадер
+        if (loader) {
+            loader.style.display = 'flex';
+        }
+        
+        // Быстрая анимация: 0.8с шестеренка + 0.4с двери = 1.2с всего
         setTimeout(() => {
-            // Прячем лоадер
             if (loader) loader.style.display = 'none';
-            
-            // Показываем основной контент
             if (mainContent) {
                 mainContent.classList.remove('hidden');
                 mainContent.classList.add('visible');
             }
             
-            // Запускаем анимацию появления остального контента
+            // Отмечаем, что пользователь уже посетил сайт
+            sessionStorage.setItem('visited', 'true');
+            
+            // Запускаем анимацию контента
+            setTimeout(() => {
+                animateContent();
+                startTextAnimations();
+            }, 100);
+            
+        }, 1200);
+    } else {
+        // Не первое посещение или не главная страница
+        if (loader) loader.style.display = 'none';
+        if (mainContent) {
+            mainContent.classList.remove('hidden');
+            mainContent.classList.add('visible');
+        }
+        
+        // Запускаем анимацию контента с задержкой
+        setTimeout(() => {
             animateContent();
-        }, 800); // Ждем завершения анимации дверей (0.8с)
-    }, 1500); // Шестеренка крутится 1.5 секунды
+            if (isMainPage) {
+                startTextAnimations();
+            }
+        }, 300);
+    }
 
     // Функция анимации появления контента
     function animateContent() {
-        const elements = document.querySelectorAll('.section, .service-card, .review-card');
-        elements.forEach((el, index) => {
+        const sections = document.querySelectorAll('.section');
+        const serviceCards = document.querySelectorAll('.service-card');
+        const reviewCards = document.querySelectorAll('.review-card');
+        const workSlides = document.querySelectorAll('.work-slide');
+        
+        // Анимация секций
+        sections.forEach((section, index) => {
             setTimeout(() => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, 50);
+                section.classList.add('animated');
+            }, index * 200);
+        });
+        
+        // Анимация карточек услуг
+        serviceCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('animated');
             }, index * 100);
+        });
+        
+        // Анимация отзывов
+        reviewCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('animated');
+            }, index * 150);
+        });
+        
+        // Анимация работ
+        workSlides.forEach((slide, index) => {
+            setTimeout(() => {
+                slide.classList.add('animated');
+            }, index * 100);
+        });
+    }
+
+    // Анимация текста в герое
+    function startTextAnimations() {
+        const title = document.querySelector('.hero-content h1');
+        const description = document.querySelector('.hero-description');
+        
+        if (title && description) {
+            // Разбиваем заголовок на буквы
+            const text = title.textContent;
+            title.innerHTML = '';
+            
+            for (let i = 0; i < text.length; i++) {
+                const span = document.createElement('span');
+                span.className = 'letter';
+                span.textContent = text[i];
+                span.style.animationDelay = `${i * 0.05}s`;
+                title.appendChild(span);
+            }
+            
+            // Запускаем анимацию печатания для описания
+            setTimeout(() => {
+                description.style.animationPlayState = 'running';
+            }, 500);
+        }
+    }
+
+    // Мобильное меню
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Закрытие меню при клике на ссылку
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
         });
     }
 
@@ -46,15 +139,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (worksTrack && prevBtn && nextBtn) {
         let currentPosition = 0;
-        const slideWidth = document.querySelector('.work-slide').offsetWidth + 30;
-        const totalSlides = document.querySelectorAll('.work-slide').length;
+        let slideWidth = 0;
+        const slides = document.querySelectorAll('.work-slide');
         
-        // Функция обновления позиции слайдера
+        if (slides.length > 0) {
+            slideWidth = slides[0].offsetWidth + 30;
+        }
+        
+        const totalSlides = slides.length;
+        
         function updateSliderPosition() {
             worksTrack.style.transform = `translateX(-${currentPosition}px)`;
         }
         
-        // Кнопка "назад"
         prevBtn.addEventListener('click', () => {
             if (currentPosition > 0) {
                 currentPosition -= slideWidth;
@@ -62,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Кнопка "вперед"
         nextBtn.addEventListener('click', () => {
             const maxPosition = slideWidth * (totalSlides - 1);
             if (currentPosition < maxPosition) {
@@ -71,12 +167,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Адаптация при изменении размера окна
         window.addEventListener('resize', () => {
-            const newSlideWidth = document.querySelector('.work-slide').offsetWidth + 30;
-            currentPosition = Math.round(currentPosition / slideWidth) * newSlideWidth;
-            slideWidth = newSlideWidth;
-            updateSliderPosition();
+            if (slides.length > 0) {
+                const newSlideWidth = slides[0].offsetWidth + 30;
+                currentPosition = Math.round(currentPosition / slideWidth) * newSlideWidth;
+                slideWidth = newSlideWidth;
+                updateSliderPosition();
+            }
         });
     }
 
@@ -85,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const modals = document.querySelectorAll('.modal');
     const closeButtons = document.querySelectorAll('.close-modal');
     
-    // Открытие модального окна при клике на карточку услуги
     serviceCards.forEach(card => {
         card.addEventListener('click', function() {
             const modalId = this.getAttribute('data-modal');
@@ -98,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Закрытие модального окна
     closeButtons.forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.modal');
@@ -109,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Закрытие модального окна при клике вне его
     modals.forEach(modal => {
         modal.addEventListener('click', function(e) {
             if (e.target === this) {
@@ -119,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Закрытие модального окна клавишей ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             modals.forEach(modal => {
@@ -131,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Обработка формы заявки (отправка через Telegram бота)
+    // Обработка формы заявки
     const submitBtn = document.getElementById('submit-form');
     
     if (submitBtn) {
@@ -141,52 +234,148 @@ document.addEventListener('DOMContentLoaded', function() {
             const phone = document.getElementById('form-phone')?.value.trim();
             const message = document.getElementById('form-message')?.value.trim();
             
-            // Валидация формы
             if (!name || !telegram || !message) {
                 alert('Пожалуйста, заполните обязательные поля: Имя, Telegram и Сообщение');
                 return;
             }
             
-            // Показываем индикатор загрузки
             const originalText = this.innerHTML;
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
             this.disabled = true;
             
             try {
-                // Fallback: открываем Telegram с предзаполненным сообщением
-                const fallbackMessage = `Заявка с сайта:\n\nИмя: ${name}\nTelegram: @${telegram}\nТелефон: ${phone || 'не указан'}\nЗадача: ${message}`;
-                window.open(`https://t.me/tehspecgleb?text=${encodeURIComponent(fallbackMessage)}`, '_blank');
+                const botToken = '8328083670:AAHkb_xbhVHaL53rzU_LoSLtnfs3bDsgiao';
+                const chatId = '7884533080'; // Твой chat_id
                 
-                // Показываем уведомление
-                alert('Сообщение подготовлено для отправки в Telegram. Пожалуйста, отправьте его вручную.');
+                const formattedMessage = `
+📨 <b>НОВАЯ ЗАЯВКА С САЙТА</b>
+
+👤 <b>Имя:</b> ${name}
+📱 <b>Telegram:</b> @${telegram.replace('@', '')}
+☎️ <b>Телефон:</b> ${phone || 'не указан'}
+📝 <b>Задача:</b>
+${message}
+
+🕒 <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
+                `;
                 
-                // Очищаем форму
-                if (document.getElementById('form-name')) document.getElementById('form-name').value = '';
-                if (document.getElementById('form-telegram')) document.getElementById('form-telegram').value = '';
-                if (document.getElementById('form-phone')) document.getElementById('form-phone').value = '';
-                if (document.getElementById('form-message')) document.getElementById('form-message').value = '';
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: formattedMessage,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.ok) {
+                    alert('✅ Заявка отправлена! Я свяжусь с вами в Telegram в течение 15 минут.');
+                    
+                    document.getElementById('form-name').value = '';
+                    document.getElementById('form-telegram').value = '';
+                    document.getElementById('form-phone').value = '';
+                    document.getElementById('form-message').value = '';
+                    
+                    this.style.background = 'linear-gradient(45deg, #2ecc71, #27ae60)';
+                    setTimeout(() => {
+                        this.style.background = '';
+                    }, 2000);
+                    
+                } else {
+                    throw new Error(data.description || 'Ошибка отправки');
+                }
                 
             } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Произошла ошибка. Пожалуйста, свяжитесь со мной напрямую в Telegram: @tehspecgleb');
+                console.error('Ошибка отправки:', error);
+                alert('Произошла ошибка при отправке. Пожалуйста, свяжитесь со мной напрямую в Telegram: @tehspecgleb');
             } finally {
-                // Восстанавливаем кнопку
                 this.innerHTML = originalText;
                 this.disabled = false;
             }
         });
     }
 
-    // Плавная прокрутка для якорных ссылок
+    // Обработка формы на странице контактов
+    const contactSubmitBtn = document.querySelector('button[onclick="sendContactToTelegram()"]');
+    if (contactSubmitBtn) {
+        contactSubmitBtn.onclick = async function() {
+            const name = document.getElementById('contact-name')?.value.trim();
+            const phone = document.getElementById('contact-phone')?.value.trim();
+            const message = document.getElementById('contact-message')?.value.trim();
+            
+            if (!name || !phone || !message) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+            this.disabled = true;
+            
+            try {
+                const botToken = '8328083670:AAHkb_xbhVHaL53rzU_LoSLtnfs3bDsgiao';
+                const chatId = '7884533080';
+                
+                const formattedMessage = `
+📨 <b>НОВАЯ ЗАЯВКА С САЙТА (контакты)</b>
+
+👤 <b>Имя:</b> ${name}
+📱 <b>Контакты:</b> ${phone}
+📝 <b>Проект:</b>
+${message}
+
+🕒 <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
+                `;
+                
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: formattedMessage,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.ok) {
+                    alert('✅ Заявка отправлена! Я свяжусь с вами в течение 15 минут.');
+                    
+                    document.getElementById('contact-name').value = '';
+                    document.getElementById('contact-phone').value = '';
+                    document.getElementById('contact-message').value = '';
+                    
+                } else {
+                    throw new Error(data.description || 'Ошибка отправки');
+                }
+                
+            } catch (error) {
+                console.error('Ошибка отправки:', error);
+                alert('Произошла ошибка. Пожалуйста, свяжитесь со мной напрямую в Telegram: @tehspecgleb');
+            } finally {
+                this.innerHTML = originalText;
+                this.disabled = false;
+            }
+        };
+    }
+
+    // Плавная прокрутка
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
+                e.preventDefault();
                 window.scrollTo({
                     top: targetElement.offsetTop - 80,
                     behavior: 'smooth'
@@ -194,74 +383,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Обновление активной ссылки при прокрутке
-    window.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-        
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - 100)) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    });
 
-    // Добавляем эффект "пульсации" для кнопок при нажатии
-    document.querySelectorAll('.btn-primary').forEach(button => {
-        button.addEventListener('click', function(e) {
-            // Создаем эффект пульсации
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.cssText = `
-                position: absolute;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.7);
-                transform: scale(0);
-                animation: ripple-animation 0.6s linear;
-                width: ${size}px;
-                height: ${size}px;
-                top: ${y}px;
-                left: ${x}px;
-            `;
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-    });
-
-    // Добавляем CSS для эффекта пульсации
-    const rippleStyle = document.createElement('style');
-    rippleStyle.textContent = `
-        @keyframes ripple-animation {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-        .btn-primary {
-            position: relative;
-            overflow: hidden;
-        }
-    `;
-    document.head.appendChild(rippleStyle);
-
-    console.log('Сайт успешно загружен!');
+    console.log('Сайт загружен!');
 });
