@@ -3,51 +3,46 @@ document.addEventListener('DOMContentLoaded', function() {
     // Проверяем, находится ли пользователь в Telegram Mini App
     const isTelegramWebApp = window.Telegram && window.Telegram.WebApp;
     
-    // Если это мини-ап, добавляем класс к body
+    // Элементы для анимации загрузки
+    const loader = document.getElementById('loader');
+    const mainContent = document.getElementById('main-content');
+    const isMainPage = document.querySelector('body')?.classList.contains('main-page');
+    
+    // Если это мини-ап
     if (isTelegramWebApp) {
         document.body.classList.add('telegram-webapp');
         
-        // Инициализируем Telegram Web App
-        const tg = window.Telegram.WebApp;
-        tg.expand();
+        // Быстрая загрузка для мини-ап
+        if (loader) loader.style.display = 'none';
+        if (mainContent) {
+            mainContent.classList.remove('hidden');
+            mainContent.classList.add('visible');
+        }
         
-        // Запускаем анимации через requestAnimationFrame для мини-ап
-        requestAnimationFrame(() => {
+        // Запускаем анимацию для мини-ап
+        setTimeout(() => {
             animateForMiniApp();
-        });
+            animateContent();
+        }, 100);
     } else {
         // Обычная загрузка сайта
         normalPageLoad();
     }
     
     function animateForMiniApp() {
-        // Запускаем анимацию печатания текста для мини-ап
+        // Для мини-ап форсируем анимацию печатания
         const description = document.querySelector('.hero-description');
-        if (description) {
-            description.style.animation = 'fadeIn 2s ease forwards';
+        if (description && isMainPage) {
+            description.style.animation = 'typewriter 3.5s steps(40, end) 1s forwards, blinkCursor 0.75s step-end infinite';
+            description.style.whiteSpace = 'nowrap';
+            description.style.borderRight = '3px solid var(--primary)';
+            description.style.width = '0';
         }
-        
-        // Показываем контент
-        const mainContent = document.getElementById('main-content');
-        if (mainContent) {
-            mainContent.classList.remove('hidden');
-            mainContent.classList.add('visible');
-        }
-        
-        // Запускаем остальные анимации
-        setTimeout(() => {
-            animateContent();
-        }, 500);
     }
     
     function normalPageLoad() {
         // Проверяем, первый ли это запуск главной страницы
         const isFirstVisit = !sessionStorage.getItem('visited');
-        const isMainPage = document.querySelector('body').classList.contains('main-page');
-        
-        // Элементы для анимации загрузки
-        const loader = document.getElementById('loader');
-        const mainContent = document.getElementById('main-content');
         
         // Если это первое посещение главной страницы - показываем анимацию
         if (isMainPage && isFirstVisit && loader) {
@@ -89,6 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const reviewCards = document.querySelectorAll('.review-card');
         const workSlides = document.querySelectorAll('.work-slide');
         const statCards = document.querySelectorAll('.stat-card');
+        const skillCategories = document.querySelectorAll('.skill-category');
+        const timelineItems = document.querySelectorAll('.timeline-item');
         
         // Анимация секций
         sections.forEach((section, index) => {
@@ -123,6 +120,37 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 card.classList.add('animated');
             }, index * 100);
+        });
+        
+        // Анимация навыков (если страница "Обо мне")
+        skillCategories.forEach((category, index) => {
+            setTimeout(() => {
+                category.classList.add('animated');
+            }, index * 100);
+        });
+        
+        // Анимация таймлайна
+        timelineItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('animated');
+            }, index * 150);
+        });
+        
+        // Анимация прогресс-баров
+        animateProgressBars();
+    }
+
+    // Анимация прогресс-бара
+    function animateProgressBars() {
+        const progressBars = document.querySelectorAll('.progress-fill');
+        progressBars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            if (width) {
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 500);
+            }
         });
     }
 
@@ -241,7 +269,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Обработка формы заявки
+    // ===== УЛУЧШЕННАЯ ВАЛИДАЦИЯ ФОРМ =====
+    function validateForm(formData) {
+        const errors = [];
+        
+        // Валидация имени
+        if (!formData.name || formData.name.length < 2) {
+            errors.push('Имя должно содержать минимум 2 символа');
+        }
+        
+        // Валидация Telegram
+        if (!formData.telegram) {
+            errors.push('Введите ник в Telegram');
+        } else if (!formData.telegram.startsWith('@')) {
+            errors.push('Telegram должен начинаться с @');
+        } else if (formData.telegram.length < 6) {
+            errors.push('Telegram должен содержать минимум 5 символов после @');
+        }
+        
+        // Валидация телефона (если указан)
+        if (formData.phone && formData.phone.trim() !== '') {
+            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+            if (!phoneRegex.test(formData.phone)) {
+                errors.push('Введите корректный номер телефона');
+            }
+        }
+        
+        // Валидация сообщения
+        if (!formData.message || formData.message.length < 10) {
+            errors.push('Сообщение должно содержать минимум 10 символов');
+        }
+        
+        return errors;
+    }
+
+    // Обработка формы заявки на главной
     const submitBtn = document.getElementById('submit-form');
     
     if (submitBtn) {
@@ -251,12 +313,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const phone = document.getElementById('form-phone')?.value.trim();
             const message = document.getElementById('form-message')?.value.trim();
             
-            if (!name || !telegram || !message) {
-                alert('Пожалуйста, заполните обязательные поля: Имя, Telegram и Сообщение');
+            const formData = { name, telegram, phone, message };
+            const errors = validateForm(formData);
+            
+            if (errors.length > 0) {
+                alert(errors.join('\n'));
                 return;
             }
             
             const originalText = this.innerHTML;
+            const originalBackground = this.style.background;
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
             this.disabled = true;
             
@@ -268,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
 📨 <b>НОВАЯ ЗАЯВКА С САЙТА</b>
 
 👤 <b>Имя:</b> ${name}
-📱 <b>Telegram:</b> @${telegram.replace('@', '')}
+📱 <b>Telegram:</b> ${telegram}
 ☎️ <b>Телефон:</b> ${phone || 'не указан'}
 📝 <b>Задача:</b>
 ${message}
@@ -291,18 +357,22 @@ ${message}
                 const data = await response.json();
                 
                 if (data.ok) {
-                    alert('✅ Заявка отправлена! Я свяжусь с вами в Telegram в течение 15 минут.');
-                    
-                    document.getElementById('form-name').value = '';
-                    document.getElementById('form-telegram').value = '';
-                    document.getElementById('form-phone').value = '';
-                    document.getElementById('form-message').value = '';
-                    
-                    this.style.background = 'linear-gradient(45deg, #2ecc71, #27ae60)';
-                    setTimeout(() => {
-                        this.style.background = '';
-                    }, 2000);
-                    
+                    // Скрываем форму и показываем сообщение об успехе
+                    const contactForm = document.querySelector('.contact-form');
+                    if (contactForm) {
+                        contactForm.innerHTML = `
+                            <div class="form-success active">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Заявка отправлена!</h3>
+                                <p>Я свяжусь с вами в Telegram в течение 15 минут</p>
+                                <p style="color: #aaa; margin-top: 20px;">
+                                    <a href="https://t.me/tehspecgleb" style="color: var(--primary); text-decoration: none;">
+                                        <i class="fab fa-telegram"></i> @tehspecgleb
+                                    </a>
+                                </p>
+                            </div>
+                        `;
+                    }
                 } else {
                     throw new Error(data.description || 'Ошибка отправки');
                 }
@@ -313,20 +383,26 @@ ${message}
             } finally {
                 this.innerHTML = originalText;
                 this.disabled = false;
+                this.style.background = originalBackground;
             }
         });
     }
 
     // Обработка формы на странице контактов
-    const contactSubmitBtn = document.querySelector('button[onclick="sendContactToTelegram()"]');
+    const contactSubmitBtn = document.getElementById('contact-submit');
+    
     if (contactSubmitBtn) {
-        contactSubmitBtn.onclick = async function() {
+        contactSubmitBtn.addEventListener('click', async function() {
             const name = document.getElementById('contact-name')?.value.trim();
+            const telegram = document.getElementById('contact-telegram')?.value.trim();
             const phone = document.getElementById('contact-phone')?.value.trim();
             const message = document.getElementById('contact-message')?.value.trim();
             
-            if (!name || !phone || !message) {
-                alert('Пожалуйста, заполните все поля');
+            const formData = { name, telegram, phone, message };
+            const errors = validateForm(formData);
+            
+            if (errors.length > 0) {
+                alert(errors.join('\n'));
                 return;
             }
             
@@ -339,10 +415,11 @@ ${message}
                 const chatId = '7884533080';
                 
                 const formattedMessage = `
-📨 <b>НОВАЯ ЗАЯВКА С САЙТА (контакты)</b>
+📨 <b>НОВАЯ ЗАЯВКА С САЙТА (страница контакты)</b>
 
 👤 <b>Имя:</b> ${name}
-📱 <b>Контакты:</b> ${phone}
+📱 <b>Telegram:</b> ${telegram}
+☎️ <b>Телефон:</b> ${phone || 'не указан'}
 📝 <b>Проект:</b>
 ${message}
 
@@ -364,12 +441,14 @@ ${message}
                 const data = await response.json();
                 
                 if (data.ok) {
-                    alert('✅ Заявка отправлена! Я свяжусь с вами в течение 15 минут.');
+                    // Скрываем форму, показываем успех
+                    const formContainer = document.getElementById('contact-form-container');
+                    const successMessage = document.getElementById('contact-success');
                     
-                    document.getElementById('contact-name').value = '';
-                    document.getElementById('contact-phone').value = '';
-                    document.getElementById('contact-message').value = '';
-                    
+                    if (formContainer && successMessage) {
+                        formContainer.style.display = 'none';
+                        successMessage.classList.add('active');
+                    }
                 } else {
                     throw new Error(data.description || 'Ошибка отправки');
                 }
@@ -381,7 +460,7 @@ ${message}
                 this.innerHTML = originalText;
                 this.disabled = false;
             }
-        };
+        });
     }
 
     // Плавная прокрутка
