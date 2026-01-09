@@ -3,32 +3,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Элементы для анимации загрузки
     const loader = document.getElementById('loader');
     const mainContent = document.getElementById('main-content');
-    const ctaButton = document.getElementById('cta-button');
-    const metalSound = document.getElementById('metalSound');
     
-    // Анимация загрузки: шестеренка → двери → контент
+    // Анимация загрузки: шестеренка крутится 1.5с, потом двери распахиваются
     setTimeout(() => {
-        // Шестеренка исчезает (уже в CSS анимации)
-        // Открываются двери (уже в CSS анимации)
-        
+        // После вращения шестеренки двери открываются
         setTimeout(() => {
             // Прячем лоадер
-            loader.style.display = 'none';
+            if (loader) loader.style.display = 'none';
             
             // Показываем основной контент
-            mainContent.classList.remove('hidden');
-            mainContent.classList.add('visible');
-            
-            // Воспроизводим звук падения кнопки
-            if (metalSound) {
-                metalSound.currentTime = 0;
-                metalSound.play().catch(e => console.log("Автовоспроизведение звука заблокировано"));
+            if (mainContent) {
+                mainContent.classList.remove('hidden');
+                mainContent.classList.add('visible');
             }
             
             // Запускаем анимацию появления остального контента
             animateContent();
-        }, 1000); // Ждем завершения анимации дверей
-    }, 2000); // Шестеренка крутится 2 секунды
+        }, 800); // Ждем завершения анимации дверей (0.8с)
+    }, 1500); // Шестеренка крутится 1.5 секунды
 
     // Функция анимации появления контента
     function animateContent() {
@@ -54,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (worksTrack && prevBtn && nextBtn) {
         let currentPosition = 0;
-        const slideWidth = document.querySelector('.work-slide').offsetWidth + 30; // + gap
+        const slideWidth = document.querySelector('.work-slide').offsetWidth + 30;
         const totalSlides = document.querySelectorAll('.work-slide').length;
         
         // Функция обновления позиции слайдера
@@ -101,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (modal) {
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Блокируем скролл
+                document.body.style.overflow = 'hidden';
             }
         });
     });
@@ -112,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const modal = this.closest('.modal');
             if (modal) {
                 modal.classList.remove('active');
-                document.body.style.overflow = ''; // Восстанавливаем скролл
+                document.body.style.overflow = '';
             }
         });
     });
@@ -144,10 +136,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (submitBtn) {
         submitBtn.addEventListener('click', async function() {
-            const name = document.getElementById('form-name').value.trim();
-            const telegram = document.getElementById('form-telegram').value.trim();
-            const phone = document.getElementById('form-phone').value.trim();
-            const message = document.getElementById('form-message').value.trim();
+            const name = document.getElementById('form-name')?.value.trim();
+            const telegram = document.getElementById('form-telegram')?.value.trim();
+            const phone = document.getElementById('form-phone')?.value.trim();
+            const message = document.getElementById('form-message')?.value.trim();
             
             // Валидация формы
             if (!name || !telegram || !message) {
@@ -161,67 +153,22 @@ document.addEventListener('DOMContentLoaded', function() {
             this.disabled = true;
             
             try {
-                // Отправка через Telegram Bot API
-                const botToken = '8328083670:AAHkb_xbhVHaL53rzU_LoSLtnfs3bDsgiao';
-                const chatId = '710000000'; // Твой ID в Telegram (замени на свой)
-                
-                // Форматируем сообщение
-                const formattedMessage = `
-📨 <b>НОВАЯ ЗАЯВКА С САЙТА</b>
-
-👤 <b>Имя:</b> ${name}
-📱 <b>Telegram:</b> @${telegram.replace('@', '')}
-☎️ <b>Телефон:</b> ${phone || 'не указан'}
-📝 <b>Задача:</b>
-${message}
-
-🕒 <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
-                `;
-                
-                // Отправляем запрос к Telegram API
-                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: formattedMessage,
-                        parse_mode: 'HTML'
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.ok) {
-                    // Успешная отправка
-                    alert('✅ Заявка отправлена! Я свяжусь с вами в Telegram в течение 15 минут.');
-                    
-                    // Очищаем форму
-                    document.getElementById('form-name').value = '';
-                    document.getElementById('form-telegram').value = '';
-                    document.getElementById('form-phone').value = '';
-                    document.getElementById('form-message').value = '';
-                    
-                    // Показываем анимацию успеха
-                    this.style.background = 'linear-gradient(45deg, #2ecc71, #27ae60)';
-                    setTimeout(() => {
-                        this.style.background = '';
-                    }, 2000);
-                    
-                } else {
-                    throw new Error(data.description || 'Ошибка отправки');
-                }
-                
-            } catch (error) {
-                console.error('Ошибка отправки:', error);
-                
                 // Fallback: открываем Telegram с предзаполненным сообщением
-                const fallbackMessage = `Заявка с сайта:%0A%0AИмя: ${name}%0ATelegram: @${telegram}%0AТелефон: ${phone}%0AЗадача: ${message}`;
+                const fallbackMessage = `Заявка с сайта:\n\nИмя: ${name}\nTelegram: @${telegram}\nТелефон: ${phone || 'не указан'}\nЗадача: ${message}`;
                 window.open(`https://t.me/tehspecgleb?text=${encodeURIComponent(fallbackMessage)}`, '_blank');
                 
+                // Показываем уведомление
                 alert('Сообщение подготовлено для отправки в Telegram. Пожалуйста, отправьте его вручную.');
                 
+                // Очищаем форму
+                if (document.getElementById('form-name')) document.getElementById('form-name').value = '';
+                if (document.getElementById('form-telegram')) document.getElementById('form-telegram').value = '';
+                if (document.getElementById('form-phone')) document.getElementById('form-phone').value = '';
+                if (document.getElementById('form-message')) document.getElementById('form-message').value = '';
+                
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка. Пожалуйста, свяжитесь со мной напрямую в Telegram: @tehspecgleb');
             } finally {
                 // Восстанавливаем кнопку
                 this.innerHTML = originalText;
@@ -240,13 +187,6 @@ ${message}
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                // Обновляем активную ссылку в навигации
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                // Плавная прокрутка
                 window.scrollTo({
                     top: targetElement.offsetTop - 80,
                     behavior: 'smooth'
@@ -258,7 +198,7 @@ ${message}
     // Обновление активной ссылки при прокрутке
     window.addEventListener('scroll', function() {
         const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
         
         let current = '';
         sections.forEach(section => {
@@ -276,15 +216,6 @@ ${message}
             }
         });
     });
-
-    // Имитация звука металла при наведении на кнопку
-    if (ctaButton && metalSound) {
-        ctaButton.addEventListener('mouseenter', function() {
-            metalSound.currentTime = 0.1;
-            metalSound.volume = 0.3;
-            metalSound.play().catch(e => console.log("Звук не воспроизведен"));
-        });
-    }
 
     // Добавляем эффект "пульсации" для кнопок при нажатии
     document.querySelectorAll('.btn-primary').forEach(button => {
@@ -331,27 +262,6 @@ ${message}
         }
     `;
     document.head.appendChild(rippleStyle);
-
-    // Анимация для кнопки в герое при повторном появлении
-    function restartButtonAnimation() {
-        if (ctaButton) {
-            ctaButton.style.animation = 'none';
-            void ctaButton.offsetWidth; // Trigger reflow
-            ctaButton.style.animation = 'buttonFall 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards';
-        }
-    }
-
-    // Перезапуск анимации кнопки при фокусе на секцию героя
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && entry.target.id === 'main') {
-                restartButtonAnimation();
-            }
-        });
-    }, { threshold: 0.5 });
-
-    const heroSection = document.getElementById('main');
-    if (heroSection) observer.observe(heroSection);
 
     console.log('Сайт успешно загружен!');
 });
