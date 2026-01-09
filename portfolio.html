@@ -17,24 +17,19 @@
             </div>
             <nav class="nav-links">
                 <a href="index.html">Главная</a>
+                <a href="about.html">Обо мне</a>
                 <a href="portfolio.html" class="active">Кейсы</a>
                 <a href="reviews.html">Отзывы</a>
                 <a href="contact.html">Связаться</a>
             </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Анимация загрузки -->
-    <div id="loader">
-        <div class="gear-icon">
-            <i class="fas fa-cog"></i>
-        </div>
-        <div class="door door-top"></div>
-        <div class="door door-bottom"></div>
-    </div>
-
     <!-- Основное содержимое -->
-    <main id="main-content" class="hidden" style="padding-top: 90px;">
+    <main id="main-content" style="padding-top: 90px;">
         <div class="container">
             <div class="section-title">
                 <h2>Мои кейсы</h2>
@@ -42,23 +37,23 @@
             </div>
 
             <!-- Категории -->
-            <div class="categories" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;">
-                <button class="btn" style="background: var(--gray);" data-category="all">Все работы</button>
-                <button class="btn" style="background: var(--gray);" data-category="tilda">Сайты на Тильде</button>
-                <button class="btn" style="background: var(--gray);" data-category="dashboard">Дашборды</button>
-                <button class="btn" style="background: var(--gray);" data-category="html">HTML/CSS/JS</button>
-                <button class="btn" style="background: var(--gray);" data-category="cms">WordPress/1C-Битрикс</button>
+            <div class="categories">
+                <button class="category-btn active" data-category="all">Все работы</button>
+                <button class="category-btn" data-category="tilda">Сайты на Тильде</button>
+                <button class="category-btn" data-category="dashboard">Дашборды</button>
+                <button class="category-btn" data-category="html">HTML/CSS/JS</button>
+                <button class="category-btn" data-category="cms">WordPress/1C-Битрикс</button>
             </div>
 
             <!-- Работы -->
-            <div class="portfolio-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px;">
+            <div class="portfolio-grid">
                 <!-- Сайты на Тильде -->
-                <div class="portfolio-item" data-category="tilda" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
+                <div class="portfolio-item" data-category="tilda">
+                    <div class="portfolio-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
+                    <div class="portfolio-content">
                         <h3>Сайт на Тильде</h3>
                         <p>Корпоративный сайт с современным дизайном и адаптивной версткой</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
+                        <div class="portfolio-tags">
                             <span class="tag">Тильда</span>
                             <span class="tag">Адаптив</span>
                             <span class="tag">UI/UX</span>
@@ -66,12 +61,12 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item" data-category="tilda" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07%20(2).jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
+                <div class="portfolio-item" data-category="tilda">
+                    <div class="portfolio-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07%20(2).jpg');"></div>
+                    <div class="portfolio-content">
                         <h3>Лендинг на Тильде</h3>
                         <p>Промо-сайт для запуска продукта с формами захвата</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
+                        <div class="portfolio-tags">
                             <span class="tag">Тильда</span>
                             <span class="tag">Лендинг</span>
                             <span class="tag">Конверсия</span>
@@ -80,12 +75,12 @@
                 </div>
 
                 <!-- Дашборды -->
-                <div class="portfolio-item" data-category="dashboard" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23%20(2).jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
+                <div class="portfolio-item" data-category="dashboard">
+                    <div class="portfolio-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23%20(2).jpg');"></div>
+                    <div class="portfolio-content">
                         <h3>Дашборд CRM системы</h3>
                         <p>Визуализация данных, аналитика, отчетность в реальном времени</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
+                        <div class="portfolio-tags">
                             <span class="tag">Дашборд</span>
                             <span class="tag">Аналитика</span>
                             <span class="tag">CRM</span>
@@ -93,12 +88,12 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item" data-category="dashboard" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23.jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
+                <div class="portfolio-item" data-category="dashboard">
+                    <div class="portfolio-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23.jpg');"></div>
+                    <div class="portfolio-content">
                         <h3>Дашборд аналитики</h3>
                         <p>Визуализация метрик и KPI в реальном времени</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
+                        <div class="portfolio-tags">
                             <span class="tag">Дашборд</span>
                             <span class="tag">Аналитика</span>
                             <span class="tag">KPI</span>
@@ -106,70 +101,30 @@
                     </div>
                 </div>
 
-                <div class="portfolio-item" data-category="dashboard" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-40-07.jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
-                        <h3>Сложный дашборд</h3>
-                        <p>Многокомпонентная панель управления бизнес-процессами</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
-                            <span class="tag">Панель управления</span>
-                            <span class="tag">Бизнес-аналитика</span>
-                            <span class="tag">React</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="dashboard" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-39-24.jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
-                        <h3>Панель управления</h3>
-                        <p>Админ-панель с CRUD операциями и управлением пользователями</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
-                            <span class="tag">Админка</span>
-                            <span class="tag">Управление</span>
-                            <span class="tag">Vue.js</span>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- HTML/CSS/JS -->
-                <div class="portfolio-item" data-category="html" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-28-46.jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
+                <div class="portfolio-item" data-category="html">
+                    <div class="portfolio-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-28-46.jpg');"></div>
+                    <div class="portfolio-content">
                         <h3>Кастомный сайт</h3>
                         <p>HTML/CSS/JS разработка с нуля, современные анимации</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
+                        <div class="portfolio-tags">
                             <span class="tag">HTML</span>
                             <span class="tag">CSS</span>
                             <span class="tag">JavaScript</span>
-                            <span class="tag">Анимации</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- WordPress/1C-Битрикс -->
-                <div class="portfolio-item" data-category="cms" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-17_10-14-24.jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
+                <div class="portfolio-item" data-category="cms">
+                    <div class="portfolio-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-17_10-14-24.jpg');"></div>
+                    <div class="portfolio-content">
                         <h3>Интерфейс системы</h3>
                         <p>Сложный интерфейс с множеством элементов управления</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
+                        <div class="portfolio-tags">
                             <span class="tag">UI/UX</span>
                             <span class="tag">Интерфейс</span>
                             <span class="tag">WordPress</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="cms" style="background: rgba(26, 26, 26, 0.7); border-radius: 15px; overflow: hidden; transition: var(--transition);">
-                    <div class="portfolio-img" style="height: 250px; background-size: cover; background-position: center; background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-17_10-14-24%20(2).jpg');"></div>
-                    <div class="portfolio-content" style="padding: 25px;">
-                        <h3>Интерфейс настройки</h3>
-                        <p>Панель управления и настройки для сложной системы</p>
-                        <div class="portfolio-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;">
-                            <span class="tag">Настройки</span>
-                            <span class="tag">Админка</span>
-                            <span class="tag">1C-Битрикс</span>
                         </div>
                     </div>
                 </div>
@@ -189,44 +144,52 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
+                <div class="footer-section center">
                     <h4>Кургузов Глеб</h4>
-                    <p>Технический специалист</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Контакты</h4>
-                    <div class="footer-links">
-                        <a href="https://t.me/tehspecgleb" target="_blank">Telegram: @tehspecgleb</a>
-                        <a href="mailto:kurguzovgleb@yandex.ru">Email: kurguzovgleb@yandex.ru</a>
+                    <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
+                    <div class="social-links">
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Навигация</h4>
-                    <div class="footer-links">
-                        <a href="index.html">Главная</a>
-                        <a href="portfolio.html">Кейсы</a>
-                        <a href="reviews.html">Отзывы</a>
-                        <a href="contact.html">Связаться</a>
+                
+                <div class="footer-columns">
+                    <div class="footer-section">
+                        <h4>Навигация</h4>
+                        <div class="footer-links">
+                            <a href="index.html">Главная</a>
+                            <a href="about.html">Обо мне</a>
+                            <a href="portfolio.html">Кейсы</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contact.html">Связаться</a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Контакты</h4>
+                        <div class="footer-links">
+                            <a href="https://t.me/tehspecgleb">Telegram</a>
+                            <a href="mailto:kurguzovgleb@yandex.ru">Email</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <div class="copyright">
-                <p>&copy; 2025 Кургузов Глеб</p>
+                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb">@tehspecgleb</a></p>
             </div>
         </div>
     </footer>
 
     <script>
         // Фильтрация работ по категориям
-        document.querySelectorAll('.categories button').forEach(button => {
+        document.querySelectorAll('.category-btn').forEach(button => {
             button.addEventListener('click', () => {
-                // Удаляем активный класс у всех кнопок
-                document.querySelectorAll('.categories button').forEach(btn => {
-                    btn.style.background = 'var(--gray)';
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
                 });
                 
-                // Добавляем активный класс нажатой кнопке
-                button.style.background = 'var(--primary)';
+                button.classList.add('active');
                 
                 const category = button.dataset.category;
                 const items = document.querySelectorAll('.portfolio-item');
