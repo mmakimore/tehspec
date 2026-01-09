@@ -7,326 +7,390 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="home-page">
-    <!-- Шапка -->
+<body>
+    <!-- Шапка (всегда видна, даже на мобилке) -->
     <header>
         <div class="nav-container">
             <div class="logo">
-                <i class="fas fa-code"></i>
-                Кургузов Глеб
+                <img src="https://w7.pngwing.com/pngs/723/170/png-transparent-web-development-computer-icons-icon-design-mechanical-miscellaneous-text-orange.png" alt="Шестеренка" class="logo-gear">
+                <span>Кургузов Глеб</span>
             </div>
-            
             <nav class="nav-links">
-                <a href="index.html">Главная</a>
-                <a href="reviews.html">Отзывы</a>
-                <a href="contact.html">Контакты</a>
+                <a href="#main" class="active">Главная</a>
+                <a href="#services">Услуги</a>
+                <a href="#works">Работы</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#contact">Контакты</a>
             </nav>
-            
-            <button class="mobile-menu-btn" id="menuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </header>
 
-    <!-- Герой с анимацией -->
-    <section class="hero-section">
-        <div class="doors-overlay">
-            <div class="door-top"></div>
-            <div class="door-bottom"></div>
-        </div>
-        <div class="gear-overlay">
-            <i class="fas fa-cog"></i>
-        </div>
-        
-        <div class="container">
-            <div class="hero-content">
-                <h1>Технический специалист</h1>
-                <div class="subtitle">Чистый код, адаптивная верстка</div>
-                <div class="description">
-                    Сопровождение онлайн-школ | запуск | сайт | чат-боты | CRM-системы
-                </div>
-                <a href="contact.html" class="btn btn-primary">
-                    <i class="fas fa-paper-plane"></i> Связаться со мной
-                </a>
-            </div>
-        </div>
-    </section>
+    <!-- Анимация загрузки (шестеренка + двери) -->
+    <div id="loader">
+        <img src="https://w7.pngwing.com/pngs/723/170/png-transparent-web-development-computer-icons-icon-design-mechanical-miscellaneous-text-orange.png" alt="Шестеренка" class="spin-gear">
+        <div class="door door-top"></div>
+        <div class="door door-bottom"></div>
+    </div>
 
-    <!-- Обо мне -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Обо мне</h2>
-                <p>Почему выбирают меня</p>
-            </div>
-            
-            <div class="about-grid">
-                <div class="about-content animate-on-scroll">
-                    <h3>Мой опыт</h3>
-                    <p>• Запускал проекты на 700+ человек</p>
-                    <p>• Проводил вебинары с живым онлайном более 300 человек</p>
-                    <p>• Создавал сложных ботов воронок на Salebot, Bothelp, Python</p>
-                    <p>• Разработал множество сайтов: лендинги и многостраничные</p>
+    <!-- Основной контент (скрыт до анимации) -->
+    <main id="main-content" class="hidden">
+        <!-- Герой-секция -->
+        <section class="hero-section" id="main">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Технический специалист</h1>
+                    <div class="subtitle">Чистый код, адаптивная верстка</div>
+                    <div class="description">
+                        Сопровождение онлайн-школ | запуск | сайт | чат-боты | CRM-системы
+                    </div>
+                    <!-- Кнопка с анимацией падения -->
+                    <a href="#contact" class="btn btn-primary falling-btn" id="cta-button">
+                        <i class="fas fa-paper-plane"></i> Связаться со мной
+                    </a>
                 </div>
-                
-                <div class="about-content animate-on-scroll">
-                    <h3>Мой подход</h3>
-                    <p>Работаю на результат. Понимаю бизнес-процессы и знаю, как технологии могут их улучшить.</p>
-                    <p>Всегда на связи, отвечаю быстро и по делу. Объясняю сложные вещи простым языком.</p>
-                    <p>Ценю время клиента и всегда укладываюсь в сроки.</p>
+            </div>
+        </section>
+
+        <!-- Услуги с модальными окнами -->
+        <section class="section" id="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Что я могу предложить</h2>
+                    <p>Полный спектр услуг для вашего бизнеса</p>
+                </div>
+                <div class="services-grid">
+                    <!-- Карточка 1 -->
+                    <div class="service-card" data-modal="modal1">
+                        <div class="service-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Запуск онлайн-школ</h3>
+                        <p>Полное сопровождение от идеи до первых студентов</p>
+                        <span class="service-more">Подробнее →</span>
+                    </div>
+                    <!-- Карточка 2 -->
+                    <div class="service-card" data-modal="modal2">
+                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Разработка сайтов</h3>
+                        <p>Тильда, WordPress, 1C-Битрикс, HTML/CSS/JS</p>
+                        <span class="service-more">Подробнее →</span>
+                    </div>
+                    <!-- Карточка 3 -->
+                    <div class="service-card" data-modal="modal3">
+                        <div class="service-icon"><i class="fas fa-robot"></i></div>
+                        <h3>Чат-боты</h3>
+                        <p>Создание и настройка ботов для продаж и поддержки</p>
+                        <span class="service-more">Подробнее →</span>
+                    </div>
+                    <!-- Карточка 4 -->
+                    <div class="service-card" data-modal="modal4">
+                        <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>Автоматизация</h3>
+                        <p>Настройка автоматических воронок и процессов</p>
+                        <span class="service-more">Подробнее →</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Модальные окна для услуг -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3><i class="fas fa-rocket"></i> Запуск онлайн-школ</h3>
+                <div class="modal-body">
+                    <p><strong>Полный цикл сопровождения:</strong></p>
+                    <ul>
+                        <li>Анализ ниши и целевой аудитории</li>
+                        <li>Разработка стратегии запуска</li>
+                        <li>Настройка технической инфраструктуры</li>
+                        <li>Подключение платежных систем</li>
+                        <li>Автоматизация процессов приема студентов</li>
+                        <li>Интеграция с CRM и email-рассылками</li>
+                    </ul>
+                    <p><strong>Результат:</strong> Готовая к работе онлайн-школа с отлаженными процессами.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Что я могу предложить -->
-    <section class="section" id="services">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Что я могу предложить</h2>
-                <p>Полный спектр услуг для вашего бизнеса</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>Запуск онлайн-школ</h3>
-                    <p>Полное сопровождение от идеи до первых студентов</p>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3>Разработка сайтов</h3>
-                    <p>Тильда, WordPress, 1C-Битрикс, HTML/CSS/JS</p>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Чат-боты</h3>
-                    <p>Создание и настройка ботов для продаж и поддержки</p>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>CRM-системы</h3>
-                    <p>Внедрение и настройка CRM для управления клиентами</p>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Автоматизация</h3>
-                    <p>Настройка автоматических воронок и процессов</p>
-                </div>
-                
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Дашборды</h3>
-                    <p>Визуализация данных и аналитика в реальном времени</p>
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3><i class="fas fa-laptop-code"></i> Разработка сайтов</h3>
+                <div class="modal-body">
+                    <p><strong>На всех платформах:</strong></p>
+                    <ul>
+                        <li><strong>Тильда:</strong> Лендинги, корпоративные сайты</li>
+                        <li><strong>WordPress:</strong> Блоги, каталоги, корпоративные порталы</li>
+                        <li><strong>1C-Битрикс:</strong> Интернет-магазины, сложные порталы</li>
+                        <li><strong>HTML/CSS/JS:</strong> Кастомная разработка с нуля</li>
+                        <li><strong>Интеграции:</strong> API, платежные системы, CRM</li>
+                    </ul>
+                    <p><strong>Особенности:</strong> Адаптивная верстка, SEO-оптимизация, высокая скорость загрузки.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Последние работы -->
-    <section class="section" id="works">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Последние работы</h2>
-                <p>Примеры реализованных проектов</p>
-            </div>
-            
-            <div class="works-grid">
-                <div class="work-card animate-on-scroll">
-                    <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
-                    <div class="work-content">
-                        <h3>Сайт на Тильде</h3>
-                        <p>Корпоративный сайт с современным дизайном</p>
-                        <div class="work-tags">
-                            <span class="tag">Тильда</span>
-                            <span class="tag">Адаптив</span>
-                            <span class="tag">UI/UX</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="work-card animate-on-scroll">
-                    <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23%20(2).jpg');"></div>
-                    <div class="work-content">
-                        <h3>Дашборд CRM системы</h3>
-                        <p>Визуализация данных в реальном времени</p>
-                        <div class="work-tags">
-                            <span class="tag">Дашборд</span>
-                            <span class="tag">Аналитика</span>
-                            <span class="tag">CRM</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="work-card animate-on-scroll">
-                    <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-28-46.jpg');"></div>
-                    <div class="work-content">
-                        <h3>Кастомный сайт</h3>
-                        <p>HTML/CSS/JS разработка с анимациями</p>
-                        <div class="work-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                    </div>
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3><i class="fas fa-robot"></i> Чат-боты</h3>
+                <div class="modal-body">
+                    <p><strong>Для любых задач:</strong></p>
+                    <ul>
+                        <li><strong>Telegram/Salebot/Bothelp:</strong> Автоворонки продаж</li>
+                        <li><strong>Python-боты:</strong> Сложная логика и интеграции</li>
+                        <li><strong>Чат-поддержка:</strong> Автоответы, тикеты, FAQ</li>
+                        <li><strong>Автоматизация:</strong> Рассылки, напоминания, триггеры</li>
+                        <li><strong>Аналитика:</strong> Отслеживание конверсии, поведение пользователей</li>
+                    </ul>
+                    <p><strong>Эффект:</strong> Увеличение конверсии на 30-50%, снижение нагрузки на поддержку.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Отзывы на главной -->
-    <section class="section" id="reviews-preview">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Отзывы</h2>
-                <p>Что говорят клиенты</p>
-            </div>
-            
-            <div class="reviews-grid">
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <div class="review-avatar">АК</div>
-                        <div class="review-info">
-                            <h4>Алексей Королёв</h4>
-                            <p>IT-директор</p>
-                        </div>
-                    </div>
-                    <p class="review-text">"С вами очень комфортно работать, все было организовано быстро и чётко. Проект завершили раньше срока с отличным результатом."</p>
-                </div>
-                
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <div class="review-avatar">ДИ</div>
-                        <div class="review-info">
-                            <h4>Дмитрий Иванов</h4>
-                            <p>Предприниматель</p>
-                        </div>
-                    </div>
-                    <p class="review-text">"Сделал все грамотно, по цене легко договориться, знает свое дело на 100%. Заказывал разработку интернет-магазина — получил именно то, что хотел."</p>
-                </div>
-                
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <div class="review-avatar">МС</div>
-                        <div class="review-info">
-                            <h4>Мария Семёнова</h4>
-                            <p>Маркетолог</p>
-                        </div>
-                    </div>
-                    <p class="review-text">"Заказывала лендинг на Тильде. Сделали быстро, качественно, внесли все правки. Конверсия выросла на 30%!"</p>
+        <div id="modal4" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3><i class="fas fa-cogs"></i> Автоматизация</h3>
+                <div class="modal-body">
+                    <p><strong>Оптимизация бизнес-процессов:</strong></p>
+                    <ul>
+                        <li>Автоматические воронки продаж</li>
+                        <li>Интеграция CRM с мессенджерами и почтой</li>
+                        <li>Скрипты для обработки данных (Python)</li>
+                        <li>Автоотчеты и дашборды</li>
+                        <li>Уведомления и напоминания</li>
+                        <li>Синхронизация данных между системами</li>
+                    </ul>
+                    <p><strong>Выгода:</strong> Экономия 20+ часов в неделю, минимизация человеческих ошибок.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Контакты на главной -->
-    <section class="section" id="contact-preview">
-        <div class="container">
-            <div class="contact-section">
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <h3>Готов обсудить ваш проект</h3>
-                        <p>Отвечаю в Telegram в течение 15 минут</p>
-                        
-                        <div class="contact-methods">
-                            <a href="https://t.me/tehspecgleb" target="_blank" style="text-decoration: none;">
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fab fa-telegram"></i>
-                                    </div>
-                                    <div>
-                                        <strong>Telegram</strong>
-                                        <p>@tehspecgleb</p>
-                                    </div>
+        <!-- Работы в одну строку (слайдер) -->
+        <section class="section works-section" id="works">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Последние работы</h2>
+                    <p>Примеры реализованных проектов</p>
+                </div>
+                <div class="works-slider">
+                    <div class="works-track" id="works-track">
+                        <!-- Работа 1 -->
+                        <div class="work-slide">
+                            <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
+                            <div class="work-content">
+                                <h3>Сайт на Тильде</h3>
+                                <p>Корпоративный сайт с современным дизайном</p>
+                                <div class="work-tags">
+                                    <span class="tag">Тильда</span>
+                                    <span class="tag">Адаптив</span>
+                                    <span class="tag">UI/UX</span>
                                 </div>
-                            </a>
-                            
-                            <div class="contact-method">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <!-- Работа 2 -->
+                        <div class="work-slide">
+                            <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-29-23%20(2).jpg');"></div>
+                            <div class="work-content">
+                                <h3>Дашборд CRM</h3>
+                                <p>Визуализация данных в реальном времени</p>
+                                <div class="work-tags">
+                                    <span class="tag">Дашборд</span>
+                                    <span class="tag">Аналитика</span>
+                                    <span class="tag">CRM</span>
                                 </div>
-                                <div>
-                                    <strong>Email</strong>
-                                    <p>kurguzovgleb@yandex.ru</p>
+                            </div>
+                        </div>
+                        <!-- Работа 3 -->
+                        <div class="work-slide">
+                            <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2026-01-09_15-28-46.jpg');"></div>
+                            <div class="work-content">
+                                <h3>Кастомный сайт</h3>
+                                <p>HTML/CSS/JS разработка с анимациями</p>
+                                <div class="work-tags">
+                                    <span class="tag">HTML</span>
+                                    <span class="tag">CSS</span>
+                                    <span class="tag">JavaScript</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Отзывы -->
+        <section class="section" id="reviews">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Отзывы</h2>
+                    <p>Что говорят клиенты</p>
+                </div>
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">АК</div>
+                            <div class="review-info">
+                                <h4>Алексей Королёв</h4>
+                                <p>IT-директор</p>
+                            </div>
+                        </div>
+                        <p class="review-text">"С вами очень комфортно работать, все было организовано быстро и чётко. Проект завершили раньше срока с отличным результатом."</p>
+                    </div>
                     
-                    <div class="contact-form">
-                        <h3>Быстрая заявка</h3>
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="Ваше имя" required>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ДИ</div>
+                            <div class="review-info">
+                                <h4>Дмитрий Иванов</h4>
+                                <p>Предприниматель</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="tel" id="phone" placeholder="Телефон или Telegram" required>
+                        <p class="review-text">"Сделал все грамотно, по цене легко договориться, знает свое дело на 100%. Заказывал разработку интернет-магазина — получил именно то, что хотел."</p>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">МС</div>
+                            <div class="review-info">
+                                <h4>Мария Семёнова</h4>
+                                <p>Маркетолог</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <textarea id="message" placeholder="Опишите задачу..." required></textarea>
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="sendToTelegram()">
-                            <i class="fab fa-telegram"></i> Отправить заявку
-                        </button>
+                        <p class="review-text">"Заказывала лендинг на Тильде. Сделали быстро, качественно, внесли все правки. Конверсия выросла на 30%!"</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Контакты и форма -->
+        <section class="section" id="contact">
+            <div class="container">
+                <div class="contact-section">
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h3>Готов обсудить ваш проект</h3>
+                            <p>Отвечаю в Telegram в течение 15 минут</p>
+                            <div class="contact-methods">
+                                <a href="https://t.me/tehspecgleb" target="_blank" style="text-decoration: none;">
+                                    <div class="contact-method">
+                                        <div class="contact-icon">
+                                            <i class="fab fa-telegram"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Telegram</strong>
+                                            <p>@tehspecgleb</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Email</strong>
+                                        <p>kurguzovgleb@yandex.ru</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Время ответа</strong>
+                                        <p>15 минут в рабочее время</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form">
+                            <h3>Отправить заявку</h3>
+                            <p>Заполните форму, и я свяжусь с вами</p>
+                            <div class="form-group">
+                                <input type="text" id="form-name" placeholder="Ваше имя *" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="form-telegram" placeholder="Ник в Telegram *" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="form-phone" placeholder="Номер телефона">
+                            </div>
+                            <div class="form-group">
+                                <textarea id="form-message" placeholder="Что нужно сделать? *" rows="4" required></textarea>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="submit-form">
+                                <i class="fab fa-telegram"></i> Отправить заявку
+                            </button>
+                            <p class="form-note">Я напишу вам в Telegram в течение 15 минут</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Подвал -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
+                <div class="footer-section footer-main">
                     <h4>Кургузов Глеб</h4>
                     <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
                     <div class="social-links">
-                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-section footer-nav">
                     <h4>Навигация</h4>
                     <div class="footer-links">
-                        <a href="index.html">Главная</a>
-                        <a href="reviews.html">Отзывы</a>
-                        <a href="contact.html">Контакты</a>
+                        <a href="#main">Главная</a>
+                        <a href="#services">Услуги</a>
+                        <a href="#works">Работы</a>
+                        <a href="#reviews">Отзывы</a>
+                        <a href="#contact">Контакты</a>
                     </div>
                 </div>
                 
-                <div class="footer-section">
+                <div class="footer-section footer-services">
                     <h4>Услуги</h4>
                     <div class="footer-links">
-                        <a href="#services">Запуск онлайн-школ</a>
-                        <a href="#services">Разработка сайтов</a>
-                        <a href="#services">Чат-боты</a>
-                        <a href="#services">CRM-системы</a>
+                        <a href="#services" data-modal="modal1">Запуск онлайн-школ</a>
+                        <a href="#services" data-modal="modal2">Разработка сайтов</a>
+                        <a href="#services" data-modal="modal3">Чат-боты</a>
+                        <a href="#services" data-modal="modal4">Автоматизация</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section footer-contact">
+                    <h4>Контакты</h4>
+                    <div class="footer-links">
+                        <a href="https://t.me/tehspecgleb" target="_blank">Telegram: @tehspecgleb</a>
+                        <a href="mailto:kurguzovgleb@yandex.ru">Email: kurguzovgleb@yandex.ru</a>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb" style="color: #666; text-decoration: none;">@tehspecgleb</a></p>
+                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb" target="_blank">@tehspecgleb</a></p>
             </div>
         </div>
     </footer>
+
+    <!-- Аудио для звука (скрыто) -->
+    <audio id="metalSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-metal-hit-impact-908.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
