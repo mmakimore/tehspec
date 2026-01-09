@@ -43,6 +43,13 @@
         <section class="hero-section" id="main">
             <div class="container">
                 <div class="hero-content">
+                    <!-- Добавляем изображение -->
+                    <div style="max-width: 400px; margin: 0 auto 40px; border-radius: 20px; overflow: hidden; border: 2px solid var(--primary); box-shadow: 0 10px 30px rgba(237, 118, 14, 0.3);">
+                        <img src="https://github.com/mmakimore/tehspec/blob/image/photo_2026-01-09_15-29-23%20(2).jpg?raw=true" 
+                             alt="Дашборд CRM"
+                             style="width: 100%; height: auto; display: block;">
+                    </div>
+                    
                     <h1>ТЕХНИЧЕСКИЙ СПЕЦИАЛИСТ</h1>
                     <div class="hero-description">
                         Сопровождение онлайн-школ | запуск | сайт | чат-боты | CRM-системы
@@ -219,15 +226,19 @@
                             <p>Заполните форму, и я свяжусь с вами</p>
                             <div class="form-group">
                                 <input type="text" id="form-name" placeholder="Ваше имя *" required>
+                                <small class="form-hint">Минимум 2 буквы</small>
                             </div>
                             <div class="form-group">
-                                <input type="text" id="form-telegram" placeholder="Ник в Telegram *" required>
+                                <input type="text" id="form-telegram" placeholder="@ник в Telegram *" required>
+                                <small class="form-hint">Начинается с @</small>
                             </div>
                             <div class="form-group">
                                 <input type="tel" id="form-phone" placeholder="Номер телефона">
+                                <small class="form-hint">Необязательно</small>
                             </div>
                             <div class="form-group">
                                 <textarea id="form-message" placeholder="Что нужно сделать? *" rows="4" required></textarea>
+                                <small class="form-hint">Минимум 10 символов</small>
                             </div>
                             <button type="button" class="btn btn-primary" id="submit-form">
                                 <i class="fas fa-paper-plane"></i> Отправить заявку
