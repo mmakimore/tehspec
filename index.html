@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Кургузов Глеб | Технический специалист</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -38,19 +38,12 @@
     </div>
 
     <!-- Основное содержимое -->
-    <main id="main-content" class="hidden">
+    <main id="main-content" class="hidden" style="padding-top: 50px;">
         <!-- Герой -->
         <section class="hero-section" id="main">
             <div class="container">
                 <div class="hero-content">
-                    <!-- Добавляем изображение -->
-                    <div style="max-width: 400px; margin: 0 auto 40px; border-radius: 20px; overflow: hidden; border: 2px solid var(--primary); box-shadow: 0 10px 30px rgba(237, 118, 14, 0.3);">
-                        <img src="https://github.com/mmakimore/tehspec/blob/image/photo_2026-01-09_15-29-23%20(2).jpg?raw=true" 
-                             alt="Дашборд CRM"
-                             style="width: 100%; height: auto; display: block;">
-                    </div>
-                    
-                    <h1>ТЕХНИЧЕСКИЙ СПЕЦИАЛИСТ</h1>
+                    <h1 id="animated-title">ТЕХНИЧЕСКИЙ СПЕЦИАЛИСТ</h1>
                     <div class="hero-description">
                         Сопровождение онлайн-школ | запуск | сайт | чат-боты | CRM-системы
                     </div>
@@ -98,7 +91,7 @@
         </section>
 
         <!-- Работы -->
-        <section class="section works-section" id="works">
+        <section class="section works-section" id="works" style="padding-bottom: 40px;">
             <div class="container">
                 <div class="section-title">
                     <h2>Последние работы</h2>
@@ -106,14 +99,15 @@
                 </div>
                 <div class="works-slider">
                     <div class="works-track" id="works-track">
-                        <div class="work-slide">
+                        <div class="work-slide" data-modal="modal-restaurant">
                             <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
                             <div class="work-content">
-                                <h3>Сайт на Тильде</h3>
-                                <p>Корпоративный сайт с современным дизайном</p>
+                                <h3>РЕСТОРАН ИНДИЙСКОЙ И ЛАНКИЙСКОЙ КУХНИ</h3>
+                                <p>Полный цикл разработки сайта ресторана</p>
                                 <div class="work-tags">
                                     <span class="tag">Тильда</span>
-                                    <span class="tag">Адаптив</span>
+                                    <span class="tag">Многостраничник</span>
+                                    <span class="tag">Оплата онлайн</span>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +141,7 @@
         </section>
 
         <!-- Отзывы -->
-        <section class="section" id="reviews">
+        <section class="section" id="reviews" style="padding-top: 40px; padding-bottom: 40px;">
             <div class="container">
                 <div class="section-title">
                     <h2>Отзывы</h2>
@@ -189,7 +183,7 @@
         </section>
 
         <!-- Контакты -->
-        <section class="section" id="contact">
+        <section class="section" id="contact" style="padding-top: 20px;">
             <div class="container">
                 <div class="contact-section">
                     <div class="contact-grid">
@@ -197,7 +191,7 @@
                             <h3>Готов обсудить ваш проект</h3>
                             <p>Отвечаю в Telegram в течение 15 минут</p>
                             <div class="contact-methods">
-                                <a href="https://t.me/tehspecgleb" target="_blank">
+                                <a href="https://t.me/tehspecgleb" target="_blank" class="telegram-link">
                                     <div class="contact-method">
                                         <div class="contact-icon">
                                             <i class="fab fa-telegram"></i>
@@ -209,15 +203,17 @@
                                     </div>
                                 </a>
                                 
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fas fa-envelope"></i>
+                                <a href="mailto:kurguzovgleb@yandex.ru" class="email-link">
+                                    <div class="contact-method">
+                                        <div class="contact-icon">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Email</strong>
+                                            <p>kurguzovgleb@yandex.ru</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <strong>Email</strong>
-                                        <p>kurguzovgleb@yandex.ru</p>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         
@@ -250,6 +246,33 @@
             </div>
         </section>
     </main>
+
+    <!-- Модальное окно для ресторана -->
+    <div class="modal" id="modal-restaurant">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h3><i class="fas fa-utensils"></i> РЕСТОРАН ИНДИЙСКОЙ И ЛАНКИЙСКОЙ КУХНИ</h3>
+            <div class="modal-body">
+                <p><strong>Полный цикл разработки сайта ресторана индийской и ланкийской кухни</strong></p>
+                <p>Проект включал:</p>
+                <ul>
+                    <li>Разработку многостраничного сайта на Тильде</li>
+                    <li>Подключение онлайн-оплаты и доставки</li>
+                    <li>Интеграцию с картами и сервисами доставки</li>
+                    <li>Создание адаптивного дизайна</li>
+                    <li>Настройку аналитики и метрик</li>
+                </ul>
+                <p><strong>Особенности проекта:</strong></p>
+                <ul>
+                    <li>Полная интеграция с системой онлайн-заказов</li>
+                    <li>Адаптация под мобильные устройства</li>
+                    <li>Быстрая загрузка страниц</li>
+                    <li>Удобное управление контентом</li>
+                </ul>
+                <p><strong>Ссылка на проект:</strong> <a href="https://spbganesha.ru/" target="_blank">https://spbganesha.ru/</a></p>
+            </div>
+        </div>
+    </div>
 
     <!-- Модальные окна для услуг -->
     <div class="modal" id="modal1">
@@ -360,15 +383,6 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section footer-center">
-                    <h4>Кургузов Глеб</h4>
-                    <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
-                    <div class="social-links">
-                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                
                 <div class="footer-columns">
                     <div class="footer-section">
                         <h4>Навигация</h4>
