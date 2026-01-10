@@ -6,6 +6,208 @@
     <title>Связаться | Кургузов Глеб</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-section {
+            padding-top: 70px;
+            padding-bottom: 40px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .contact-info > p {
+            color: #aaa;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: var(--transition);
+            text-decoration: none !important;
+            color: inherit;
+        }
+        
+        .contact-method:hover {
+            background: rgba(237, 118, 14, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(237, 118, 14, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-method div strong {
+            color: var(--light);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .contact-method div p {
+            color: #aaa;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .contact-form > p {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(237, 118, 14, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-hint {
+            display: block;
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 15px;
+            border: 1px solid rgba(237, 118, 14, 0.2);
+        }
+        
+        .form-success.active {
+            display: block;
+        }
+        
+        .form-success i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .form-success h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .form-success p {
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-section {
+                padding-top: 80px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .contact-info h3,
+            .contact-form h3 {
+                font-size: 1.5rem;
+            }
+            
+            .contact-method {
+                padding: 12px;
+            }
+            
+            .contact-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 390px) {
+            .contact-form {
+                padding: 20px;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 16px; /* Предотвращает зумирование в iOS */
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Шапка -->
@@ -29,32 +231,32 @@
     </header>
 
     <!-- Контакты -->
-    <section class="section" style="padding-top: 90px;">
+    <section class="section contact-section">
         <div class="container">
             <div class="section-title">
                 <h2>Связаться со мной</h2>
                 <p>Отвечаю в Telegram в течение 15 минут</p>
             </div>
             
-            <div class="contact-section">
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <h3>Контакты</h3>
-                        <p>Выберите удобный способ связи</p>
-                        
-                        <div class="contact-methods">
-                            <a href="https://t.me/tehspecgleb" target="_blank">
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fab fa-telegram"></i>
-                                    </div>
-                                    <div>
-                                        <strong>Telegram</strong>
-                                        <p>@tehspecgleb</p>
-                                    </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Контакты</h3>
+                    <p>Выберите удобный способ связи</p>
+                    
+                    <div class="contact-methods">
+                        <a href="https://t.me/tehspecgleb" target="_blank" class="telegram-link">
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fab fa-telegram"></i>
                                 </div>
-                            </a>
-                            
+                                <div>
+                                    <strong>Telegram</strong>
+                                    <p>@tehspecgleb</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="mailto:kurguzovgleb@yandex.ru" class="email-link">
                             <div class="contact-method">
                                 <div class="contact-icon">
                                     <i class="fas fa-envelope"></i>
@@ -64,59 +266,59 @@
                                     <p>kurguzovgleb@yandex.ru</p>
                                 </div>
                             </div>
-                            
-                            <div class="contact-method">
-                                <div class="contact-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <strong>Время работы</strong>
-                                    <p>Пн-Вс: 10:00 - 22:00 (МСК)</p>
-                                </div>
+                        </a>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <strong>Время работы</strong>
+                                <p>Пн-Вс: 10:00 - 22:00 (МСК)</p>
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Оставить заявку</h3>
+                    <p>Заполните форму, и я свяжусь с вами</p>
                     
-                    <div class="contact-form">
-                        <h3>Оставить заявку</h3>
-                        <p>Заполните форму, и я свяжусь с вами</p>
-                        
-                        <div id="contact-form-container">
-                            <div class="form-group">
-                                <input type="text" id="contact-name" placeholder="Ваше имя *" required>
-                                <small class="form-hint">Минимум 2 буквы</small>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" id="contact-telegram" placeholder="@ник в Telegram *" required>
-                                <small class="form-hint">Начинается с @, минимум 5 символов</small>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="tel" id="contact-phone" placeholder="Номер телефона">
-                                <small class="form-hint">Формат: +7 999 123-45-67</small>
-                            </div>
-                            
-                            <div class="form-group">
-                                <textarea id="contact-message" placeholder="Опишите проект... *" rows="4" required></textarea>
-                                <small class="form-hint">Минимум 10 символов</small>
-                            </div>
-                            
-                            <button type="button" class="btn btn-primary" id="contact-submit">
-                                <i class="fas fa-paper-plane"></i> Отправить
-                            </button>
+                    <div id="contact-form-container">
+                        <div class="form-group">
+                            <input type="text" id="contact-name" placeholder="Ваше имя *" required>
+                            <small class="form-hint">Минимум 2 буквы</small>
                         </div>
                         
-                        <div class="form-success" id="contact-success">
-                            <i class="fas fa-check-circle"></i>
-                            <h3>Заявка отправлена!</h3>
-                            <p>Я свяжусь с вами в Telegram в течение 15 минут</p>
-                            <p style="color: #aaa; margin-top: 20px;">
-                                <a href="https://t.me/tehspecgleb" style="color: var(--primary); text-decoration: none;">
-                                    <i class="fab fa-telegram"></i> @tehspecgleb
-                                </a>
-                            </p>
+                        <div class="form-group">
+                            <input type="text" id="contact-telegram" placeholder="@ник в Telegram *" required>
+                            <small class="form-hint">Начинается с @, минимум 5 символов</small>
                         </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="contact-phone" placeholder="Номер телефона">
+                            <small class="form-hint">Формат: +7 999 123-45-67</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="contact-message" placeholder="Опишите проект... *" rows="4" required></textarea>
+                            <small class="form-hint">Минимум 10 символов</small>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" id="contact-submit">
+                            <i class="fas fa-paper-plane"></i> Отправить
+                        </button>
+                    </div>
+                    
+                    <div class="form-success" id="contact-success">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Заявка отправлена!</h3>
+                        <p>Я свяжусь с вами в Telegram в течение 15 минут</p>
+                        <p style="color: #aaa; margin-top: 20px;">
+                            <a href="https://t.me/tehspecgleb" style="color: var(--primary); text-decoration: none;">
+                                <i class="fab fa-telegram"></i> @tehspecgleb
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -127,15 +329,6 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section footer-center">
-                    <h4>Кургузов Глеб</h4>
-                    <p>Технический специалист. Сопровождение онлайн-школ, разработка сайтов, чат-ботов, CRM-систем.</p>
-                    <div class="social-links">
-                        <a href="https://t.me/tehspecgleb" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="mailto:kurguzovgleb@yandex.ru" class="social-link"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                
                 <div class="footer-columns">
                     <div class="footer-section">
                         <h4>Навигация</h4>
@@ -164,125 +357,6 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.querySelector('.nav-links');
-            
-            if (mobileMenuBtn && navLinks) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    navLinks.classList.toggle('active');
-                    this.innerHTML = navLinks.classList.contains('active') 
-                        ? '<i class="fas fa-times"></i>' 
-                        : '<i class="fas fa-bars"></i>';
-                });
-                
-                navLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navLinks.classList.remove('active');
-                        if (mobileMenuBtn) {
-                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                        }
-                    });
-                });
-            }
-
-            const submitBtn = document.getElementById('contact-submit');
-            const formContainer = document.getElementById('contact-form-container');
-            const successMessage = document.getElementById('contact-success');
-            
-            if (submitBtn) {
-                submitBtn.addEventListener('click', async function() {
-                    const name = document.getElementById('contact-name')?.value.trim();
-                    const telegram = document.getElementById('contact-telegram')?.value.trim();
-                    const phone = document.getElementById('contact-phone')?.value.trim();
-                    const message = document.getElementById('contact-message')?.value.trim();
-                    
-                    // Валидация
-                    const errors = [];
-                    
-                    if (!name || name.length < 2) {
-                        errors.push('Имя должно содержать минимум 2 символа');
-                    }
-                    
-                    if (!telegram || !telegram.startsWith('@')) {
-                        errors.push('Telegram должен начинаться с @');
-                    } else if (telegram.length < 6) {
-                        errors.push('Telegram должен содержать минимум 5 символов после @');
-                    }
-                    
-                    if (phone && phone.trim() !== '' && !/^[\+]?[0-9\s\-\(\)]{10,}$/.test(phone)) {
-                        errors.push('Введите корректный номер телефона');
-                    }
-                    
-                    if (!message || message.length < 10) {
-                        errors.push('Сообщение должно содержать минимум 10 символов');
-                    }
-                    
-                    if (errors.length > 0) {
-                        alert(errors.join('\n'));
-                        return;
-                    }
-                    
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
-                    this.disabled = true;
-                    
-                    try {
-                        const botToken = '8328083670:AAHkb_xbhVHaL53rzU_LoSLtnfs3bDsgiao';
-                        const chatId = '7884533080';
-                        
-                        const formattedMessage = `
-📨 <b>НОВАЯ ЗАЯВКА С САЙТА (страница контакты)</b>
-
-👤 <b>Имя:</b> ${name}
-📱 <b>Telegram:</b> ${telegram}
-☎️ <b>Телефон:</b> ${phone || 'не указан'}
-📝 <b>Проект:</b>
-${message}
-
-🕒 <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
-                        `;
-                        
-                        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                chat_id: chatId,
-                                text: formattedMessage,
-                                parse_mode: 'HTML'
-                            })
-                        });
-                        
-                        const data = await response.json();
-                        
-                        if (data.ok) {
-                            // Скрываем форму, показываем успех
-                            formContainer.style.display = 'none';
-                            successMessage.classList.add('active');
-                            
-                            // Очищаем форму
-                            document.getElementById('contact-name').value = '';
-                            document.getElementById('contact-telegram').value = '';
-                            document.getElementById('contact-phone').value = '';
-                            document.getElementById('contact-message').value = '';
-                        } else {
-                            throw new Error(data.description || 'Ошибка отправки');
-                        }
-                        
-                    } catch (error) {
-                        console.error('Ошибка отправки:', error);
-                        alert('Произошла ошибка. Пожалуйста, свяжитесь со мной напрямую в Telegram: @tehspecgleb');
-                    } finally {
-                        this.innerHTML = originalText;
-                        this.disabled = false;
-                    }
-                });
-            }
-        });
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
