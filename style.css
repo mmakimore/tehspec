@@ -130,26 +130,6 @@ body {
     to { opacity: 1; }
 }
 
-/* ===== АНИМАЦИЯ ЗАГОЛОВКА "ТЕХНИЧЕСКИЙ СПЕЦИАЛИСТ" ===== */
-@keyframes letterReveal {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Применяем анимацию к буквам заголовка через JavaScript */
-#animated-title span {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: letterReveal 0.5s ease forwards;
-}
-
 /* ===== ШАПКА ===== */
 header {
     background: rgba(10, 10, 10, 0.95);
@@ -157,12 +137,11 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 10000;
+    z-index: 1000; /* Уменьшим для модальных окон */
     border-bottom: 1px solid rgba(237, 118, 14, 0.2);
     height: 70px;
     display: flex;
     align-items: center;
-    overflow: visible;
 }
 
 .nav-container {
@@ -202,7 +181,6 @@ header {
     position: relative;
     font-size: 0.95rem;
     white-space: nowrap;
-    z-index: 10001;
 }
 
 .nav-links a:hover {
@@ -232,7 +210,7 @@ header {
     color: var(--primary);
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 10002;
+    z-index: 1001;
 }
 
 .mobile-menu-btn:hover {
@@ -294,17 +272,18 @@ header {
 
 /* ===== ГЛАВНАЯ ГЕРОЙ СЕКЦИЯ ===== */
 .hero-section {
-    min-height: calc(100vh - 50px);
+    min-height: 70vh;
     display: flex;
     align-items: center;
-    padding-top: 10px;
+    padding-top: 150px;
+    padding-bottom: 30px;
 }
 
 .hero-content {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px;
 }
 
 .hero-content h1 {
@@ -315,19 +294,20 @@ header {
     letter-spacing: 2px;
     text-shadow: 0 0 5px var(--primary),
                  0 0 10px rgba(237, 118, 14, 0.3);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards 0.5s;
 }
 
 .hero-description {
     font-size: 1.4rem;
     color: #ccc;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     line-height: 1.8;
     overflow: hidden;
     border-right: 3px solid var(--primary);
     white-space: nowrap;
-    margin: 0 auto 50px;
+    margin: 0 auto 40px;
     animation: 
         typewriter 3.5s steps(40, end) 1s forwards,
         blinkCursor 0.75s step-end infinite;
@@ -354,7 +334,7 @@ header {
 
 /* ===== СЕКЦИИ ===== */
 .section {
-    padding: 80px 0;
+    padding: 60px 0;
     opacity: 0;
     transform: translateY(20px);
 }
@@ -365,16 +345,14 @@ header {
 
 .section-title {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .section-title h2 {
     font-size: 2.5rem;
     margin-bottom: 15px;
     color: var(--primary);
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    white-space: nowrap;
     text-shadow: 0 0 5px var(--primary),
                  0 0 10px rgba(237, 118, 14, 0.3);
 }
@@ -456,9 +434,7 @@ header {
     font-size: 1.3rem;
     margin-bottom: 15px;
     color: var(--light);
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    white-space: nowrap;
 }
 
 .service-card p {
@@ -487,8 +463,8 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 1001;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000; /* Выше шапки */
     backdrop-filter: blur(10px);
 }
 
@@ -513,15 +489,13 @@ header {
 }
 
 .modal-content h3 {
-    font-size: 2rem;
-    margin-bottom: 25px;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
     color: var(--primary);
     display: flex;
     align-items: center;
     gap: 15px;
     white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 .modal-content h3 i {
@@ -531,20 +505,20 @@ header {
 .modal-body {
     color: #eee;
     line-height: 1.7;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .modal-body p {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .modal-body ul {
-    margin: 20px 0;
-    padding-left: 25px;
+    margin: 15px 0;
+    padding-left: 20px;
 }
 
 .modal-body li {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     position: relative;
     padding-left: 10px;
     list-style-type: disc;
@@ -576,6 +550,7 @@ header {
 /* ===== РАБОТЫ ===== */
 .works-section {
     overflow: hidden;
+    padding-bottom: 80px; /* Для стрелочек */
 }
 
 .works-slider {
@@ -601,7 +576,6 @@ header {
     min-width: 300px;
     opacity: 0;
     transform: translateX(50px);
-    cursor: pointer;
 }
 
 .work-slide.animated {
@@ -622,7 +596,6 @@ header {
     height: 200px;
     background-size: cover;
     background-position: center;
-    max-width: 100%;
 }
 
 .work-content {
@@ -633,9 +606,6 @@ header {
     font-size: 1.2rem;
     margin-bottom: 10px;
     color: var(--light);
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 .work-content p {
@@ -658,37 +628,39 @@ header {
     font-size: 0.8rem;
 }
 
+/* КАСТОМНЫЕ СТРЕЛОЧКИ */
 .slider-btn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(26, 26, 26, 0.8);
-    border: 1px solid rgba(237, 118, 14, 0.3);
+    top: calc(100% + 30px);
+    background: rgba(26, 26, 26, 0.9);
+    border: 2px solid var(--primary);
     color: var(--primary);
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     transition: var(--transition);
     z-index: 10;
     backdrop-filter: blur(5px);
+    box-shadow: 0 5px 15px rgba(237, 118, 14, 0.3);
 }
 
 .slider-btn:hover {
     background: rgba(237, 118, 14, 0.2);
-    transform: translateY(-50%) scale(1.1);
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(237, 118, 14, 0.4);
 }
 
 .prev-btn {
-    left: 10px;
+    left: calc(50% - 70px);
 }
 
 .next-btn {
-    right: 10px;
+    right: calc(50% - 70px);
 }
 
 /* ===== ОТЗЫВЫ ===== */
@@ -750,9 +722,6 @@ header {
     font-size: 1.2rem;
     margin-bottom: 5px;
     color: var(--light);
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 .review-info p {
@@ -765,8 +734,6 @@ header {
     font-style: italic;
     line-height: 1.6;
     font-size: 0.95rem;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 /* ===== КОНТАКТЫ ===== */
@@ -788,17 +755,12 @@ header {
     font-size: 1.8rem;
     margin-bottom: 20px;
     color: var(--primary);
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    white-space: nowrap;
 }
 
 .contact-info > p {
     color: #aaa;
     margin-bottom: 30px;
-    line-height: 1.6;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 .contact-methods {
@@ -846,8 +808,8 @@ header {
 }
 
 .contact-method a {
-    text-decoration: none !important;
-    color: inherit !important;
+    text-decoration: none;
+    color: inherit;
     width: 100%;
 }
 
@@ -855,18 +817,13 @@ header {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
 }
 
 .contact-form h3 {
     font-size: 1.8rem;
     margin-bottom: 5px;
     color: var(--primary);
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    white-space: nowrap;
 }
 
 .contact-form > p {
@@ -885,8 +842,6 @@ header {
     font-size: 1rem;
     transition: var(--transition);
     font-family: inherit;
-    max-width: 100%;
-    box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -901,11 +856,9 @@ header {
     resize: vertical;
 }
 
+/* УБИРАЕМ ПОДСКАЗКИ */
 .form-hint {
-    display: block;
-    color: #666;
-    font-size: 0.8rem;
-    margin-top: 5px;
+    display: none !important;
 }
 
 .form-success {
@@ -958,38 +911,9 @@ header {
     box-shadow: 0 10px 20px rgba(237, 118, 14, 0.3);
 }
 
-/* ===== КАТЕГОРИИ ПОРТФОЛИО ===== */
+/* ===== КАТЕГОРИИ ПОРТФОЛИО - УДАЛЕНО ===== */
 .categories {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-}
-
-.category-btn {
-    padding: 10px 20px;
-    background: rgba(237, 118, 14, 0.1);
-    border: 1px solid rgba(237, 118, 14, 0.3);
-    border-radius: 20px;
-    color: #ccc;
-    cursor: pointer;
-    transition: var(--transition);
-    font-weight: 500;
-    font-size: 0.9rem;
-    white-space: nowrap;
-}
-
-.category-btn:hover {
-    background: rgba(237, 118, 14, 0.2);
-    color: var(--light);
-    transform: translateY(-2px);
-}
-
-.category-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
+    display: none !important;
 }
 
 /* ===== ПРОГРЕСС-БАР ===== */
@@ -1056,29 +980,7 @@ header {
     margin-bottom: 80px;
 }
 
-/* ===== ИСПРАВЛЕНИЯ ССЫЛОК - УБИРАЕМ СИНИЕ ПОДЧЕРКИВАНИЯ ===== */
-.telegram-link,
-.email-link,
-.footer-links a,
-.copyright a {
-    text-decoration: none !important;
-    color: inherit !important;
-}
-
-.telegram-link:hover .contact-method,
-.email-link:hover .contact-method {
-    background: rgba(237, 118, 14, 0.1);
-}
-
-.contact-method a,
-.contact-method a:hover,
-.contact-method a:focus,
-.contact-method a:active {
-    color: inherit !important;
-    text-decoration: none !important;
-}
-
-/* ===== ПОДВАЛ В 2 СТОЛБИКА ===== */
+/* ===== ПОДВАЛ ===== */
 footer {
     background: rgba(10, 10, 10, 0.95);
     padding: 70px 0 30px;
@@ -1100,8 +1002,8 @@ footer {
 }
 
 .footer-section h4 {
-    margin-bottom: 20px;
     font-size: 1.2rem;
+    margin-bottom: 20px;
     color: var(--primary);
 }
 
@@ -1139,7 +1041,7 @@ footer {
 .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .footer-links a {
@@ -1147,8 +1049,6 @@ footer {
     text-decoration: none;
     transition: var(--transition);
     font-size: 0.95rem;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 .footer-links a:hover {
@@ -1174,7 +1074,41 @@ footer {
     color: var(--primary);
 }
 
-/* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+/* ===== АНИМАЦИЯ ШЕСТЕРЕНКИ ПРИ СКРОЛЛЕ ===== */
+.scroll-gear {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: rgba(237, 118, 14, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.8rem;
+    z-index: 999;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+.scroll-gear.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.scroll-gear:hover {
+    background: rgba(237, 118, 14, 0.2);
+    transform: scale(1.1);
+    animation: gearSpin 2s linear infinite;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 1200px) {
     .work-slide {
         flex: 0 0 calc(50% - 15px);
@@ -1281,18 +1215,28 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    /* Уменьшаем отступы для мобильных */
-    .section {
-        padding: 40px 0;
+    /* Стрелочки на мобильных */
+    .slider-btn {
+        top: calc(100% + 20px);
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
     }
     
-    .hero-section {
-        min-height: 80vh;
-        padding-top: 5px;
+    .prev-btn {
+        left: calc(50% - 60px);
     }
     
-    .hero-content {
-        padding: 20px 15px;
+    .next-btn {
+        right: calc(50% - 60px);
+    }
+    
+    .scroll-gear {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        bottom: 20px;
+        right: 20px;
     }
 }
 
@@ -1315,9 +1259,9 @@ footer {
     }
     
     .slider-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
     }
     
     .stats-grid {
@@ -1328,248 +1272,32 @@ footer {
         font-size: 2.5rem;
     }
     
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .portfolio-img {
-        height: 200px;
-    }
-    
-    .reviews-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .review-header {
-        gap: 12px;
-    }
-    
-    .review-avatar {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
+    .modal-content h3 {
+        font-size: 1.4rem;
     }
 }
 
-/* ===== ИСПРАВЛЕНИЯ ДЛЯ 390PX ===== */
-@media (max-width: 390px) {
-    .hero-content h1 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-    }
-    
-    .hero-description {
-        font-size: 1rem;
-        margin-bottom: 30px;
-        white-space: normal;
-        border-right: none;
-        animation: fadeIn 2s ease forwards !important;
-        width: 100%;
-    }
-    
-    .section-title h2 {
-        font-size: 1.8rem;
-        white-space: normal;
-    }
-    
-    .service-card, 
-    .review-card,
-    .portfolio-item {
-        padding: 20px;
-    }
-    
-    .contact-section {
-        padding: 20px;
-    }
-    
-    .contact-method {
-        padding: 12px;
-    }
-    
-    .contact-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-    
-    .btn {
-        padding: 14px 28px;
-        font-size: 0.95rem;
-    }
-    
-    .footer-columns {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-    }
-    
-    /* Предотвращаем горизонтальный скролл */
-    body {
-        overflow-x: hidden;
-        max-width: 100vw;
-    }
-    
+@media (max-width: 400px) {
     .container {
         padding: 0 15px;
     }
     
-    .review-card {
-        padding: 20px;
-    }
-    
-    .review-text {
-        font-size: 0.9rem;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .stat-card {
-        padding: 25px 15px;
-    }
-    
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .skill-category {
-        padding: 20px;
-    }
-    
-    /* Предотвращение зуммирования в iOS */
-    input, textarea, select {
-        font-size: 16px !important;
-    }
-}
-
-/* ===== ИСПРАВЛЕНИЯ ДЛЯ ПК В МИНИ-ПРИЛОЖЕНИИ ===== */
-@media (min-width: 769px) {
-    .hero-section {
-        min-height: 70vh;
-        padding-top: 20px;
-    }
-    
-    .hero-content h1 {
-        font-size: 3.5rem;
-        line-height: 1.2;
-        margin-bottom: 20px;
-    }
-    
-    .contact-grid {
-        gap: 40px;
-        align-items: start;
-    }
-    
-    .contact-form {
-        width: 100%;
-    }
-    
-    .contact-method {
-        padding: 15px 20px;
-    }
-    
-    /* Для ПК в мини-приложении */
-    .container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-}
-
-/* ===== ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ===== */
-@media (max-width: 360px) {
-    .container {
-        padding: 0 10px;
-    }
-    
-    .hero-content h1 {
-        font-size: 1.6rem;
-    }
-    
-    .section-title h2 {
-        font-size: 1.6rem;
-    }
-    
-    .service-card h3 {
-        font-size: 1.1rem;
-    }
-    
     .btn {
-        padding: 12px 24px;
+        padding: 14px 24px;
         font-size: 0.9rem;
     }
     
+    .service-card,
     .review-card {
-        padding: 15px;
-    }
-}
-
-/* ===== УБИРАЕМ ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ ===== */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-* {
-    max-width: 100%;
-}
-
-/* ===== УЛУЧШЕННАЯ АДАПТИВНОСТЬ ТЕКСТА ===== */
-h1, h2, h3, h4, h5, h6 {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-p, span, a, li {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-/* ===== ИСПРАВЛЕНИЕ КАРТИНОК ===== */
-img, .portfolio-img, .work-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* ===== ОПТИМИЗАЦИЯ ДЛЯ МИНИ-ПРИЛОЖЕНИЯ ===== */
-@media (max-height: 700px) {
-    .hero-section {
-        min-height: 80vh;
-        padding-top: 5px;
+        padding: 25px 20px;
     }
     
-    .hero-content {
-        padding: 20px 15px;
+    .hero-content h1 {
+        font-size: 1.8rem;
     }
     
-    .section {
-        padding: 40px 0;
-    }
-}
-
-/* ===== ИСПРАВЛЕНИЕ ОТСТУПОВ ===== */
-.hero-section + .section {
-    padding-top: 30px;
-}
-
-.section + .section {
-    padding-top: 30px;
-}
-
-/* ===== ПРЕДОТВРАЩЕНИЕ ЗУМИРОВАНИЯ В iOS ===== */
-input, textarea, select {
-    font-size: 16px;
-}
-
-/* ===== ОБЩИЕ ИСПРАВЛЕНИЯ ДЛЯ ВСЕХ СТРАНИЦ ===== */
-main {
-    padding-top: 70px;
-}
-
-/* Для мобильных - уменьшаем отступ шапки */
-@media (max-width: 768px) {
-    main {
-        padding-top: 80px;
+    .footer-columns {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
 }
