@@ -494,3 +494,125 @@ ${message}
 
     console.log('Сайт загружен!');
 });
+// Добавляем после существующего кода
+
+// Анимация заголовка "ТЕХНИЧЕСКИЙ СПЕЦИАЛИСТ"
+function animateTitle() {
+    const title = document.getElementById('animated-title');
+    if (!title) return;
+    
+    const text = title.innerText;
+    title.innerHTML = '';
+    
+    // Разбиваем текст на буквы и оборачиваем каждую в span
+    for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.textContent = text[i];
+        span.style.display = 'inline-block';
+        span.style.opacity = '0';
+        span.style.transform = 'translateY(20px)';
+        span.style.animation = `letterReveal 0.5s ease ${i * 0.05}s forwards`;
+        title.appendChild(span);
+        
+        // Добавляем пробелам нормальное отображение
+        if (text[i] === ' ') {
+            span.style.margin = '0 4px';
+        }
+    }
+}
+
+// Открытие модального окна при клике на работу
+function initWorkModals() {
+    const workSlides = document.querySelectorAll('.work-slide[data-modal]');
+    workSlides.forEach(slide => {
+        slide.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+}
+
+// Исправление шапки для гарантированной кликабельности
+function fixHeaderClickability() {
+    const header = document.querySelector('header');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    if (header) {
+        header.style.zIndex = '10000';
+        header.style.pointerEvents = 'auto';
+    }
+    
+    navLinks.forEach(link => {
+        link.style.position = 'relative';
+        link.style.zIndex = '10001';
+        link.style.pointerEvents = 'auto';
+    });
+}
+
+// Инициализация всех улучшений
+document.addEventListener('DOMContentLoaded', function() {
+    // Запускаем анимацию заголовка
+    setTimeout(animateTitle, 1000);
+    
+    // Инициализируем модальные окна для работ
+    initWorkModals();
+    
+    // Исправляем кликабельность шапки
+    fixHeaderClickability();
+    
+    // Адаптация для экрана 390px
+    function checkViewport() {
+        if (window.innerWidth <= 390) {
+            document.body.classList.add('viewport-390');
+        } else {
+            document.body.classList.remove('viewport-390');
+        }
+    }
+    
+    checkViewport();
+    window.addEventListener('resize', checkViewport);
+    
+    // Улучшенная обработка формы (дополнение к существующей)
+    const submitBtn = document.getElementById('submit-form');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function() {
+            // Существующая логика формы...
+            // Добавляем проверку для 390px
+            if (window.innerWidth <= 390) {
+                // Оптимизация для маленьких экранов
+                const inputs = document.querySelectorAll('#contact input, #contact textarea');
+                inputs.forEach(input => {
+                    input.style.fontSize = '16px'; // Предотвращает зумирование в iOS
+                });
+            }
+        });
+    }
+});
+
+// Исправление для корректного отображения на ПК в мини-приложении
+if (window.Telegram && window.Telegram.WebApp) {
+    Telegram.WebApp.expand();
+    
+    // Адаптация под разные размеры экрана на ПК
+    function adjustForDesktop() {
+        if (window.innerWidth >= 768) {
+            // Для ПК в мини-приложении
+            document.body.style.maxWidth = '100%';
+            document.body.style.margin = '0 auto';
+            
+            // Оптимальные размеры для ПК
+            const container = document.querySelector('.container');
+            if (container) {
+                container.style.maxWidth = '800px';
+            }
+        }
+    }
+    
+    window.addEventListener('load', adjustForDesktop);
+    window.addEventListener('resize', adjustForDesktop);
+}
