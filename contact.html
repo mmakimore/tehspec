@@ -46,7 +46,7 @@
             border-radius: 10px;
             transition: var(--transition);
             text-decoration: none !important;
-            color: inherit;
+            color: inherit !important;
         }
         
         .contact-method:hover {
@@ -88,6 +88,8 @@
             padding: 30px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            max-width: 500px;
         }
         
         .contact-form h3 {
@@ -113,13 +115,15 @@
             font-size: 1rem;
             transition: var(--transition);
             font-family: inherit;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
         }
         
         .form-group input:focus,
         .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(237, 118, 14, 0.2);
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 2px rgba(237, 118, 14, 0.2) !important;
         }
         
         .form-group textarea {
@@ -169,6 +173,12 @@
             
             .contact-form {
                 padding: 25px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
         
@@ -261,4 +271,91 @@
                             </div>
                         </a>
                         
-                        <div class
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <strong>Время работы</strong>
+                                <p>Пн-Вс: 10:00 - 22:00 (МСК)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Оставить заявку</h3>
+                    <p>Заполните форму, и я свяжусь с вами</p>
+                    
+                    <div id="contact-form-container">
+                        <div class="form-group">
+                            <input type="text" id="contact-name" placeholder="Ваше имя *" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="contact-telegram" placeholder="@ник в Telegram *" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="contact-phone" placeholder="+7 999 123-45-67">
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="contact-message" placeholder="Опишите проект... *" rows="4" required></textarea>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" id="contact-submit">
+                            <i class="fas fa-paper-plane"></i> Отправить
+                        </button>
+                    </div>
+                    
+                    <div class="form-success" id="contact-success">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Заявка отправлена!</h3>
+                        <p>Я свяжусь с вами в Telegram в течение 15 минут</p>
+                        <p style="color: #aaa; margin-top: 20px;">
+                            <a href="https://t.me/tehspecgleb" style="color: var(--primary); text-decoration: none;">
+                                <i class="fab fa-telegram"></i> @tehspecgleb
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-columns">
+                    <div class="footer-section">
+                        <h4>Навигация</h4>
+                        <div class="footer-links">
+                            <a href="index.html">Главная</a>
+                            <a href="about.html">Обо мне</a>
+                            <a href="portfolio.html">Кейсы</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contact.html">Связаться</a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Контакты</h4>
+                        <div class="footer-links">
+                            <a href="https://t.me/tehspecgleb">Telegram</a>
+                            <a href="mailto:kurguzovgleb@yandex.ru">Email</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Кургузов Глеб | <a href="https://t.me/tehspecgleb">@tehspecgleb</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
