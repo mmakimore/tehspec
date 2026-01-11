@@ -2,10 +2,35 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кургузов Глеб | Технический специалист</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили для главной */
+        .section-title h2 br {
+            display: block;
+        }
+        
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #888;
+        }
+        
+        /* Исправление для формы на ПК */
+        @media (min-width: 769px) {
+            .contact-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                align-items: start;
+            }
+            
+            .contact-form {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body class="main-page">
     <!-- Шапка -->
@@ -43,7 +68,7 @@
         <section class="hero-section" id="main">
             <div class="container">
                 <div class="hero-content">
-                    <h1 id="animated-title">ТЕХНИЧЕСКИЙ СПЕЦИАЛИСТ</h1>
+                    <h1>ТЕХНИЧЕСКИЙ СПЕЦИАЛИСТ</h1>
                     <div class="hero-description">
                         Сопровождение онлайн-школ | запуск | сайт | чат-боты | CRM-системы
                     </div>
@@ -58,7 +83,7 @@
         <section class="section" id="services">
             <div class="container">
                 <div class="section-title">
-                    <h2>Что я могу предложить</h2>
+                    <h2>Что я<br>могу предложить</h2>
                     <p>Полный спектр услуг для вашего бизнеса</p>
                 </div>
                 <div class="services-grid">
@@ -91,7 +116,7 @@
         </section>
 
         <!-- Работы -->
-        <section class="section works-section" id="works" style="padding-bottom: 40px;">
+        <section class="section works-section" id="works">
             <div class="container">
                 <div class="section-title">
                     <h2>Последние работы</h2>
@@ -100,7 +125,7 @@
                 <div class="works-slider">
                     <div class="works-track" id="works-track">
                         <div class="work-slide" data-modal="modal-restaurant">
-                            <div class="work-img" style="background-image: url('https://raw.githubusercontent.com/mmakimore/tehspec/main/photo_2025-08-25_12-46-07.jpg');"></div>
+                            <div class="work-img" style="background-image: url('https://github.com/mmakimore/tehspec/blob/image/photo_2026-01-09_15-29-23%20(2).jpg?raw=true');"></div>
                             <div class="work-content">
                                 <h3>РЕСТОРАН ИНДИЙСКОЙ И ЛАНКИЙСКОЙ КУХНИ</h3>
                                 <p>Полный цикл разработки сайта ресторана</p>
@@ -141,7 +166,7 @@
         </section>
 
         <!-- Отзывы -->
-        <section class="section" id="reviews" style="padding-top: 40px; padding-bottom: 40px;">
+        <section class="section" id="reviews">
             <div class="container">
                 <div class="section-title">
                     <h2>Отзывы</h2>
@@ -183,7 +208,7 @@
         </section>
 
         <!-- Контакты -->
-        <section class="section" id="contact" style="padding-top: 20px;">
+        <section class="section" id="contact">
             <div class="container">
                 <div class="contact-section">
                     <div class="contact-grid">
@@ -222,19 +247,15 @@
                             <p>Заполните форму, и я свяжусь с вами</p>
                             <div class="form-group">
                                 <input type="text" id="form-name" placeholder="Ваше имя *" required>
-                                <small class="form-hint">Минимум 2 буквы</small>
                             </div>
                             <div class="form-group">
                                 <input type="text" id="form-telegram" placeholder="@ник в Telegram *" required>
-                                <small class="form-hint">Начинается с @</small>
                             </div>
                             <div class="form-group">
-                                <input type="tel" id="form-phone" placeholder="Номер телефона">
-                                <small class="form-hint">Необязательно</small>
+                                <input type="tel" id="form-phone" placeholder="+7 999 123-45-67">
                             </div>
                             <div class="form-group">
                                 <textarea id="form-message" placeholder="Что нужно сделать? *" rows="4" required></textarea>
-                                <small class="form-hint">Минимум 10 символов</small>
                             </div>
                             <button type="button" class="btn btn-primary" id="submit-form">
                                 <i class="fas fa-paper-plane"></i> Отправить заявку
@@ -253,6 +274,11 @@
             <button class="close-modal">&times;</button>
             <h3><i class="fas fa-utensils"></i> РЕСТОРАН ИНДИЙСКОЙ И ЛАНКИЙСКОЙ КУХНИ</h3>
             <div class="modal-body">
+                <div style="margin-bottom: 20px; border-radius: 10px; overflow: hidden;">
+                    <img src="https://github.com/mmakimore/tehspec/blob/image/photo_2026-01-09_15-29-23%20(2).jpg?raw=true" 
+                         alt="Ресторан индийской и ланкийской кухни"
+                         style="width: 100%; height: auto; display: block;">
+                </div>
                 <p><strong>Полный цикл разработки сайта ресторана индийской и ланкийской кухни</strong></p>
                 <p>Проект включал:</p>
                 <ul>
@@ -269,7 +295,7 @@
                     <li>Быстрая загрузка страниц</li>
                     <li>Удобное управление контентом</li>
                 </ul>
-                <p><strong>Ссылка на проект:</strong> <a href="https://spbganesha.ru/" target="_blank">https://spbganesha.ru/</a></p>
+                <p><strong>Ссылка на проект:</strong> <a href="https://spbganesha.ru/" target="_blank" style="color: var(--primary); text-decoration: none;">https://spbganesha.ru/</a></p>
             </div>
         </div>
     </div>
