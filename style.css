@@ -130,6 +130,51 @@ body {
     to { opacity: 1; }
 }
 
+/* ===== АНИМАЦИЯ РАСКРЫТИЯ СЕКЦИЙ ===== */
+@keyframes sectionReveal {
+    0% {
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        opacity: 0;
+    }
+    100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        opacity: 1;
+    }
+}
+
+/* ===== АНИМАЦИЯ КИНЕТИЧЕСКОГО ЗАГОЛОВКА ===== */
+@keyframes kineticTitle {
+    0% {
+        letter-spacing: -20px;
+        opacity: 0;
+        filter: blur(10px);
+    }
+    50% {
+        letter-spacing: 2px;
+        filter: blur(2px);
+    }
+    100% {
+        letter-spacing: 0;
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/* ===== АНИМАЦИЯ ВОЛНЫ ДЛЯ ПЛАШЕК ===== */
+@keyframes waveEffect {
+    0% {
+        transform: translateY(100px) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(0) scale(1.05);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
 /* ===== ШАПКА ===== */
 header {
     background: rgba(10, 10, 10, 0.95);
@@ -137,7 +182,7 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000; /* Уменьшим для модальных окон */
+    z-index: 1000;
     border-bottom: 1px solid rgba(237, 118, 14, 0.2);
     height: 70px;
     display: flex;
@@ -275,7 +320,7 @@ header {
     min-height: 70vh;
     display: flex;
     align-items: center;
-    padding-top: 150px;
+    padding-top: 50px;
     padding-bottom: 30px;
 }
 
@@ -294,9 +339,7 @@ header {
     letter-spacing: 2px;
     text-shadow: 0 0 5px var(--primary),
                  0 0 10px rgba(237, 118, 14, 0.3);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1s ease forwards 0.5s;
+    animation: kineticTitle 1.5s ease-out forwards;
 }
 
 .hero-description {
@@ -324,19 +367,11 @@ header {
     }
 }
 
-.telegram-webapp .hero-description {
-    animation: typewriter 3.5s steps(40, end) 1s forwards,
-               blinkCursor 0.75s step-end infinite !important;
-    border-right: 3px solid var(--primary);
-    white-space: nowrap;
-    width: 0;
-}
-
 /* ===== СЕКЦИИ ===== */
 .section {
     padding: 60px 0;
     opacity: 0;
-    transform: translateY(20px);
+    animation: sectionReveal 1s ease-out forwards;
 }
 
 .section.animated {
@@ -381,11 +416,8 @@ header {
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(20px);
-}
-
-.service-card.animated {
-    animation: fadeInScale 0.6s ease forwards;
+    transform: translateY(100px);
+    animation: waveEffect 0.6s ease forwards;
 }
 
 .service-card:nth-child(1) { animation-delay: 0.1s; }
@@ -419,7 +451,7 @@ header {
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.02);
     border-color: var(--primary);
     box-shadow: 0 10px 30px rgba(237, 118, 14, 0.2);
 }
@@ -464,7 +496,7 @@ header {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.95);
-    z-index: 10000; /* Выше шапки */
+    z-index: 10000;
     backdrop-filter: blur(10px);
 }
 
@@ -495,7 +527,6 @@ header {
     display: flex;
     align-items: center;
     gap: 15px;
-    white-space: normal;
 }
 
 .modal-content h3 i {
@@ -550,7 +581,7 @@ header {
 /* ===== РАБОТЫ ===== */
 .works-section {
     overflow: hidden;
-    padding-bottom: 80px; /* Для стрелочек */
+    padding-bottom: 80px;
 }
 
 .works-slider {
@@ -749,6 +780,7 @@ header {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 50px;
+    align-items: start;
 }
 
 .contact-info h3 {
@@ -777,6 +809,8 @@ header {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     transition: var(--transition);
+    text-decoration: none !important;
+    color: inherit !important;
 }
 
 .contact-method:hover {
@@ -807,16 +841,12 @@ header {
     margin: 0;
 }
 
-.contact-method a {
-    text-decoration: none;
-    color: inherit;
-    width: 100%;
-}
-
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    max-width: 500px;
 }
 
 .contact-form h3 {
@@ -842,23 +872,23 @@ header {
     font-size: 1rem;
     transition: var(--transition);
     font-family: inherit;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(237, 118, 14, 0.2);
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 2px rgba(237, 118, 14, 0.2) !important;
 }
 
 .form-group textarea {
     min-height: 120px;
     resize: vertical;
-}
-
-/* УБИРАЕМ ПОДСКАЗКИ */
-.form-hint {
-    display: none !important;
 }
 
 .form-success {
@@ -909,37 +939,6 @@ header {
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(237, 118, 14, 0.3);
-}
-
-/* ===== КАТЕГОРИИ ПОРТФОЛИО - УДАЛЕНО ===== */
-.categories {
-    display: none !important;
-}
-
-/* ===== ПРОГРЕСС-БАР ===== */
-.progress-bar {
-    margin: 15px 0;
-}
-
-.progress-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-    color: #ccc;
-}
-
-.progress-bg {
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--primary-glow));
-    border-radius: 4px;
-    transition: width 1s ease-in-out;
 }
 
 /* ===== СТАТИСТИКА ===== */
@@ -1074,40 +1073,6 @@ footer {
     color: var(--primary);
 }
 
-/* ===== АНИМАЦИЯ ШЕСТЕРЕНКИ ПРИ СКРОЛЛЕ ===== */
-.scroll-gear {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background: rgba(237, 118, 14, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    font-size: 1.8rem;
-    z-index: 999;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
-    border: 2px solid var(--primary);
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-}
-
-.scroll-gear.active {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.scroll-gear:hover {
-    background: rgba(237, 118, 14, 0.2);
-    transform: scale(1.1);
-    animation: gearSpin 2s linear infinite;
-}
-
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 1200px) {
     .work-slide {
@@ -1229,14 +1194,6 @@ footer {
     
     .next-btn {
         right: calc(50% - 60px);
-    }
-    
-    .scroll-gear {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-        bottom: 20px;
-        right: 20px;
     }
 }
 
