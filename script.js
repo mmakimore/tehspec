@@ -616,3 +616,114 @@ if (window.Telegram && window.Telegram.WebApp) {
     window.addEventListener('load', adjustForDesktop);
     window.addEventListener('resize', adjustForDesktop);
 }
+
+// Добавь эти функции в конец твоего script.js
+
+// 1. Анимация волны для плашек при скролле
+function initWaveAnimation() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    window.addEventListener('scroll', () => {
+        serviceCards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const isInView = cardRect.top < window.innerHeight && cardRect.bottom > 0;
+            
+            if (isInView) {
+                const progress = 1 - (cardRect.top / window.innerHeight);
+                const scale = 0.9 + (progress * 0.15);
+                const yOffset = Math.sin(progress * Math.PI) * -20;
+                
+                card.style.transform = `translateY(${yOffset}px) scale(${scale})`;
+                card.style.zIndex = Math.round(progress * 10);
+            }
+        });
+    });
+}
+
+// 2. Исправление шапки на странице contact.html
+function fixContactPageHeader() {
+    if (window.location.pathname.includes('contact.html')) {
+        const header = document.querySelector('header');
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (header && mobileBtn && navLinks) {
+            // Убедимся, что шапка работает
+            mobileBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Закрытие меню при клике на ссылку
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        }
+    }
+}
+
+// 3. Анимация раскрытия секций
+function initSectionReveal() {
+    const sections = document.querySelectorAll('.section');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    sections.forEach(section => {
+        section.style.animationPlayState = 'paused';
+        observer.observe(section);
+    });
+}
+
+// 4. Убираем синие подчеркивания навсегда
+function removeBlueUnderlines() {
+    // Для всех input и textarea
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.style.outline = 'none';
+        input.style.boxShadow = 'none';
+        input.style.border = 'none';
+        
+        input.addEventListener('focus', function() {
+            this.style.outline = 'none';
+            this.style.boxShadow = '0 0 0 2px rgba(237, 118, 14, 0.2)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.style.boxShadow = 'none';
+        });
+    });
+    
+    // Для ссылок в формах
+    const formLinks = document.querySelectorAll('.contact-method a');
+    formLinks.forEach(link => {
+        link.style.textDecoration = 'none';
+    });
+}
+
+// Инициализация всех функций при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+    // Запускаем все исправления
+    initWaveAnimation();
+    fixContactPageHeader();
+    initSectionReveal();
+    removeBlueUnderlines();
+    
+    // Фикс для заголовка
+    const mainTitle = document.querySelector('.hero-content h1');
+    if (mainTitle) {
+        mainTitle.style.opacity = '1';
+        mainTitle.style.animation = 'kineticTitle 1.5s ease-out forwards';
+    }
+});
